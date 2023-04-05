@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CreateAvatar from "./CreateAvatar";
+
 // import { lightBlue, orange } from "@mui/material/colors";
 
 const theme = createTheme({
