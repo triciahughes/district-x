@@ -3,27 +3,21 @@ import { Switch, Route } from "react-router-dom";
 import SignUpForm from "./SignUpForm";
 import SignInForm from "./SignInForm";
 import * as React from "react";
-// import Button from "@mui/material/Button";
+import CreateAvatar from "./CreateAvatar";
 
 function App() {
   // Code goes here!
   return (
     <>
-      {/* <Button>Hello</Button> */}
       <Route path="/signin">
         <SignInForm />
       </Route>
       <Route path="/signup">
         <SignUpForm />
       </Route>
-      {/* <Header />
-      <Route path="/signin">
-        <SignInForm />
+      <Route path="/createavatar">
+        <CreateAvatar />
       </Route>
-      <Route path="/signup">
-        <SignUpForm />
-      </Route>
-      <Route exact path="/"></Route> */}
     </>
   );
 }

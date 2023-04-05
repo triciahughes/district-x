@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CreateAvatar from "./CreateAvatar";
 // import { lightBlue, orange } from "@mui/material/colors";
 
 const theme = createTheme({
@@ -21,6 +22,7 @@ const theme = createTheme({
 });
 
 function SignUpForm() {
+  const history = useHistory();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -28,6 +30,7 @@ function SignUpForm() {
       username: data.get("username"),
       password: data.get("password"),
     });
+    history.push("/createavatar");
   };
 
   return (
