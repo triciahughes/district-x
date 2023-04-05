@@ -5,13 +5,47 @@ import SignUpForm from "./components/SignUpForm";
 import SignInForm from "./components/SignInForm";
 import CreateAvatar from "./components/CreateAvatar";
 import Home from "./components/Home";
+import { useHistory } from "react-router-dom";
+import { useState, useEffect, useCallback } from "react";
 
 function App() {
-  // Code goes here!
+  const [user, setUser] = useState({});
+  const history = useHistory();
+
+  const userFetch = useCallback(fetchUser, [history]);
+
+  useEffect(() => {
+    userFetch();
+  }, [userFetch]);
+
+  function fetchUser() {
+    fetch("/authorized").then((res) => {
+      if (res.ok) {
+        res.json().then((userData) => {
+          setUser(userData);
+          history.push("/home");
+        });
+      } else {
+        setUser([]);
+        history.push("/signin");
+      }
+    });
+  }
+
+  function handleLogout() {
+    fetch("/logout", {
+      method: "DELETE",
+    }).then(() => {
+      setUser([]);
+      fetchUser();
+      history.push("/signin");
+    });
+  }
+
   return (
     <>
       <Route path="/signin">
-        <SignInForm />
+        <SignInForm setUser={setUser} fetchUser={fetchUser} />
       </Route>
       <Route path="/signup">
         <SignUpForm />
@@ -20,7 +54,7 @@ function App() {
         <CreateAvatar />
       </Route>
       <Route path="/home">
-        <Home />
+        <Home handleLogout={handleLogout} userData={user} />
       </Route>
     </>
   );

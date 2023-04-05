@@ -1,10 +1,10 @@
 import NavBar from "./NavBar/NavBar";
 import Posts from "./Posts";
 
-function Home() {
+function Home({ handleLogout, userData }) {
   return (
     <>
-      <NavBar />
+      <NavBar handleLogout={handleLogout} userData={userData} />
       <Posts />
     </>
   );

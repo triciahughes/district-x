@@ -15,11 +15,11 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import Avatar from "@mui/material/Avatar";
 
 const drawerWidth = 240;
-function NavBar() {
+function NavBar({ handleLogout, userData }) {
   const history = useHistory();
 
   function handleLogOutClick() {
-    history.push("/signin");
+    handleLogout();
   }
   function handleCreatePostClick() {
     console.log("Clicked");
@@ -44,7 +44,7 @@ function NavBar() {
       <Toolbar />
       <Divider />
       <List onClick={handleUsernameClick}>
-        {[`Username Here`].map((text) => (
+        {[`${userData.username}`].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemAvatar>

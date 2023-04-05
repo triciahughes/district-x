@@ -7,6 +7,8 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
 const theme = createTheme({
   palette: {
@@ -19,17 +21,39 @@ const theme = createTheme({
   },
 });
 
-function SignInForm() {
+const validationSchema = yup.object({
+  username: yup.string("Enter your username").required("Username is required"),
+  password: yup.string("Enter your password").required("Password is required"),
+});
+
+function SignInForm({ setUser, fetchUser }) {
   const history = useHistory();
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("username"),
-      password: data.get("password"),
-    });
-    history.push("/home");
-  };
+
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values, { setSubmitting }) => {
+      setSubmitting(false);
+      fetch("/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      }).then((res) => {
+        if (res.ok) {
+          res.json().then((userData) => {
+            setUser(userData);
+            fetchUser();
+            history.push("/home");
+          });
+        }
+      });
+    },
+  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -67,8 +91,12 @@ function SignInForm() {
             <Box
               component="form"
               noValidate
-              onSubmit={handleSubmit}
+              // onSubmit={formik.handleSubmit}
               sx={{ mt: 1 }}
+              onSubmit={(e) => {
+                e.preventDefault();
+                formik.handleSubmit();
+              }}
             >
               <TextField
                 margin="normal"
@@ -77,6 +105,8 @@ function SignInForm() {
                 id="username"
                 label="Username"
                 name="username"
+                value={formik.values.username}
+                onChange={formik.handleChange}
                 autoComplete="username"
                 autoFocus
               />
@@ -88,6 +118,8 @@ function SignInForm() {
                 label="Password"
                 type="password"
                 id="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
                 autoComplete="current-password"
               />
               <Button

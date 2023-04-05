@@ -87,9 +87,22 @@ class Signin(Resource):
             return response
         return {'error' : "Invalid Username or Password"}, 401
 
+class Logout(Resource):
+
+    def delete(self):
+
+        if session.get('user_id'):
+
+            session['user_id'] = None
+
+            return {}, 204
+
+        return {'error': '401 Unauthorized'}, 401
+
 api.add_resource(Signup, '/signup')
 api.add_resource(AuthorizedSession, '/authorized')
-api.add_resource(Login, '/signin')
+api.add_resource(Signin, '/signin')
+api.add_resource(Logout, '/logout')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
