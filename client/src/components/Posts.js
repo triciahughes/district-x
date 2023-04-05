@@ -1,69 +1,58 @@
-import {
-  Box,
-  Stack,
-  Link,
-  Card,
-  Button,
-  Divider,
-  Typography,
-  CardHeader,
-} from "@mui/material";
-
-AppNewsUpdate.propTypes = {
-    title: PropTypes.string,
-    subheader: PropTypes.string,
-    list: PropTypes.array.isRequired,
-  };
-  
-  export default function AppNewsUpdate({ title, subheader, list, ...other }) {
-    return (
-      <Card {...other}>
-        <CardHeader title={title} subheader={subheader} />
-  
-        <Scrollbar>
-          <Stack spacing={3} sx={{ p: 3, pr: 0 }}>
-            {list.map((news) => (
-              <NewsItem key={news.id} news={news} />
-            ))}
-          </Stack>
-        </Scrollbar>
-  
-        <Divider />
-  
-        <Box sx={{ p: 2, textAlign: 'right' }}>
-          <Button size="small" color="inherit" endIcon={<Iconify icon={'eva:arrow-ios-forward-fill'} />}>
-            View all
-          </Button>
-        </Box>
-      </Card>
-    );
-  }
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
+import { Button } from "@mui/material";
+import { borderColor } from "@mui/system";
+import Link from "@mui/material/Link";
+// import { Link } from "react-router-dom";
 function Posts() {
-  return (
-    <Stack direction="row" alignItems="center" spacing={2}>
-      {/* <Box
-          component="img"
-          alt={title}
-          src={image}
-          sx={{ width: 48, height: 48, borderRadius: 1.5, flexShrink: 0 }}
-        />*/}
+  function handlePostClick() {
+    console.log("Clicked");
+  }
+  const StyledPaper = styled(Paper)(({ theme }) => ({
+    backgroundColor: "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(2),
+    maxWidth: 700,
+    color: theme.palette.text.primary,
+  }));
 
-      <Box sx={{ minWidth: 240, flexGrow: 1 }}>
-        <Link color="inherit" variant="subtitle2" underline="hover" noWrap>
-          Title here
-        </Link>
+  const messages = ["hi", "hello", "bye"];
 
-        <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
-          Post here ?
-        </Typography>
+  const list = messages.map((message) => {
+    return (
+      <Box sx={{ flexGrow: 1, overflow: "hidden", px: 3 }}>
+        <StyledPaper
+          sx={{
+            my: 2,
+            mx: "auto",
+            p: 2,
+          }}
+        >
+          <Grid container wrap="nowrap" spacing={2}>
+            <Grid item>
+              <Avatar>W</Avatar>
+            </Grid>
+            <Grid item xs key={message} onClick={handlePostClick}>
+              <Typography fontWeight={600}>
+                <Link href="" underline="hover" color="orange">
+                  Username here
+                </Link>
+              </Typography>
+              <Typography fontWeight={100}>{message}</Typography>
+            </Grid>
+            <Button />
+          </Grid>
+        </StyledPaper>
       </Box>
+    );
+  });
 
-      <Typography
-        variant="caption"
-        sx={{ pr: 3, flexShrink: 0, color: "text.secondary" }}
-      ></Typography>
-    </Stack>
-  );
+  return <>{list}</>;
 }
 
 export default Posts;

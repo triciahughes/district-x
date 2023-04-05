@@ -1,10 +1,10 @@
 // import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import * as React from "react";
-import SignUpForm from "./SignUpForm";
-import SignInForm from "./SignInForm";
-import CreateAvatar from "./CreateAvatar";
-import Home from "./Home";
+import SignUpForm from "./components/SignUpForm";
+import SignInForm from "./components/SignInForm";
+import CreateAvatar from "./components/CreateAvatar";
+import Home from "./components/Home";
 
 function App() {
   // Code goes here!
