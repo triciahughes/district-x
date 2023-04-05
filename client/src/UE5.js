@@ -10,30 +10,17 @@ const uuidv4 = function () {
   });
 };
 
-const ue5 = (function (register) {
-  if (typeof ue === "undefined" || typeof ue !== "object") {
-    ue = {};
-  }
+const ue5 = (function () {
+  // Non-strict mode context inside the IIFE
 
-  if (
-    typeof ue.interop != "object" ||
-    typeof ue.interop.broadcast != "function"
-  ) {
+  if (typeof ue != "object" || typeof ue.interface != "object") {
+    if (typeof ue != "object") ue = {};
     // mobile
-    ue.interop = {};
-    return function (name, data, callback, timeout) {
+    ue.interface = {};
+    ue.interface.broadcast = function (name, data) {
       if (typeof name != "string") return;
-
-      if (typeof data == "function") {
-        timeout = callback;
-        callback = data;
-        data = null;
-      }
-
-      var uuid = register(callback, timeout);
-      var args = [name, "", uuid];
+      var args = [name, ""];
       if (typeof data != "undefined") args[1] = data;
-
       var hash = encodeURIComponent(JSON.stringify(args));
       if (
         typeof window.history == "object" &&
@@ -46,37 +33,20 @@ const ue5 = (function (register) {
         document.location.hash = encodeURIComponent("[]");
       }
     };
-  }
+  } else
+    (function (obj) {
+      // desktop
+      ue.interface = {};
+      ue.interface.broadcast = function (name, data) {
+        if (typeof name != "string") return;
+        if (typeof data != "undefined")
+          obj.broadcast(name, JSON.stringify(data));
+        else obj.broadcast(name, "");
+      };
+    })(ue.interface);
 
-  return (function (interop) {
-    // desktop
-    ue.interop = {};
-    return function (name, data, callback, timeout) {
-      if (typeof name != "string") return;
-
-      if (typeof data == "function") {
-        timeout = callback;
-        callback = data;
-        data = null;
-      }
-
-      var uuid = register(callback, timeout);
-      if (typeof data != "undefined")
-        interop.broadcast(name, JSON.stringify(data), uuid);
-      else interop.broadcast(name, "", uuid);
-    };
-  })(ue.interop);
-})(function (callback, timeout) {
-  if (typeof callback != "function") return "";
-
-  var uuid = uuidv4();
-  ue.interop[uuid] = callback;
-
-  setTimeout(function () {
-    delete ue.interop[uuid];
-  }, 1000 * Math.max(1, parseInt(timeout) || 0));
-
-  return uuid;
-});
+  // create the global ue5(...) helper function
+  return ue.interface.broadcast;
+})();
 
 export default ue5;

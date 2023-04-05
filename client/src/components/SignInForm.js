@@ -28,6 +28,7 @@ function SignInForm() {
       email: data.get("username"),
       password: data.get("password"),
     });
+    history.push("/home");
   };
 
   return (

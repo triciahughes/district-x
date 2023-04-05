@@ -1,9 +1,10 @@
 // import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
+import * as React from "react";
 import SignUpForm from "./SignUpForm";
 import SignInForm from "./SignInForm";
-import * as React from "react";
 import CreateAvatar from "./CreateAvatar";
+import Home from "./Home";
 
 function App() {
   // Code goes here!
@@ -17,6 +18,9 @@ function App() {
       </Route>
       <Route path="/createavatar">
         <CreateAvatar />
+      </Route>
+      <Route path="/home">
+        <Home />
       </Route>
     </>
   );
