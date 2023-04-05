@@ -1,80 +1,98 @@
-import { useFormik } from "formik";
-import * as yup from "yup";
-import { useHistory } from "react-router-dom";
-import { Button, TextField } from "@mui/material";
+import { Link, useHistory } from "react-router-dom";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import { lightBlue, orange } from "@mui/material/colors";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#03a9f4",
+    },
+    secondary: {
+      main: "#ff9100",
+    },
+  },
+});
 
 function SignUpForm() {
-  const history = useHistory();
-
-  const formSchema = yup.object().shape({
-    username: yup.string().required("Must enter valid username."),
-    password: yup.string().required("Must enter password."),
-    confirm_password: yup
-      .string()
-      .required("Must confirm password.")
-      .oneOf([yup.ref("password"), null], "Passwords must match."),
-  });
-
-  const formik = useFormik({
-    initialValues: {
-      username: "",
-      password: "",
-      confirm_password: "",
-    },
-    validationSchema: formSchema,
-    validateOnChange: false,
-    validateOnBlur: false,
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-      // fetch("/signup", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(values),
-      // })
-      //   .then((res) => res.json())
-      //   .then((data) => console.log(data))
-      //   .then(history.push("/"));
-      // resetForm({ values: "" });
-    },
-  });
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      username: data.get("username"),
+      password: data.get("password"),
+    });
+  };
 
   return (
-    <>
-      <form variant="standard" onSubmit={formik.handleSubmit}>
-        <TextField
-          variant="filled"
-          type="text"
-          name="username"
-          value={formik.values.username}
-          onChange={formik.handleChange}
-          placeholder="Username"
-        />
-        <br />
-        <TextField
-          variant="filled"
-          type="password"
-          name="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          placeholder="Password"
-        />
-        <br />
-        <TextField
-          variant="filled"
-          type="password"
-          name="confirm_password"
-          value={formik.values.confirm_password}
-          onChange={formik.handleChange}
-          placeholder="Confirm Password"
-        />
-        <br />
-        <Button type="submit" value="Sign Up">
-          Sign Up
-        </Button>
-      </form>
-    </>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 1 }}
+          >
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                sx={{ mt: 3, mb: 2 }}
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                sx={{ mt: 3, mb: 2 }}
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="new-password"
+              />
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="outlined"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link to="/signin" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 }
 
