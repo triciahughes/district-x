@@ -8,7 +8,7 @@ from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import NotFound, Unauthorized
 from config import app, db, api
-from models import User
+from models import User, Post
 from flask_cors import CORS
 
 CORS(app)
@@ -99,10 +99,22 @@ class Logout(Resource):
 
         return {'error': '401 Unauthorized'}, 401
 
+class PostList(Resource):
+
+    def get(self):
+        posts = Post.query.all()
+
+        response = make_response(
+            jsonify([post.to_dict() for post in posts]),
+            200
+        )
+        return response
+
 api.add_resource(Signup, '/signup')
 api.add_resource(AuthorizedSession, '/authorized')
 api.add_resource(Signin, '/signin')
 api.add_resource(Logout, '/logout')
+api.add_resource(PostList, '/posts')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
