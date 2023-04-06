@@ -14,7 +14,13 @@ function Posts({ posts }) {
     return post.user;
   });
 
-  console.log(postMap);
+  // console.log(postMap.username);
+
+  // const usernameInfo = postMap.map((user) => {
+  //   return user.username;
+  // });
+
+  // console.log(usernameInfo);
 
   function handlePostClick() {
     console.log("Clicked");
@@ -54,7 +60,7 @@ function Posts({ posts }) {
             <Grid item xs key={post.id} onClick={handlePostClick}>
               <Typography fontWeight={600}>
                 <Link href="" underline="hover" color="orange">
-                  Username here
+                  {post.user.username}
                 </Link>
               </Typography>
               <Typography fontWeight={100}>{post.post}</Typography>
