@@ -82,10 +82,6 @@ const CreatePost = ({ user, setShowCreatePost, fetchPost }) => {
             component="form"
             noValidate
             sx={{ mt: 1 }}
-            // onSubmit={(e) => {
-            //   e.preventDefault();
-            //   formik.handleSubmit();
-            // }}
             onSubmit={(e) => {
               e.preventDefault();
               console.log("submitted");

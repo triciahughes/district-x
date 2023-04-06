@@ -5,22 +5,27 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import { Button } from "@mui/material";
-import { borderColor } from "@mui/system";
+import { Button, ButtonGroup } from "@mui/material";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import List from "@mui/material/List";
 import Link from "@mui/material/Link";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 // import { Link } from "react-router-dom";
 function Posts({ posts }) {
   const postMap = posts.map((post) => {
     return post.user;
   });
 
-  // console.log(postMap.username);
+  function handleUpvoteClick() {
+    console.log("Clicked");
+  }
 
-  // const usernameInfo = postMap.map((user) => {
-  //   return user.username;
-  // });
-
-  // console.log(usernameInfo);
+  function handleDownvoteClick() {
+    console.log("Clicked");
+  }
 
   function handlePostClick() {
     console.log("Clicked");
@@ -32,8 +37,6 @@ function Posts({ posts }) {
     maxWidth: 700,
     color: theme.palette.text.primary,
   }));
-
-  // const messages = ["hi", "hello", "bye"];
 
   const list = posts.map((post) => {
     return (
@@ -65,7 +68,26 @@ function Posts({ posts }) {
               </Typography>
               <Typography fontWeight={100}>{post.post}</Typography>
             </Grid>
-            <Button />
+            <ButtonGroup>
+              <List>
+                <ListItem>
+                  <ListItemButton onClick={handleUpvoteClick}>
+                    <ArrowUpwardIcon></ArrowUpwardIcon>
+                  </ListItemButton>
+                  <p style={{ color: "#03a9f4" }}>{post.upvotes}</p>
+                </ListItem>
+              </List>
+              <List>
+                <ListItem>
+                  <ListItemButton onClick={handleDownvoteClick}>
+                    <ArrowDownwardIcon></ArrowDownwardIcon>
+                  </ListItemButton>
+                  <p style={{ color: "#ff9100" }}>{post.downvotes}</p>
+                </ListItem>
+              </List>
+            </ButtonGroup>
+            {/* <Button /> */}
+            {/* <Button /> */}
           </Grid>
         </StyledPaper>
       </Box>
