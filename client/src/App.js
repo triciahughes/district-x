@@ -51,7 +51,11 @@ function App() {
         <SignUpForm setUser={setUser} fetchUser={fetchUser} />
       </Route>
       <Route path="/createavatar">
-        <CreateAvatar fetchUser={fetchUser} />
+        <CreateAvatar
+          fetchUser={fetchUser}
+          user={user.username}
+          userId={user.id}
+        />
       </Route>
       <Route path="/home">
         <Home handleLogout={handleLogout} userData={user} />

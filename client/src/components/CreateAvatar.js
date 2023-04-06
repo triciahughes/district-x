@@ -2,9 +2,12 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { AccountInitialized } from "../unreal/unrealFunctionLibrary";
 
-function CreateAvatar({ fetchUser }) {
+function CreateAvatar({ fetchUser, user, userId }) {
   const history = useHistory();
-  AccountInitialized({ name: "test" });
+  console.log(user);
+  console.log(userId);
+
+  AccountInitialized({ name: `${user}` });
 
   useEffect(() => {
     // Define the event listener
