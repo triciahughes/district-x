@@ -9,7 +9,18 @@ import { Button } from "@mui/material";
 import { borderColor } from "@mui/system";
 import Link from "@mui/material/Link";
 // import { Link } from "react-router-dom";
-function Posts() {
+function Posts({ posts }) {
+  const postMap = posts.map((post) => {
+    return post.user;
+  });
+
+  const postUserData = postMap.map((user) => {
+    return user;
+  });
+
+  console.log(postMap);
+  console.log(postUserData);
+
   function handlePostClick() {
     console.log("Clicked");
   }
@@ -21,9 +32,9 @@ function Posts() {
     color: theme.palette.text.primary,
   }));
 
-  const messages = ["hi", "hello", "bye"];
+  // const messages = ["hi", "hello", "bye"];
 
-  const list = messages.map((message) => {
+  const list = posts.map((post) => {
     return (
       <Box
         sx={{
@@ -32,7 +43,7 @@ function Posts() {
           px: 3,
           backgroundColor: "white",
         }}
-        key={message}
+        key={post.id}
       >
         <StyledPaper
           sx={{
@@ -45,13 +56,13 @@ function Posts() {
             <Grid item>
               <Avatar>W</Avatar>
             </Grid>
-            <Grid item xs key={message} onClick={handlePostClick}>
+            <Grid item xs key={post.id} onClick={handlePostClick}>
               <Typography fontWeight={600}>
                 <Link href="" underline="hover" color="orange">
                   Username here
                 </Link>
               </Typography>
-              <Typography fontWeight={100}>{message}</Typography>
+              <Typography fontWeight={100}>{post.post}</Typography>
             </Grid>
             <Button />
           </Grid>

@@ -10,12 +10,14 @@ import { useState, useEffect, useCallback } from "react";
 
 function App() {
   const [user, setUser] = useState({});
+  const [post, setPost] = useState([]);
   const history = useHistory();
 
   const userFetch = useCallback(fetchUser, [history]);
 
   useEffect(() => {
     userFetch();
+    fetchPost();
   }, [userFetch]);
 
   function fetchUser() {
@@ -28,6 +30,16 @@ function App() {
       } else {
         setUser([]);
         history.push("/signin");
+      }
+    });
+  }
+
+  function fetchPost() {
+    fetch("/posts").then((res) => {
+      if (res.ok) {
+        res.json().then((postData) => {
+          setPost(postData);
+        });
       }
     });
   }
@@ -58,7 +70,7 @@ function App() {
         />
       </Route>
       <Route path="/home">
-        <Home handleLogout={handleLogout} userData={user} />
+        <Home handleLogout={handleLogout} userData={user} posts={post} />
       </Route>
     </>
   );
