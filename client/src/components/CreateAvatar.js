@@ -1,17 +1,28 @@
-import React from "react";
-import ue5 from "../UE5";
-import ue from "../UE5";
-
-if (typeof ue.interface === "undefined") {
-  ue.interface = {};
-}
-
-ue.interface.test = function (data) {
-  console.log("working");
-};
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { AccountInitialized } from "../unreal/unrealFunctionLibrary";
 
 function CreateAvatar() {
-  ue5("InitCharacterCreator");
+  const history = useHistory();
+  AccountInitialized({ name: "test" });
+
+  useEffect(() => {
+    // Define the event listener
+    const handleAccountFinalized = (event) => {
+      console.log("Received data from index.html:", event.detail);
+      history.push("/home");
+    };
+
+    document.addEventListener("accountFinalized", handleAccountFinalized);
+
+    return () => {
+      document.removeEventListener(
+        "avatarCreationFinalized",
+        handleAccountFinalized
+      );
+    };
+  }, [history]);
+
   return <></>;
 }
 

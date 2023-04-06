@@ -25,7 +25,15 @@ function Posts() {
 
   const list = messages.map((message) => {
     return (
-      <Box sx={{ flexGrow: 1, overflow: "hidden", px: 3 }} key={message}>
+      <Box
+        sx={{
+          flexGrow: 1,
+          overflow: "hidden",
+          px: 3,
+          backgroundColor: "white",
+        }}
+        key={message}
+      >
         <StyledPaper
           sx={{
             my: 2,
