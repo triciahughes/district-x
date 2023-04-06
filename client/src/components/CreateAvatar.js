@@ -16,12 +16,9 @@ function CreateAvatar() {
     document.addEventListener("accountFinalized", handleAccountFinalized);
 
     return () => {
-      document.removeEventListener(
-        "avatarCreationFinalized",
-        handleAccountFinalized
-      );
+      document.removeEventListener("accountFinalized", handleAccountFinalized);
     };
-  }, [history]);
+  }, []);
 
   return <></>;
 }
