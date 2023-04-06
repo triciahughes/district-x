@@ -50,7 +50,7 @@ if __name__ == '__main__':
                 post=fake.sentence(),
                 upvotes=fake.random_int(min=0, max=100),
                 downvotes=fake.random_int(min=0, max=100),
-                user_id=fake.random_int(min=0, max=10),
+                user_id=fake.random_int(min=1, max=10),
             )
 
             posts.append(post)
