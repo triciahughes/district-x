@@ -52,9 +52,6 @@ const CreatePost = ({ user, setShowCreatePost, fetchPost }) => {
       }).then((res) => {
         if (res.ok) {
           res.json().then((postData) => {
-            //   setUser(userData);
-            //   fetchUser();
-            //   history.push("/home");
             fetchPost();
             console.log(postData);
             setShowCreatePost(false);
@@ -99,19 +96,21 @@ const CreatePost = ({ user, setShowCreatePost, fetchPost }) => {
               <TextField
                 required
                 fullWidth
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: -1 }}
                 id="post"
                 label="Post"
                 name="post"
                 value={formik.values.post}
                 onChange={formik.handleChange}
+                inputProps={{ maxLength: 140 }}
               />
             </Grid>
+            <p style={{ color: "#ff9100" }}>140 characters max</p>
             <Button
               type="submit"
               fullWidth
               variant="outlined"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 2, mb: 1 }}
             >
               Submit
             </Button>
