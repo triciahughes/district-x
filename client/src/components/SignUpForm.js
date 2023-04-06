@@ -7,6 +7,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
 const theme = createTheme({
   palette: {
@@ -19,17 +21,34 @@ const theme = createTheme({
   },
 });
 
-function SignUpForm() {
+const validationSchema = yup.object({
+  username: yup.string("Enter your username").required("Username is required"),
+  password: yup.string("Enter your password").required("Password is required"),
+});
+
+function SignUpForm({ setUser, fetchUser }) {
   const history = useHistory();
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get("username"),
-      password: data.get("password"),
-    });
-    history.push("/createavatar");
-  };
+
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values, { setSubmitting }) => {
+      setSubmitting(false);
+      fetch("/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+        .then(history.push("/createavatar"));
+    },
+  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -49,8 +68,12 @@ function SignUpForm() {
           <Box
             component="form"
             noValidate
-            onSubmit={handleSubmit}
+            // onSubmit={handleSubmit}
             sx={{ mt: 1 }}
+            onSubmit={(e) => {
+              e.preventDefault();
+              formik.handleSubmit();
+            }}
           >
             <Grid item xs={12}>
               <TextField
@@ -60,6 +83,8 @@ function SignUpForm() {
                 id="username"
                 label="Username"
                 name="username"
+                value={formik.values.username}
+                onChange={formik.handleChange}
                 autoComplete="username"
               />
             </Grid>
@@ -72,6 +97,8 @@ function SignUpForm() {
                 label="Password"
                 type="password"
                 id="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
                 autoComplete="new-password"
               />
             </Grid>
