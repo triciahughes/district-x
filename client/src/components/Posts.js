@@ -14,12 +14,7 @@ function Posts({ posts }) {
     return post.user;
   });
 
-  const postUserData = postMap.map((user) => {
-    return user;
-  });
-
   console.log(postMap);
-  console.log(postUserData);
 
   function handlePostClick() {
     console.log("Clicked");

@@ -4,6 +4,8 @@ import * as React from "react";
 import SignUpForm from "./components/SignUpForm";
 import SignInForm from "./components/SignInForm";
 import CreateAvatar from "./components/CreateAvatar";
+import CreatePost from "./components/CreatePost";
+import NavBar from "./components/NavBar/NavBar";
 import Home from "./components/Home";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
@@ -11,6 +13,7 @@ import { useState, useEffect, useCallback } from "react";
 function App() {
   const [user, setUser] = useState({});
   const [post, setPost] = useState([]);
+  const [showCreatePost, setShowCreatePost] = useState(false);
   const history = useHistory();
 
   const userFetch = useCallback(fetchUser, [history]);
@@ -54,6 +57,13 @@ function App() {
     });
   }
 
+  function handleCreatePostClick() {
+    console.log("Clicked");
+    setShowCreatePost(!showCreatePost);
+
+    // history.push("/createpost");
+  }
+
   return (
     <>
       <Route path="/signin">
@@ -70,7 +80,20 @@ function App() {
         />
       </Route>
       <Route path="/home">
-        <Home handleLogout={handleLogout} userData={user} posts={post} />
+        <Home
+          handleLogout={handleLogout}
+          userData={user}
+          posts={post}
+          setPost={setPost}
+          fetchPost={fetchPost}
+          showCreatePost={showCreatePost}
+          setShowCreatePost={setShowCreatePost}
+          handleCreatePostClick={handleCreatePostClick}
+          user={user}
+        />
+      </Route>
+      <Route path="/createpost">
+        <CreatePost />
       </Route>
     </>
   );

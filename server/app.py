@@ -102,7 +102,7 @@ class Logout(Resource):
 class PostList(Resource):
 
     def get(self):
-        posts = Post.query.all()
+        posts = Post.query.order_by(Post.id.desc()).all()
 
         response = make_response(
             jsonify([post.to_dict() for post in posts]),
@@ -110,11 +110,38 @@ class PostList(Resource):
         )
         return response
 
+
+class CreatePost(Resource):
+
+    def post(self):
+
+        data = request.get_json()
+
+        new_post = Post(
+            post=data['post'],
+            user_id=data['user_id'],
+            upvotes=data['upvotes'],
+            downvotes=data['downvotes'],
+        )
+
+        db.session.add(new_post)
+        db.session.commit()
+
+        response_dict = new_post.to_dict()
+
+        response = make_response(
+            response_dict,
+            201
+        )
+        return response
+
+
 api.add_resource(Signup, '/signup')
 api.add_resource(AuthorizedSession, '/authorized')
 api.add_resource(Signin, '/signin')
 api.add_resource(Logout, '/logout')
 api.add_resource(PostList, '/posts')
+api.add_resource(CreatePost, '/createpost')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

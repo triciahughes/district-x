@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
@@ -15,15 +16,13 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import Avatar from "@mui/material/Avatar";
 
 const drawerWidth = 240;
-function NavBar({ handleLogout, userData }) {
+function NavBar({ handleLogout, userData, handleCreatePostClick }) {
   const history = useHistory();
 
   function handleLogOutClick() {
     handleLogout();
   }
-  function handleCreatePostClick() {
-    console.log("Clicked");
-  }
+
   function handleUsernameClick() {
     console.log("Clicked");
   }
