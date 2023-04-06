@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { AccountInitialized } from "../unreal/unrealFunctionLibrary";
 
-function CreateAvatar() {
+function CreateAvatar({ fetchUser }) {
   const history = useHistory();
   AccountInitialized({ name: "test" });
 
@@ -10,6 +10,7 @@ function CreateAvatar() {
     // Define the event listener
     const handleAccountFinalized = (event) => {
       console.log("Received data from index.html:", event.detail);
+      fetchUser();
       history.push("/home");
     };
 

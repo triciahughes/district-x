@@ -45,8 +45,11 @@ function SignUpForm({ setUser, fetchUser }) {
         body: JSON.stringify(values),
       })
         .then((res) => res.json())
-        .then((data) => console.log(data))
-        .then(history.push("/createavatar"));
+        .then((data) => {
+          setUser(data);
+          console.log(data);
+          history.push("/createavatar");
+        });
     },
   });
 
