@@ -12,6 +12,8 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.String, nullable=False)
     _password_hash = db.Column(db.String)
 
+    posts = db.relationship('Post', back_populates='user')
+
     @hybrid_property
     def password_hash(self):
         return self._password_hash
@@ -32,3 +34,18 @@ class User(db.Model, SerializerMixin):
         return f'<Username: {self.username} Password: {self._password_hash}'
 
     
+class Post(db.Model, SerializerMixin):
+
+    __tablename__ = 'posts'
+
+    id = db.Column(db.Integer, primary_key=True)
+    post = db.Column(db.String)
+    upvotes = db.Column(db.Integer)
+    downvotes = db.Column(db.Integer)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    user = db.relationship('User', back_populates='posts')
+
+    def __repr__(self):
+        return f'<User: {self.user} Post: {self.post} Upvotes: {self.upvotes} Downvotes: {self.downvotes}'
