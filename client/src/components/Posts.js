@@ -91,11 +91,11 @@ function Posts({ user, fetchPost, id, votes, posts, postUser, postData }) {
             p: 2,
           }}
         >
-          <Grid container wrap="nowrap" spacing={2} onClick={handlePostClick}>
+          <Grid container wrap="nowrap" spacing={2}>
             <Grid item>
               <Avatar>L</Avatar>
             </Grid>
-            <Grid item xs>
+            <Grid item xs onClick={handlePostClick}>
               <Typography fontWeight={600}>
                 <Link href="" underline="hover" color="orange">
                   {postUser}
