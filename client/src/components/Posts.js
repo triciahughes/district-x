@@ -100,11 +100,15 @@ function Posts({ user, fetchPost, id, votes, posts, postUser }) {
               <List>
                 <ListItem>
                   <ListItemButton onClick={handleUpvoteClick}>
-                    <ArrowUpwardIcon></ArrowUpwardIcon>
+                    <ArrowUpwardIcon
+                      sx={{ color: "#D0DB61" }}
+                    ></ArrowUpwardIcon>
                   </ListItemButton>
                   <p style={{ color: "#03a9f4" }}>{votes}</p>
                   <ListItemButton onClick={handleDownvoteClick}>
-                    <ArrowDownwardIcon></ArrowDownwardIcon>
+                    <ArrowDownwardIcon
+                      sx={{ color: "#D9381E" }}
+                    ></ArrowDownwardIcon>
                   </ListItemButton>
                 </ListItem>
               </List>
