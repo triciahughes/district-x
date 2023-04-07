@@ -110,6 +110,40 @@ class PostList(Resource):
         )
         return response
 
+class PostById(Resource):
+
+    def get(self, id):
+        post = Post.query.filter(Post.id == id).first()
+
+        if post:
+
+            response = make_response(
+                jsonify(post.to_dict()),
+                200
+            )
+            return response
+
+        return {'error': '404 Not Found'}, 404
+
+    def patch(self, id):
+        post = Post.query.filter(Post.id == id).first()
+
+        if not post:
+            return {'error': '404 Not Found'}, 404
+        data = request.get_json()
+
+        for key in data:
+            setattr(post, key, data[key])
+        
+        db.session.add(post)
+        db.session.commit()
+
+        response = make_response(
+            post.to_dict(),
+            200
+        )
+        return response
+
 
 class CreatePost(Resource):
 
@@ -141,6 +175,7 @@ api.add_resource(AuthorizedSession, '/authorized')
 api.add_resource(Signin, '/signin')
 api.add_resource(Logout, '/logout')
 api.add_resource(PostList, '/posts')
+api.add_resource(PostById, '/posts/<int:id>')
 api.add_resource(CreatePost, '/createpost')
 
 if __name__ == '__main__':

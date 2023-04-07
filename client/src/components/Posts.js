@@ -32,12 +32,35 @@ function Posts({ user, fetchPost, id, upvotes, downvotes, posts, postUser }) {
   }));
 
   function handleUpvoteClick() {
-    console.log("clicked");
-    // setUpvotes(post.upvotes);
+    const newUpvotes = (upvotes += 1);
+
+    fetch(`/posts/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ upvotes: newUpvotes }),
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then(fetchPost());
+      }
+    });
   }
 
   function handleDownvoteClick() {
-    console.log("Clicked");
+    const newDownvotes = (downvotes += 1);
+
+    fetch(`/posts/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ downvotes: newDownvotes }),
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then(fetchPost());
+      }
+    });
   }
 
   function handlePostClick() {
