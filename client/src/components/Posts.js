@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import {
   Box,
@@ -18,8 +19,10 @@ import {
 } from "@mui/icons-material";
 ///////////// IMPORTS //////////////
 
-function Posts({ posts }) {
+function Posts({ user, fetchPost, id, upvotes, downvotes, posts, postUser }) {
+  // const [upvotes, setUpvotes] = useState(0);
   ///////////// STYLES //////////////
+
   const StyledPaper = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
     ...theme.typography.body2,
@@ -28,12 +31,9 @@ function Posts({ posts }) {
     color: theme.palette.text.primary,
   }));
 
-  const postMap = posts.map((post) => {
-    return post.user;
-  });
-
   function handleUpvoteClick() {
-    console.log("Clicked");
+    console.log("clicked");
+    // setUpvotes(post.upvotes);
   }
 
   function handleDownvoteClick() {
@@ -44,8 +44,64 @@ function Posts({ posts }) {
     console.log("Clicked");
   }
 
-  const list = posts.map((post) => {
-    return (
+  // const list = posts.map((post) => {
+  //   const downvotes = post.downvotes;
+  //   return (
+  //     <Box
+  //       sx={{
+  //         flexGrow: 1,
+  //         overflow: "hidden",
+  //         px: 3,
+  //         backgroundColor: "white",
+  //       }}
+  //       key={post.id}
+  //     >
+  //       <StyledPaper
+  //         sx={{
+  //           my: 2,
+  //           mx: "auto",
+  //           p: 2,
+  //         }}
+  //       >
+  //         <Grid container wrap="nowrap" spacing={2}>
+  //           <Grid item>
+  //             <Avatar>L</Avatar>
+  //           </Grid>
+  //           <Grid item xs key={post.id} onClick={handlePostClick}>
+  //             <Typography fontWeight={600}>
+  //               <Link href="" underline="hover" color="orange">
+  //                 {post.user.username}
+  //               </Link>
+  //             </Typography>
+  //             <Typography fontWeight={100}>{post.post}</Typography>
+  //           </Grid>
+  //           <ButtonGroup>
+  //             <List>
+  //               <ListItem>
+  //                 <ListItemButton onClick={handleUpvoteClick}>
+  //                   <ArrowUpwardIcon></ArrowUpwardIcon>
+  //                 </ListItemButton>
+  //                 <p style={{ color: "#03a9f4" }}>{upvotes}</p>
+  //               </ListItem>
+  //             </List>
+  //             <List>
+  //               <ListItem>
+  //                 <ListItemButton onClick={handleDownvoteClick}>
+  //                   <ArrowDownwardIcon></ArrowDownwardIcon>
+  //                 </ListItemButton>
+  //                 <p style={{ color: "#ff9100" }}>{post.downvotes}</p>
+  //               </ListItem>
+  //             </List>
+  //           </ButtonGroup>
+  //         </Grid>
+  //       </StyledPaper>
+  //     </Box>
+  //   );
+  // });
+
+  return (
+    <>
+      {" "}
       <Box
         sx={{
           flexGrow: 1,
@@ -53,7 +109,6 @@ function Posts({ posts }) {
           px: 3,
           backgroundColor: "white",
         }}
-        key={post.id}
       >
         <StyledPaper
           sx={{
@@ -66,13 +121,13 @@ function Posts({ posts }) {
             <Grid item>
               <Avatar>L</Avatar>
             </Grid>
-            <Grid item xs key={post.id} onClick={handlePostClick}>
+            <Grid item xs onClick={handlePostClick}>
               <Typography fontWeight={600}>
                 <Link href="" underline="hover" color="orange">
-                  {post.user.username}
+                  {postUser}
                 </Link>
               </Typography>
-              <Typography fontWeight={100}>{post.post}</Typography>
+              <Typography fontWeight={100}>{posts}</Typography>
             </Grid>
             <ButtonGroup>
               <List>
@@ -80,7 +135,7 @@ function Posts({ posts }) {
                   <ListItemButton onClick={handleUpvoteClick}>
                     <ArrowUpwardIcon></ArrowUpwardIcon>
                   </ListItemButton>
-                  <p style={{ color: "#03a9f4" }}>{post.upvotes}</p>
+                  <p style={{ color: "#03a9f4" }}>{upvotes}</p>
                 </ListItem>
               </List>
               <List>
@@ -88,17 +143,15 @@ function Posts({ posts }) {
                   <ListItemButton onClick={handleDownvoteClick}>
                     <ArrowDownwardIcon></ArrowDownwardIcon>
                   </ListItemButton>
-                  <p style={{ color: "#ff9100" }}>{post.downvotes}</p>
+                  <p style={{ color: "#ff9100" }}>{downvotes}</p>
                 </ListItem>
               </List>
             </ButtonGroup>
           </Grid>
         </StyledPaper>
       </Box>
-    );
-  });
-
-  return <>{list}</>;
+    </>
+  );
 }
 
 export default Posts;

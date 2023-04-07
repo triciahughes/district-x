@@ -12,6 +12,21 @@ function Home({
   handleCreatePostClick,
   user,
 }) {
+  console.log(posts);
+  const postsList = posts.map((post) => {
+    return (
+      <Posts
+        user={user}
+        fetchPost={fetchPost}
+        key={post.id}
+        id={post.id}
+        upvotes={post.upvotes}
+        downvotes={post.downvotes}
+        posts={post.post}
+        postUser={post.user.username}
+      />
+    );
+  });
   return (
     <>
       <NavBar
@@ -26,7 +41,8 @@ function Home({
           fetchPost={fetchPost}
         />
       ) : null}
-      <Posts posts={posts} />
+      {/* <Posts posts={posts} /> */}
+      {postsList}
     </>
   );
 }

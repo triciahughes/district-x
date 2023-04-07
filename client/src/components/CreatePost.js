@@ -14,6 +14,7 @@ import * as yup from "yup";
 ///////////// IMPORTS //////////////
 
 const CreatePost = ({ user, setShowCreatePost, fetchPost }) => {
+  ///////////// STYLES //////////////
   const theme = createTheme({
     palette: {
       primary: {
