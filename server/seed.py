@@ -48,8 +48,7 @@ if __name__ == '__main__':
 
             post = Post(
                 post=fake.sentence(),
-                upvotes=fake.random_int(min=0, max=100),
-                downvotes=fake.random_int(min=0, max=100),
+                votes=fake.random_int(min=0, max=100),
                 user_id=fake.random_int(min=1, max=10),
             )
 

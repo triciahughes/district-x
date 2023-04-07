@@ -19,7 +19,7 @@ import {
 } from "@mui/icons-material";
 ///////////// IMPORTS //////////////
 
-function Posts({ user, fetchPost, id, upvotes, downvotes, posts, postUser }) {
+function Posts({ user, fetchPost, id, votes, posts, postUser }) {
   // const [upvotes, setUpvotes] = useState(0);
   ///////////// STYLES //////////////
 
@@ -32,14 +32,14 @@ function Posts({ user, fetchPost, id, upvotes, downvotes, posts, postUser }) {
   }));
 
   function handleUpvoteClick() {
-    const newUpvotes = (upvotes += 1);
+    const newUpvotes = (votes += 1);
 
     fetch(`/posts/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ upvotes: newUpvotes }),
+      body: JSON.stringify({ votes: newUpvotes }),
     }).then((res) => {
       if (res.ok) {
         res.json().then(fetchPost());
@@ -48,14 +48,14 @@ function Posts({ user, fetchPost, id, upvotes, downvotes, posts, postUser }) {
   }
 
   function handleDownvoteClick() {
-    const newDownvotes = (downvotes += 1);
+    const newDownvotes = (votes -= 1);
 
     fetch(`/posts/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ downvotes: newDownvotes }),
+      body: JSON.stringify({ votes: newDownvotes }),
     }).then((res) => {
       if (res.ok) {
         res.json().then(fetchPost());
@@ -102,15 +102,10 @@ function Posts({ user, fetchPost, id, upvotes, downvotes, posts, postUser }) {
                   <ListItemButton onClick={handleUpvoteClick}>
                     <ArrowUpwardIcon></ArrowUpwardIcon>
                   </ListItemButton>
-                  <p style={{ color: "#03a9f4" }}>{upvotes}</p>
-                </ListItem>
-              </List>
-              <List>
-                <ListItem>
+                  <p style={{ color: "#03a9f4" }}>{votes}</p>
                   <ListItemButton onClick={handleDownvoteClick}>
                     <ArrowDownwardIcon></ArrowDownwardIcon>
                   </ListItemButton>
-                  <p style={{ color: "#ff9100" }}>{downvotes}</p>
                 </ListItem>
               </List>
             </ButtonGroup>

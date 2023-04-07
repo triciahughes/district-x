@@ -20,8 +20,7 @@ function Home({
         fetchPost={fetchPost}
         key={post.id}
         id={post.id}
-        upvotes={post.upvotes}
-        downvotes={post.downvotes}
+        votes={post.votes}
         posts={post.post}
         postUser={post.user.username}
       />

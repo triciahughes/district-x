@@ -42,8 +42,7 @@ class Post(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     post = db.Column(db.String)
-    upvotes = db.Column(db.Integer)
-    downvotes = db.Column(db.Integer)
+    votes = db.Column(db.Integer)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
