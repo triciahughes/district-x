@@ -1,5 +1,5 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import {
   Drawer,
   Toolbar,
@@ -23,7 +23,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 const drawerWidth = 240;
 
-const PostDetails = ({ handleLogOutClick, postUser, postId, user }) => {
+const PostDetails = ({ handleLogOutClick, postUser, user }) => {
   ///////////// STYLES //////////////
   const StyledPaper = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
@@ -32,8 +32,20 @@ const PostDetails = ({ handleLogOutClick, postUser, postId, user }) => {
     maxWidth: 700,
     color: theme.palette.text.primary,
   }));
+  const [postDetails, setPostDetails] = useState();
 
-  console.log(postId);
+  const { id } = useParams();
+  console.log(id);
+
+  useEffect(() => {
+    fetch(`/posts/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setPostDetails(data);
+      });
+  }, [id]);
+
+  console.log(postDetails);
 
   function handleUsernameClick() {
     console.log("clicked");
@@ -104,7 +116,7 @@ const PostDetails = ({ handleLogOutClick, postUser, postId, user }) => {
             <Grid item xs>
               <Typography fontWeight={600}>
                 <Link href="" underline="hover" color="orange">
-                  {postUser}
+                  username here
                 </Link>
               </Typography>
               <Typography fontWeight={100}>post here</Typography>

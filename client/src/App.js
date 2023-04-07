@@ -1,5 +1,5 @@
 // import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import * as React from "react";
 import SignUpForm from "./components/SignUpForm";
 import SignInForm from "./components/SignInForm";
@@ -28,7 +28,7 @@ function App() {
       if (res.ok) {
         res.json().then((userData) => {
           setUser(userData);
-          history.push("/home");
+          // history.push("/home");
         });
       } else {
         setUser([]);
@@ -104,7 +104,7 @@ function App() {
       <Route path="/createpost">
         <CreatePost />
       </Route>
-      <Route path="/postdetails">
+      <Route path="/post/:id">
         <PostDetails user={user.username} handleLogOutClick={handleLogout} />
       </Route>
     </>

@@ -22,7 +22,6 @@ import {
 ///////////// IMPORTS //////////////
 
 function Posts({ user, fetchPost, id, votes, posts, postUser, postData }) {
-  const [postId, setPostId] = useState();
   const history = useHistory();
   ///////////// STYLES //////////////
   const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -66,13 +65,10 @@ function Posts({ user, fetchPost, id, votes, posts, postUser, postData }) {
   }
 
   function handlePostClick() {
-    console.log("clicked");
-    setPostId(id);
+    // console.log("clicked");
     console.log(id);
-    <PostDetails postUser={postUser} postId={postId} />;
-    history.push("/postdetails");
+    history.push(`/post/${id}`);
   }
-  console.log(postId);
 
   return (
     <>
