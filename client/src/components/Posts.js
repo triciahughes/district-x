@@ -64,7 +64,7 @@ function Posts({ posts }) {
         >
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item>
-              <Avatar>W</Avatar>
+              <Avatar>L</Avatar>
             </Grid>
             <Grid item xs key={post.id} onClick={handlePostClick}>
               <Typography fontWeight={600}>

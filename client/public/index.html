@@ -4,18 +4,30 @@
     <script src="../src/unreal/unrealHelper.js"></script>
     <script src="../src/unreal/unrealInterface.js"></script>
     <script src="../src/unreal/unrealFunctionLibrary.js"></script>
-    <script>
-      ue.interface.accountFinalized = function (data) {
-        // Insert JavaScript functionality here
-        // console.log(JSON.stringify(data));
+    <!--
 
+
+
+
+        -->
+    <script>
+      // Define a method named `accountFinalized` on `ue.interface` object.
+      ue.interface.accountFinalized = function (data) {
+        // Create a new CustomEvent called "accountFinalized" with the provided `data` as the event detail.
         const accountFinalizedEvent = new CustomEvent("accountFinalized", {
           detail: data,
         });
 
+        // Dispatch the custom "accountFinalized" event on the `document` object.
         document.dispatchEvent(accountFinalizedEvent);
       };
     </script>
+    <!--
+
+
+
+
+        -->
     <meta charset="utf-8" />
     <link rel="icon" href="./logo192.png" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
