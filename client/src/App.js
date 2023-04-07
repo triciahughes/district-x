@@ -5,7 +5,6 @@ import SignUpForm from "./components/SignUpForm";
 import SignInForm from "./components/SignInForm";
 import CreateAvatar from "./components/CreateAvatar";
 import CreatePost from "./components/CreatePost";
-import NavBar from "./components/NavBar/NavBar";
 import Home from "./components/Home";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
@@ -58,10 +57,19 @@ function App() {
   }
 
   function handleCreatePostClick() {
-    console.log("Clicked");
     setShowCreatePost(!showCreatePost);
+  }
 
-    // history.push("/createpost");
+  function handleUpvotesClick(postId) {
+    fetch(`/posts/${postId}/upvote`, {
+      method: "PUT",
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((postData) => {
+          fetchPost();
+        });
+      }
+    });
   }
 
   return (

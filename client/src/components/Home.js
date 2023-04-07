@@ -1,6 +1,5 @@
 import NavBar from "./NavBar/NavBar";
 import Posts from "./Posts";
-import { Paper } from "@mui/material";
 import CreatePost from "./CreatePost";
 
 function Home({

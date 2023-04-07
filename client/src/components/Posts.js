@@ -1,20 +1,33 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import Avatar from "@mui/material/Avatar";
-import Typography from "@mui/material/Typography";
-import { Button, ButtonGroup } from "@mui/material";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import List from "@mui/material/List";
+import {
+  Box,
+  Paper,
+  Grid,
+  Avatar,
+  Typography,
+  ButtonGroup,
+  List,
+  ListItem,
+  ListItemButton,
+} from "@mui/material";
 import Link from "@mui/material/Link";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-// import { Link } from "react-router-dom";
+import {
+  ArrowDownward as ArrowDownwardIcon,
+  ArrowUpward as ArrowUpwardIcon,
+} from "@mui/icons-material";
+///////////// IMPORTS //////////////
+
 function Posts({ posts }) {
+  ///////////// STYLES //////////////
+  const StyledPaper = styled(Paper)(({ theme }) => ({
+    backgroundColor: "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(2),
+    maxWidth: 700,
+    color: theme.palette.text.primary,
+  }));
+
   const postMap = posts.map((post) => {
     return post.user;
   });
@@ -30,13 +43,6 @@ function Posts({ posts }) {
   function handlePostClick() {
     console.log("Clicked");
   }
-  const StyledPaper = styled(Paper)(({ theme }) => ({
-    backgroundColor: "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    maxWidth: 700,
-    color: theme.palette.text.primary,
-  }));
 
   const list = posts.map((post) => {
     return (
@@ -86,8 +92,6 @@ function Posts({ posts }) {
                 </ListItem>
               </List>
             </ButtonGroup>
-            {/* <Button /> */}
-            {/* <Button /> */}
           </Grid>
         </StyledPaper>
       </Box>
