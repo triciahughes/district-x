@@ -112,6 +112,20 @@ const CreatePost = ({ user, setShowCreatePost, fetchPost }) => {
             >
               Submit
             </Button>
+            <Button
+              type="click"
+              onClick={() => setShowCreatePost(false)}
+              fullWidth
+              variant="outlined"
+              sx={{
+                mt: 2,
+                mb: 1,
+                color: "error.main",
+                borderColor: "#D9381E",
+              }}
+            >
+              Cancel
+            </Button>
             <Grid container justifyContent="flex-end"></Grid>
           </Box>
         </Box>
