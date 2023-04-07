@@ -5,6 +5,7 @@ import SignUpForm from "./components/SignUpForm";
 import SignInForm from "./components/SignInForm";
 import CreateAvatar from "./components/CreateAvatar";
 import CreatePost from "./components/CreatePost";
+import PostDetails from "./components/PostDetails";
 import Home from "./components/Home";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
@@ -60,17 +61,17 @@ function App() {
     setShowCreatePost(!showCreatePost);
   }
 
-  function handleUpvotesClick(postId) {
-    fetch(`/posts/${postId}/upvote`, {
-      method: "PUT",
-    }).then((res) => {
-      if (res.ok) {
-        res.json().then((postData) => {
-          fetchPost();
-        });
-      }
-    });
-  }
+  // function handleUpvotesClick(postId) {
+  //   fetch(`/posts/${postId}/upvote`, {
+  //     method: "PUT",
+  //   }).then((res) => {
+  //     if (res.ok) {
+  //       res.json().then((postData) => {
+  //         fetchPost();
+  //       });
+  //     }
+  //   });
+  // }
 
   return (
     <>
@@ -102,6 +103,9 @@ function App() {
       </Route>
       <Route path="/createpost">
         <CreatePost />
+      </Route>
+      <Route path="/postdetails">
+        <PostDetails user={user.username} handleLogOutClick={handleLogout} />
       </Route>
     </>
   );

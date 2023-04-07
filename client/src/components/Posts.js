@@ -1,4 +1,6 @@
 import * as React from "react";
+import PostDetails from "./PostDetails";
+import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import {
@@ -19,10 +21,10 @@ import {
 } from "@mui/icons-material";
 ///////////// IMPORTS //////////////
 
-function Posts({ user, fetchPost, id, votes, posts, postUser }) {
-  // const [upvotes, setUpvotes] = useState(0);
+function Posts({ user, fetchPost, id, votes, posts, postUser, postData }) {
+  const [postId, setPostId] = useState();
+  const history = useHistory();
   ///////////// STYLES //////////////
-
   const StyledPaper = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
     ...theme.typography.body2,
@@ -64,8 +66,13 @@ function Posts({ user, fetchPost, id, votes, posts, postUser }) {
   }
 
   function handlePostClick() {
-    console.log("Clicked");
+    console.log("clicked");
+    setPostId(id);
+    console.log(id);
+    <PostDetails postUser={postUser} postId={postId} />;
+    history.push("/postdetails");
   }
+  console.log(postId);
 
   return (
     <>
@@ -84,11 +91,11 @@ function Posts({ user, fetchPost, id, votes, posts, postUser }) {
             p: 2,
           }}
         >
-          <Grid container wrap="nowrap" spacing={2}>
+          <Grid container wrap="nowrap" spacing={2} onClick={handlePostClick}>
             <Grid item>
               <Avatar>L</Avatar>
             </Grid>
-            <Grid item xs onClick={handlePostClick}>
+            <Grid item xs>
               <Typography fontWeight={600}>
                 <Link href="" underline="hover" color="orange">
                   {postUser}

@@ -12,7 +12,6 @@ function Home({
   handleCreatePostClick,
   user,
 }) {
-  console.log(posts);
   const postsList = posts.map((post) => {
     return (
       <Posts
@@ -23,6 +22,7 @@ function Home({
         votes={post.votes}
         posts={post.post}
         postUser={post.user.username}
+        postData={posts}
       />
     );
   });
@@ -40,7 +40,6 @@ function Home({
           fetchPost={fetchPost}
         />
       ) : null}
-      {/* <Posts posts={posts} /> */}
       {postsList}
     </>
   );
