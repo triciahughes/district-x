@@ -32,6 +32,8 @@ function Posts({ user, fetchPost, id, votes, posts, postUser, postData }) {
     color: theme.palette.text.primary,
   }));
 
+  //////////// upvotes && downvotes ////////////
+
   function handleUpvoteClick() {
     const newUpvotes = (votes += 1);
 

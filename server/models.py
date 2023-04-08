@@ -8,13 +8,14 @@ class User(db.Model, SerializerMixin):
 
     __tablename__ = 'users'
 
-    serialize_rules = ('-posts.user', '-_password_hash',)
+    serialize_rules = ('-posts', '-_password_hash', '-comments',)
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False)
     _password_hash = db.Column(db.String)
 
     posts = db.relationship('Post', back_populates='user')
+    comments = db.relationship('Comment', back_populates='user')
 
     @hybrid_property
     def password_hash(self):
@@ -40,6 +41,8 @@ class Post(db.Model, SerializerMixin):
 
     __tablename__ = 'posts'
 
+    serialize_rules = ('-comments',)
+
     id = db.Column(db.Integer, primary_key=True)
     post = db.Column(db.String)
     votes = db.Column(db.Integer)
@@ -47,13 +50,16 @@ class Post(db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     user = db.relationship('User', back_populates='posts')
+    comments = db.relationship('Comment', back_populates='post')
 
     def __repr__(self):
-        return f'<User: {self.user} Post: {self.post} Upvotes: {self.upvotes} Downvotes: {self.downvotes}'
+        return f'<User: {self.user} Post: {self.post} Votes: {self.votes}>'
 
 class Comment(db.Model, SerializerMixin):
 
     __tablename__ = 'comments'
+
+    serialize_rules = ('-user.comments', '-post.comments',)
 
     id = db.Column(db.Integer, primary_key=True)
     comment = db.Column(db.String)
@@ -66,4 +72,4 @@ class Comment(db.Model, SerializerMixin):
     post = db.relationship('Post', back_populates='comments')
 
     def __repr__(self):
-        return f'<Comment: {self.comment} Post_id: {self.post_id} User_id: {self.user_id} >'
+        return f'<Comment: {self.comment} >'

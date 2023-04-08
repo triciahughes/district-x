@@ -8,15 +8,16 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, User, Post
+from models import db, User, Post, Comment
 
 if __name__ == '__main__':
     fake = Faker()
 
     with app.app_context():
         print("Deleting all records...")
-        Post.query.delete()
+        Comment.query.delete()
         User.query.delete()
+        Post.query.delete()
         # db.session.commit()
 
         fake = Faker()
@@ -57,8 +58,31 @@ if __name__ == '__main__':
         db.session.add_all(posts)
         db.session.commit()
 
-
         print("Seeding posts finished!")
+
+        print("Creating comments...")
+
+        comments = []
+
+        for i in range(30):
+            instructions = fake.paragraph(nb_sentences=1)
+
+            comment = Comment(
+                comment=fake.sentence(),
+                user_id=fake.random_int(min=1, max=10),
+                post_id=fake.random_int(min=1, max=15),
+            )
+
+            comments.append(comment)
+        
+        db.session.add_all(comments)
+        db.session.commit()
+
+        print("Seeding comments finished!")
+
+
+
+        
 
 
 
