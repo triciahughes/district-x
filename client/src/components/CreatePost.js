@@ -41,8 +41,7 @@ const CreatePost = ({ user, setShowCreatePost, fetchPost }) => {
       const submission = {
         ...values,
         user_id: userId,
-        upvotes: 0,
-        downvotes: 0,
+        votes: 0,
       };
       console.log("clicked");
       console.log(submission);

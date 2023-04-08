@@ -93,7 +93,11 @@ function App() {
         <CreatePost />
       </Route>
       <Route path="/post/:id">
-        <PostDetails user={user.username} handleLogOutClick={handleLogout} />
+        <PostDetails
+          user={user.username}
+          handleLogOutClick={handleLogout}
+          userId={user.id}
+        />
       </Route>
     </>
   );

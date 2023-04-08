@@ -30,7 +30,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 const drawerWidth = 240;
 
-const PostDetails = ({ handleLogOutClick, user }) => {
+const PostDetails = ({ handleLogOutClick, user, userId }) => {
   ///////////// STYLES //////////////
   const StyledPaper = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
@@ -91,12 +91,12 @@ const PostDetails = ({ handleLogOutClick, user }) => {
   }
 
   //////////// variables ////////////
-  console.log(postDetails);
   const post = postDetails?.post;
   let votes = postDetails?.votes;
   const postUsername = postDetails?.user.username;
   const comments = postDetails?.comments;
-  console.log(post, votes, postUsername);
+  // const userId = user.id;
+  // console.log(userId);
 
   const comment = comments?.map((data) => {
     return (
@@ -223,7 +223,7 @@ const PostDetails = ({ handleLogOutClick, user }) => {
           </Grid>
         </StyledPaper>
       </Box>
-      <CreateComment />
+      <CreateComment id={id} userId={userId} />
       <Typography align="center" fontWeight={100}>
         Comments
       </Typography>

@@ -154,8 +154,7 @@ class CreatePost(Resource):
         new_post = Post(
             post=data['post'],
             user_id=data['user_id'],
-            upvotes=data['upvotes'],
-            downvotes=data['downvotes'],
+            votes=data['votes'],
         )
 
         db.session.add(new_post)

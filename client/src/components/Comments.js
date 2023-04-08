@@ -14,10 +14,6 @@ const Comments = ({ id, username, comment }) => {
 
   return (
     <>
-      {/* <CreateComment /> */}
-      {/* <Typography align="center" fontWeight={100}>
-        Comments
-      </Typography> */}
       <StyledPaper
         sx={{
           my: 2,
