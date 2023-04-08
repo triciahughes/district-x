@@ -28,7 +28,7 @@ function App() {
       if (res.ok) {
         res.json().then((userData) => {
           setUser(userData);
-          history.push("/home");
+          // history.push("/home");
         });
       } else {
         setUser([]);

@@ -41,7 +41,7 @@ class Post(db.Model, SerializerMixin):
 
     __tablename__ = 'posts'
 
-    serialize_rules = ('-comments',)
+    # serialize_rules = ('-comments',)
 
     id = db.Column(db.Integer, primary_key=True)
     post = db.Column(db.String)

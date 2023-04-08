@@ -3,7 +3,7 @@ import React from "react";
 import { Grid, Paper, styled, Avatar, Typography, Link } from "@mui/material";
 const drawerWidth = 240;
 
-const Comments = () => {
+const Comments = ({ id, username, comment }) => {
   const StyledPaper = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
     ...theme.typography.body2,
@@ -11,12 +11,13 @@ const Comments = () => {
     maxWidth: 700,
     color: theme.palette.text.primary,
   }));
+
   return (
     <>
-      <CreateComment />
-      <Typography align="center" fontWeight={100}>
+      {/* <CreateComment /> */}
+      {/* <Typography align="center" fontWeight={100}>
         Comments
-      </Typography>
+      </Typography> */}
       <StyledPaper
         sx={{
           my: 2,
@@ -30,16 +31,14 @@ const Comments = () => {
           </Grid>
           <Grid justifyContent="left" item xs zeroMinWidth>
             <Link href="" underline="hover" color="#03a9f4">
-              Michel Michel
+              {username}
             </Link>
             <Typography
               fontWeight={100}
               fontSize={14}
               style={{ textAlign: "left", marginRight: 20 }}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-              luctus ut est sed faucibus. Duis bibendum ac ex vehicula laoreet.
-              Suspendisse congue vulputate lobortis. Pellentesque at interdum
+              {comment}
             </Typography>
           </Grid>
         </Grid>

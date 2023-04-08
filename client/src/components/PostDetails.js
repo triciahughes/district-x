@@ -1,4 +1,5 @@
 import Comments from "./Comments";
+import CreateComment from "./CreateComment";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import {
@@ -24,6 +25,7 @@ import {
   ArrowDownward as ArrowDownwardIcon,
   ArrowUpward as ArrowUpwardIcon,
 } from "@mui/icons-material";
+import HomeIcon from "@mui/icons-material/Home";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 const drawerWidth = 240;
@@ -40,6 +42,7 @@ const PostDetails = ({ handleLogOutClick, user }) => {
 
   const [postDetails, setPostDetails] = useState();
   const { id } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     fetchPostDetails();
@@ -88,16 +91,32 @@ const PostDetails = ({ handleLogOutClick, user }) => {
   }
 
   //////////// variables ////////////
-
+  console.log(postDetails);
   const post = postDetails?.post;
   let votes = postDetails?.votes;
   const postUsername = postDetails?.user.username;
+  const comments = postDetails?.comments;
   console.log(post, votes, postUsername);
+
+  const comment = comments?.map((data) => {
+    return (
+      <Comments
+        key={data.id}
+        id={data.id}
+        comment={data.comment}
+        username={data.user.username}
+      />
+    );
+  });
 
   ////////// user profile /////////////
 
   function handleUsernameClick() {
     console.log("clicked");
+  }
+
+  function handleHomeClick() {
+    history.push("/home");
   }
 
   return (
@@ -115,6 +134,20 @@ const PostDetails = ({ handleLogOutClick, user }) => {
         anchor="left"
       >
         <Toolbar />
+        <List onClick={handleHomeClick}>
+          {["Home"].map((text) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemAvatar>
+                  <HomeIcon />
+                  {/* <Avatar alt="Profile Picture" src="" /> */}
+                </ListItemAvatar>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+
         <Divider />
         <List onClick={handleUsernameClick}>
           {[`${user}`].map((text) => (
@@ -190,7 +223,12 @@ const PostDetails = ({ handleLogOutClick, user }) => {
           </Grid>
         </StyledPaper>
       </Box>
-      <Comments />
+      <CreateComment />
+      <Typography align="center" fontWeight={100}>
+        Comments
+      </Typography>
+      {comment}
+      {/* <Comments postDetails={postDetails} /> */}
     </>
   );
 };
