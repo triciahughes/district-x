@@ -90,7 +90,7 @@ const CreateComment = () => {
               <TextField
                 required
                 fullWidth
-                sx={{ mt: 3, mb: -1 }}
+                sx={{ mt: 2, mb: -1 }}
                 id="post"
                 label="Comment"
                 name="post"
@@ -100,12 +100,7 @@ const CreateComment = () => {
               />
             </Grid>
             <p style={{ color: "#ff9100" }}>140 characters max</p>
-            <Button
-              type="submit"
-              fullWidth
-              variant="outlined"
-              sx={{ mt: 2, mb: 1 }}
-            >
+            <Button type="submit" variant="outlined" sx={{ mt: 2, mb: -1 }}>
               Submit
             </Button>
             <Grid container justifyContent="flex-end"></Grid>

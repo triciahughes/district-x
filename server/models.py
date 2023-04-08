@@ -50,3 +50,20 @@ class Post(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<User: {self.user} Post: {self.post} Upvotes: {self.upvotes} Downvotes: {self.downvotes}'
+
+class Comment(db.Model, SerializerMixin):
+
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.String)
+    # votes = db.Column(db.Integer)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+
+    user = db.relationship('User', back_populates='comments')
+    post = db.relationship('Post', back_populates='comments')
+
+    def __repr__(self):
+        return f'<Comment: {self.comment} Post_id: {self.post_id} User_id: {self.user_id} >'
