@@ -1,3 +1,4 @@
+import Comments from "./Comments";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import {
@@ -19,11 +20,15 @@ import {
   Link,
   ButtonGroup,
 } from "@mui/material";
+import {
+  ArrowDownward as ArrowDownwardIcon,
+  ArrowUpward as ArrowUpwardIcon,
+} from "@mui/icons-material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 const drawerWidth = 240;
 
-const PostDetails = ({ handleLogOutClick, postUser, user }) => {
+const PostDetails = ({ handleLogOutClick, user }) => {
   ///////////// STYLES //////////////
   const StyledPaper = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
@@ -32,20 +37,64 @@ const PostDetails = ({ handleLogOutClick, postUser, user }) => {
     maxWidth: 700,
     color: theme.palette.text.primary,
   }));
-  const [postDetails, setPostDetails] = useState();
 
+  const [postDetails, setPostDetails] = useState();
   const { id } = useParams();
-  console.log(id);
 
   useEffect(() => {
+    fetchPostDetails();
+  }, [id]);
+
+  function fetchPostDetails() {
     fetch(`/posts/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setPostDetails(data);
       });
-  }, [id]);
+  }
 
-  console.log(postDetails);
+  //////////// upvotes && downvotes ////////////
+
+  function handleUpvoteClick() {
+    const newUpvotes = (votes += 1);
+
+    fetch(`/posts/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ votes: newUpvotes }),
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then(fetchPostDetails());
+      }
+    });
+  }
+
+  function handleDownvoteClick() {
+    const newDownvotes = (votes -= 1);
+
+    fetch(`/posts/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ votes: newDownvotes }),
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then(fetchPostDetails());
+      }
+    });
+  }
+
+  //////////// variables ////////////
+
+  const post = postDetails?.post;
+  let votes = postDetails?.votes;
+  const postUsername = postDetails?.user.username;
+  console.log(post, votes, postUsername);
+
+  ////////// user profile /////////////
 
   function handleUsernameClick() {
     console.log("clicked");
@@ -116,31 +165,32 @@ const PostDetails = ({ handleLogOutClick, postUser, user }) => {
             <Grid item xs>
               <Typography fontWeight={600}>
                 <Link href="" underline="hover" color="orange">
-                  username here
+                  {postUsername}
                 </Link>
               </Typography>
-              <Typography fontWeight={100}>post here</Typography>
+              <Typography fontWeight={100}>{post}</Typography>
             </Grid>
             <ButtonGroup>
               <List>
                 <ListItem>
-                  {/* <ListItemButton onClick={handleUpvoteClick}>
+                  <ListItemButton onClick={handleUpvoteClick}>
                     <ArrowUpwardIcon
                       sx={{ color: "#D0DB61" }}
                     ></ArrowUpwardIcon>
-                  </ListItemButton> */}
-                  <p style={{ color: "#03a9f4" }}>votes here</p>
-                  {/* <ListItemButton onClick={handleDownvoteClick}>
+                  </ListItemButton>
+                  <p style={{ color: "#03a9f4" }}>{votes}</p>
+                  <ListItemButton onClick={handleDownvoteClick}>
                     <ArrowDownwardIcon
                       sx={{ color: "#D9381E" }}
                     ></ArrowDownwardIcon>
-                  </ListItemButton> */}
+                  </ListItemButton>
                 </ListItem>
               </List>
             </ButtonGroup>
           </Grid>
         </StyledPaper>
       </Box>
+      <Comments />
     </>
   );
 };

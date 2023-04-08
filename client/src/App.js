@@ -61,18 +61,6 @@ function App() {
     setShowCreatePost(!showCreatePost);
   }
 
-  // function handleUpvotesClick(postId) {
-  //   fetch(`/posts/${postId}/upvote`, {
-  //     method: "PUT",
-  //   }).then((res) => {
-  //     if (res.ok) {
-  //       res.json().then((postData) => {
-  //         fetchPost();
-  //       });
-  //     }
-  //   });
-  // }
-
   return (
     <>
       <Route path="/signin">

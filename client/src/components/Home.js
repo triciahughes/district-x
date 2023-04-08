@@ -12,7 +12,7 @@ function Home({
   handleCreatePostClick,
   user,
 }) {
-  const postsList = posts.map((post) => {
+  const postsList = posts?.map((post) => {
     return (
       <Posts
         user={user}

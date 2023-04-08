@@ -67,7 +67,7 @@ function Posts({ user, fetchPost, id, votes, posts, postUser, postData }) {
   function handlePostClick() {
     // console.log("clicked");
     console.log(id);
-    history.push(`/post/${id}`);
+    history?.push(`/post/${id}`);
   }
 
   return (
