@@ -47,6 +47,27 @@ class Signup(Resource):
         )
         return response
 
+class CreateAvatar(Resource):
+
+    def patch(self, id):
+        user = User.query.filter(User.id == id).first()
+
+        if not user:
+            return {'error': '404 Not Found'}, 404
+        data = request.get_json()
+
+        for key in data:
+            setattr(user, key, data[key])
+        
+        db.session.add(user)
+        db.session.commit()
+
+        response = make_response(
+            user.to_dict(),
+            200
+        )
+        return response
+
 class AuthorizedSession(Resource):
 
     def get(self):
@@ -228,6 +249,7 @@ class CommentById(Resource):
 
 
 api.add_resource(Signup, '/signup')
+api.add_resource(CreateAvatar, '/createavatar/<int:id>')
 api.add_resource(AuthorizedSession, '/authorized')
 api.add_resource(Signin, '/signin')
 api.add_resource(Logout, '/logout')

@@ -141,27 +141,27 @@ const PostDetails = ({ handleLogOutClick, user, userId }) => {
         anchor="left"
       >
         <Toolbar />
-        <List onClick={handleHomeClick}>
-          {["Home"].map((text) => (
+
+        <List onClick={handleUsernameClick}>
+          {[`${user}`].map((text) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemAvatar>
-                  <HomeIcon />
-                  {/* <Avatar alt="Profile Picture" src="" /> */}
+                  {/* <AccountCircleIcon /> */}
+                  <Avatar alt="Profile Picture" src="" />
                 </ListItemAvatar>
                 <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
-
         <Divider />
-        <List onClick={handleUsernameClick}>
-          {[`${user}`].map((text) => (
+        <List onClick={handleHomeClick}>
+          {["Home"].map((text) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemAvatar>
-                  <AccountCircleIcon />
+                  <HomeIcon />
                   {/* <Avatar alt="Profile Picture" src="" /> */}
                 </ListItemAvatar>
                 <ListItemText primary={text} />
@@ -200,7 +200,7 @@ const PostDetails = ({ handleLogOutClick, user, userId }) => {
         >
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item>
-              <Avatar>L</Avatar>
+              <Avatar alt="Profile Picture" src="" />
             </Grid>
             <Grid item xs>
               <Typography fontWeight={600}>

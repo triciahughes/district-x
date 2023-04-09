@@ -103,7 +103,7 @@ function Posts({
         >
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item>
-              <Avatar>L</Avatar>
+              <Avatar alt="Profile Picture" src="" />
             </Grid>
             <Grid item xs>
               <Typography fontWeight={600}>

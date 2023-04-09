@@ -13,8 +13,51 @@ function CreateAvatar({ fetchUser, user, userId }) {
     // Define the event listener
     const handleAccountFinalized = (event) => {
       console.log("Received data from index.html:", event.detail);
-      fetchUser();
-      history.push("/home");
+
+      const backdropHue = event.detail.backdropHue;
+      const clothingData = event.detail.clothing;
+      const eyeStyle = event.detail.eyeStyle;
+      const hairColor = event.detail.hairColor;
+      const hairStyle = event.detail.hairStyle;
+      const skinColor = event.detail.skinColor;
+      const thumbnailData = event.detail.thumbnailBase64;
+
+      //console.log length of thumbnailData
+      console.log(skinColor);
+      console.log(thumbnailData);
+
+      // const thumbnailSrc = thumbnailData
+      //   ? `data:image/jpeg;base64,${thumbnailData}`
+      //   : "";
+
+      // const thumbnail = <img src={thumbnailSrc} />;
+
+      // const thumbnail = ({ thumbnailData }) => (
+      //   <img src={`thumbnailData:image/jpeg;base64,${thumbnailData}`} />
+      // );
+
+      // console.log(thumbnail);
+      // console.log(thumbnailData);
+
+      fetch(`/createavatar/${userId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          backdrop: backdropHue,
+          clothingData: clothingData,
+          eyeStyle: eyeStyle,
+          hairColor: hairColor,
+          hairStyle: hairStyle,
+          skinColor: skinColor,
+          thumbnail: thumbnailData,
+        }),
+      }).then((res) => {
+        if (res.ok) {
+          res.json().then(fetchUser(), history.push("/home"));
+        }
+      });
     };
 
     document.addEventListener("accountFinalized", handleAccountFinalized);

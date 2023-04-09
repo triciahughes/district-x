@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import {
+  Avatar,
   Drawer,
   Toolbar,
   List,
@@ -29,6 +30,14 @@ function NavBar({ handleLogout, userData, handleCreatePostClick }) {
     history.push(`/user/${userData.id}`);
   }
 
+  const data = `data:image/jpeg;base64,${userData.thumbnail}`;
+
+  // const imageConverter = ({ data }) => {
+  //   return `data:image/jpeg;base64,${data}`;
+  // };
+
+  // console.log(userData);
+
   return (
     <Drawer
       sx={{
@@ -49,8 +58,9 @@ function NavBar({ handleLogout, userData, handleCreatePostClick }) {
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemAvatar>
-                <AccountCircleIcon />
-                {/* <Avatar alt="Profile Picture" src="" /> */}
+                {/* <Avatar alt="Remy Sharp" src="" /> */}
+                <Avatar alt="Profile Picture" src={data} />
+                {/* {imageConverter} */}
               </ListItemAvatar>
               <ListItemText primary={text} />
             </ListItemButton>

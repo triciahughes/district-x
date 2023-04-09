@@ -14,6 +14,14 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.String, nullable=False)
     _password_hash = db.Column(db.String)
 
+    backdrop = db.Column(db.Float)
+    clothingData = db.Column(db.Integer)
+    eyeStyle = db.Column(db.Integer)
+    hairColor = db.Column(db.String)
+    hairStyle = db.column(db.Integer)
+    skinColor = db.Column(db.String)
+    thumbnail = db.Column(db.String)
+
     posts = db.relationship('Post', back_populates='user')
     comments = db.relationship('Comment', back_populates='user')
 
