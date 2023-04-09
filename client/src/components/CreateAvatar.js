@@ -4,8 +4,8 @@ import { AccountInitialized } from "../unreal/unrealFunctionLibrary";
 
 function CreateAvatar({ fetchUser, user, userId }) {
   const history = useHistory();
-  console.log(user);
-  console.log(userId);
+  // console.log(user);
+  // console.log(userId);
 
   AccountInitialized({ name: `${user}` });
 
@@ -21,23 +21,6 @@ function CreateAvatar({ fetchUser, user, userId }) {
       const hairStyle = event.detail.hairStyle;
       const skinColor = event.detail.skinColor;
       const thumbnailData = event.detail.thumbnailBase64;
-
-      //console.log length of thumbnailData
-      console.log(skinColor);
-      console.log(thumbnailData);
-
-      // const thumbnailSrc = thumbnailData
-      //   ? `data:image/jpeg;base64,${thumbnailData}`
-      //   : "";
-
-      // const thumbnail = <img src={thumbnailSrc} />;
-
-      // const thumbnail = ({ thumbnailData }) => (
-      //   <img src={`thumbnailData:image/jpeg;base64,${thumbnailData}`} />
-      // );
-
-      // console.log(thumbnail);
-      // console.log(thumbnailData);
 
       fetch(`/createavatar/${userId}`, {
         method: "PATCH",

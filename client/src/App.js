@@ -99,6 +99,8 @@ function App() {
           user={user.username}
           handleLogOutClick={handleLogout}
           userId={user.id}
+          userThumbnail={user.thumbnail}
+          fetchPost={fetchPost}
         />
       </Route>
       <Route path="/user/:id">

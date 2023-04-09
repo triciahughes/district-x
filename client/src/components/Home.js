@@ -24,6 +24,8 @@ function Home({
         postUser={post.user.username}
         postData={posts}
         postUserId={post.user.id}
+        userData={userData}
+        postThumbnailData={post.user.thumbnail}
       />
     );
   });

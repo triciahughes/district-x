@@ -30,6 +30,8 @@ function Posts({
   postUser,
   postData,
   postUserId,
+  userData,
+  postThumbnailData,
 }) {
   const history = useHistory();
   ///////////// STYLES //////////////
@@ -40,6 +42,8 @@ function Posts({
     maxWidth: 700,
     color: theme.palette.text.primary,
   }));
+
+  const postThumbnail = `data:image/jpeg;base64,${postThumbnailData}`;
 
   //////////// upvotes && downvotes ////////////
 
@@ -103,7 +107,7 @@ function Posts({
         >
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item>
-              <Avatar alt="Profile Picture" src="" />
+              <Avatar alt="Profile Picture" src={postThumbnail} />
             </Grid>
             <Grid item xs>
               <Typography fontWeight={600}>

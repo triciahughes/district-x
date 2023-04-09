@@ -28,6 +28,8 @@ const CreatePost = ({ user, setShowCreatePost, fetchPost }) => {
 
   const userId = user.id;
 
+  const userThumbnail = user.thumbnail;
+
   const validationSchema = yup.object({
     post: yup.string("Enter post").required("Post is required"),
   });
@@ -43,8 +45,8 @@ const CreatePost = ({ user, setShowCreatePost, fetchPost }) => {
         user_id: userId,
         votes: 0,
       };
-      console.log("clicked");
-      console.log(submission);
+      // console.log("clicked");
+      // console.log(submission);
       fetch("/createpost", {
         method: "POST",
         headers: {
@@ -85,7 +87,7 @@ const CreatePost = ({ user, setShowCreatePost, fetchPost }) => {
             sx={{ mt: 1 }}
             onSubmit={(e) => {
               e.preventDefault();
-              console.log("submitted");
+              // console.log("submitted");
               formik.handleSubmit();
             }}
           >

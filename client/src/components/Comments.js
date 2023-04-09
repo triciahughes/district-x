@@ -22,6 +22,7 @@ const Comments = ({
   id,
   username,
   comment,
+  commentThumbnailData,
   votes,
   fetchPostDetails,
   commentUserId,
@@ -72,8 +73,10 @@ const Comments = ({
   function handleProfileClick(e) {
     e.preventDefault();
     // history.push(`/profile/${username.id}`);
-    console.log(username.id);
+    // console.log(username.id);
   }
+
+  const commentThumbnail = `data:image/jpeg;base64,${commentThumbnailData}`;
 
   return (
     <>
@@ -86,7 +89,7 @@ const Comments = ({
       >
         <Grid container wrap="nowrap" spacing={2}>
           <Grid item>
-            <Avatar alt="Remy Sharp" src="" />
+            <Avatar alt="Remy Sharp" src={commentThumbnail} />
           </Grid>
           <Grid justifyContent="left" item xs zeroMinWidth>
             <Link

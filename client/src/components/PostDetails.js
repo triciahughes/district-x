@@ -30,7 +30,13 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 const drawerWidth = 240;
 
-const PostDetails = ({ handleLogOutClick, user, userId }) => {
+const PostDetails = ({
+  handleLogOutClick,
+  user,
+  userId,
+  userThumbnail,
+  fetchPost,
+}) => {
   ///////////// STYLES //////////////
   const StyledPaper = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
@@ -39,6 +45,8 @@ const PostDetails = ({ handleLogOutClick, user, userId }) => {
     maxWidth: 700,
     color: theme.palette.text.primary,
   }));
+
+  const data = `data:image/jpeg;base64,${userThumbnail}`;
 
   const [postDetails, setPostDetails] = useState();
   const { id } = useParams();
@@ -96,6 +104,12 @@ const PostDetails = ({ handleLogOutClick, user, userId }) => {
   const postUsername = postDetails?.user.username;
   const comments = postDetails?.comments;
   const postId = postDetails?.user.id;
+  const postThumbnailData = postDetails?.user.thumbnail;
+  // const commentThumbnailData = comments?.user.thumbnail;
+
+  // console.log(data);
+
+  const postThumbnail = `data:image/jpeg;base64,${postThumbnailData}`;
 
   const comment = comments?.map((data) => {
     return (
@@ -107,6 +121,7 @@ const PostDetails = ({ handleLogOutClick, user, userId }) => {
         votes={data.votes}
         fetchPostDetails={fetchPostDetails}
         commentUserId={data.user.id}
+        commentThumbnailData={data.user.thumbnail}
       />
     );
   });
@@ -123,6 +138,7 @@ const PostDetails = ({ handleLogOutClick, user, userId }) => {
 
   ////////// Home ///////////////
   function handleHomeClick() {
+    fetchPost();
     history.push("/home");
   }
 
@@ -148,7 +164,7 @@ const PostDetails = ({ handleLogOutClick, user, userId }) => {
               <ListItemButton>
                 <ListItemAvatar>
                   {/* <AccountCircleIcon /> */}
-                  <Avatar alt="Profile Picture" src="" />
+                  <Avatar alt="Profile Picture" src={data} />
                 </ListItemAvatar>
                 <ListItemText primary={text} />
               </ListItemButton>
@@ -200,7 +216,7 @@ const PostDetails = ({ handleLogOutClick, user, userId }) => {
         >
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item>
-              <Avatar alt="Profile Picture" src="" />
+              <Avatar alt="Profile Picture" src={postThumbnail} />
             </Grid>
             <Grid item xs>
               <Typography fontWeight={600}>

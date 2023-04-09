@@ -56,7 +56,7 @@ const CreateComment = ({ id, userId, fetchPostDetails }) => {
       }).then((res) => {
         if (res.ok) {
           res.json().then((commentData) => {
-            console.log(commentData);
+            // console.log(commentData);
             fetchPostDetails();
             // setSubmitting(false);
           });
@@ -83,7 +83,7 @@ const CreateComment = ({ id, userId, fetchPostDetails }) => {
             sx={{ mt: 1 }}
             onSubmit={(e) => {
               e.preventDefault();
-              console.log("submitted");
+              // console.log("submitted");
               formik.handleSubmit();
             }}
           >
