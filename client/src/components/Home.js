@@ -23,6 +23,7 @@ function Home({
         posts={post.post}
         postUser={post.user.username}
         postData={posts}
+        postUserId={post.user.id}
       />
     );
   });

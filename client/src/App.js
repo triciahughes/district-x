@@ -6,6 +6,8 @@ import SignInForm from "./components/SignInForm";
 import CreateAvatar from "./components/CreateAvatar";
 import CreatePost from "./components/CreatePost";
 import PostDetails from "./components/PostDetails";
+import UserProfile from "./components/UserProfile";
+import Profile from "./components/Profile";
 import Home from "./components/Home";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
@@ -98,6 +100,12 @@ function App() {
           handleLogOutClick={handleLogout}
           userId={user.id}
         />
+      </Route>
+      <Route path="/user/:id">
+        <UserProfile />
+      </Route>
+      <Route path="/profile/:id">
+        <Profile />
       </Route>
     </>
   );

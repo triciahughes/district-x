@@ -1,5 +1,5 @@
-import CreateComment from "./CreateComment";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import {
   Grid,
   Paper,
@@ -18,7 +18,15 @@ import {
 } from "@mui/icons-material";
 const drawerWidth = 240;
 
-const Comments = ({ id, username, comment, votes, fetchPostDetails }) => {
+const Comments = ({
+  id,
+  username,
+  comment,
+  votes,
+  fetchPostDetails,
+  commentUserId,
+}) => {
+  const history = useHistory();
   const StyledPaper = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
     ...theme.typography.body2,
@@ -27,6 +35,7 @@ const Comments = ({ id, username, comment, votes, fetchPostDetails }) => {
     color: theme.palette.text.primary,
   }));
 
+  //////////// upvotes && downvotes ////////////
   function handleUpvoteClick() {
     const newUpvotes = (votes += 1);
 
@@ -59,6 +68,13 @@ const Comments = ({ id, username, comment, votes, fetchPostDetails }) => {
     });
   }
 
+  ////////// profile /////////////
+  function handleProfileClick(e) {
+    e.preventDefault();
+    // history.push(`/profile/${username.id}`);
+    console.log(username.id);
+  }
+
   return (
     <>
       <StyledPaper
@@ -73,8 +89,16 @@ const Comments = ({ id, username, comment, votes, fetchPostDetails }) => {
             <Avatar alt="Remy Sharp" src="" />
           </Grid>
           <Grid justifyContent="left" item xs zeroMinWidth>
-            <Link href="" underline="hover" color="#03a9f4">
-              {username}
+            <Link
+              href=""
+              underline="hover"
+              color="#03a9f4"
+              onclick={(e) => {
+                e.preventDefault();
+                handleProfileClick();
+              }}
+            >
+              {username.username}
             </Link>
             <Typography
               fontWeight={100}

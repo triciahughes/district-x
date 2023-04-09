@@ -26,7 +26,7 @@ function NavBar({ handleLogout, userData, handleCreatePostClick }) {
   }
 
   function handleUsernameClick() {
-    console.log("Clicked");
+    history.push(`/user/${userData.id}`);
   }
 
   return (

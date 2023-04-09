@@ -21,7 +21,16 @@ import {
 } from "@mui/icons-material";
 ///////////// IMPORTS //////////////
 
-function Posts({ user, fetchPost, id, votes, posts, postUser, postData }) {
+function Posts({
+  user,
+  fetchPost,
+  id,
+  votes,
+  posts,
+  postUser,
+  postData,
+  postUserId,
+}) {
   const history = useHistory();
   ///////////// STYLES //////////////
   const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -65,10 +74,13 @@ function Posts({ user, fetchPost, id, votes, posts, postUser, postData }) {
       }
     });
   }
+  // console.log(postData);
+
+  function handlePostUsernameClick() {
+    history.push(`/profile/${postUserId}`);
+  }
 
   function handlePostClick() {
-    // console.log("clicked");
-    // console.log(id);
     history?.push(`/post/${id}`);
   }
 
@@ -93,13 +105,20 @@ function Posts({ user, fetchPost, id, votes, posts, postUser, postData }) {
             <Grid item>
               <Avatar>L</Avatar>
             </Grid>
-            <Grid item xs onClick={handlePostClick}>
+            <Grid item xs>
               <Typography fontWeight={600}>
-                <Link href="" underline="hover" color="orange">
+                <Link
+                  href=""
+                  underline="hover"
+                  color="orange"
+                  onClick={handlePostUsernameClick}
+                >
                   {postUser}
                 </Link>
               </Typography>
-              <Typography fontWeight={100}>{posts}</Typography>
+              <Typography fontWeight={100} onClick={handlePostClick}>
+                {posts}
+              </Typography>
             </Grid>
             <ButtonGroup>
               <List>

@@ -95,8 +95,7 @@ const PostDetails = ({ handleLogOutClick, user, userId }) => {
   let votes = postDetails?.votes;
   const postUsername = postDetails?.user.username;
   const comments = postDetails?.comments;
-  // const userId = user.id;
-  // console.log(userId);
+  const postId = postDetails?.user.id;
 
   const comment = comments?.map((data) => {
     return (
@@ -104,19 +103,25 @@ const PostDetails = ({ handleLogOutClick, user, userId }) => {
         key={data.id}
         id={data.id}
         comment={data.comment}
-        username={data.user.username}
+        username={data.user}
         votes={data.votes}
         fetchPostDetails={fetchPostDetails}
+        commentUserId={data.user.id}
       />
     );
   });
 
-  ////////// user profile /////////////
-
+  ////////// user (self) profile /////////////
   function handleUsernameClick() {
-    console.log("clicked");
+    history.push(`/user/${userId}`);
   }
 
+  ////////// profile /////////////
+  function handleProfileClick() {
+    history.push(`/profile/${postId}`);
+  }
+
+  ////////// Home ///////////////
   function handleHomeClick() {
     history.push("/home");
   }
@@ -199,7 +204,12 @@ const PostDetails = ({ handleLogOutClick, user, userId }) => {
             </Grid>
             <Grid item xs>
               <Typography fontWeight={600}>
-                <Link href="" underline="hover" color="orange">
+                <Link
+                  href=""
+                  underline="hover"
+                  color="orange"
+                  onClick={handleProfileClick}
+                >
                   {postUsername}
                 </Link>
               </Typography>
