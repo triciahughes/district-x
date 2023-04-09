@@ -1,3 +1,10 @@
+// The unrealHelper.js code exports three items: a global variable 'ue', a function 'uuidv4' that generates a UUID v4 string, and a function 'ue5' that broadcasts messages using either ue.interface.broadcast or the browser's history state depending on availability, while also accepting an optional callback function. The callback function is stored in the ue.interface object using a UUID as the key and is removed after a specified timeout.:
+
+// ue: A global variable that is initialized as an empty object if it's not already an object.
+// uuidv4: A function that generates a UUID v4 string.
+// ue5: A function that broadcasts messages using either the ue.interface.broadcast function or the browser's history state, depending on the availability of ue.interface.broadcast.
+// The ue5 function also accepts an optional callback function as an argument, which is stored in the ue.interface object using a UUID as the key. The stored function is removed after a specified timeout.
+
 // Export the global variable `ue`. If it's not an object, initialize it as an empty object.
 export let ue;
 if (typeof ue !== "object") {
@@ -86,10 +93,3 @@ export const ue5 = (function (r) {
   }, 1e3 * Math.max(1, parseInt(e) || 0));
   return n;
 });
-
-// To summarize, this JavaScript code exports three items:
-
-// ue: A global variable that is initialized as an empty object if it's not already an object.
-// uuidv4: A function that generates a UUID v4 string.
-// ue5: A function that broadcasts messages using either the ue.interface.broadcast function or the browser's history state, depending on the availability of ue.interface.broadcast.
-// The ue5 function also accepts an optional callback function as an argument, which is stored in the ue.interface object using a UUID as the key. The stored function is removed after a specified timeout.

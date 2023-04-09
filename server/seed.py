@@ -64,13 +64,14 @@ if __name__ == '__main__':
 
         comments = []
 
-        for i in range(30):
+        for i in range(50):
             instructions = fake.paragraph(nb_sentences=1)
 
             comment = Comment(
                 comment=fake.sentence(),
                 user_id=fake.random_int(min=1, max=10),
                 post_id=fake.random_int(min=1, max=15),
+                votes=fake.random_int(min=0, max=100),
             )
 
             comments.append(comment)

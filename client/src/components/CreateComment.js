@@ -13,7 +13,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 ///////////// IMPORTS //////////////
 
-const CreateComment = ({ id, userId }) => {
+const CreateComment = ({ id, userId, fetchPostDetails }) => {
   ///////////// STYLES //////////////
   const theme = createTheme({
     palette: {
@@ -26,8 +26,8 @@ const CreateComment = ({ id, userId }) => {
     },
   });
 
-  console.log(id);
-  console.log(userId);
+  // console.log(id);
+  // console.log(userId);
 
   const validationSchema = yup.object({
     comment: yup.string("Enter comment").required("Comment is required"),
@@ -37,27 +37,31 @@ const CreateComment = ({ id, userId }) => {
       comment: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values, { setSubmitting }) => {
-      setSubmitting(true);
+    onSubmit: (values, { resetForm }) => {
+      // setSubmitting(true);
       const submission = {
         ...values,
         user_id: userId,
+        post_id: id,
+        votes: 0,
       };
-      console.log("clicked");
-      console.log(submission);
-      //   fetch("/createcomment", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(submission),
-      //   }).then((res) => {
-      //     if (res.ok) {
-      //       res.json().then((commentData) => {
-      //         console.log(commentData);
-      //       });
-      //     }
-      //   });
+      resetForm({ values: "" });
+
+      fetch("/createcomment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(submission),
+      }).then((res) => {
+        if (res.ok) {
+          res.json().then((commentData) => {
+            console.log(commentData);
+            fetchPostDetails();
+            // setSubmitting(false);
+          });
+        }
+      });
     },
   });
 
@@ -91,7 +95,7 @@ const CreateComment = ({ id, userId }) => {
                 id="comment"
                 label="Comment"
                 name="comment"
-                value={formik.values.post}
+                value={formik.values.comment}
                 onChange={formik.handleChange}
                 inputProps={{ maxLength: 140 }}
               />

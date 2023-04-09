@@ -1,3 +1,5 @@
+// This code initializes ue.interface as an empty object and defines a broadcast method for it if certain conditions are met. It then assigns the broadcast method to the ue5 variable if ue.interface.broadcast is defined.
+
 // Check if the global variable `ue` is not an object, or if `ue.interface` is not an object.
 if (typeof ue != "object" || typeof ue.interface != "object") {
   // Define an anonymous function (IIFE) that takes an `obj` parameter and executes it immediately with `ue.interface` as the argument.
@@ -28,5 +30,3 @@ if (typeof ue != "object" || typeof ue.interface != "object") {
 if (ue && ue.interface && ue.interface.broadcast) {
   ue5 = ue.interface.broadcast;
 }
-
-// This JavaScript code checks if the global variable ue is not an object, or if ue.interface is not an object. If either of these conditions is true, it initializes ue.interface as an empty object and defines a broadcast method for it. The broadcast method is then assigned to the ue5 variable if ue.interface.broadcast is defined.

@@ -63,7 +63,7 @@ class Comment(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     comment = db.Column(db.String)
-    # votes = db.Column(db.Integer)
+    votes = db.Column(db.Integer)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))

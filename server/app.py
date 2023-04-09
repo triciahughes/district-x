@@ -8,7 +8,7 @@ from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import NotFound, Unauthorized
 from config import app, db, api
-from models import User, Post
+from models import User, Post, Comment
 from flask_cors import CORS
 
 CORS(app)
@@ -168,6 +168,64 @@ class CreatePost(Resource):
         )
         return response
 
+class CreateComment(Resource):
+
+    def post(self):
+
+        data = request.get_json()
+
+        new_comment = Comment(
+            comment=data['comment'],
+            user_id=data['user_id'],
+            post_id=data['post_id'],
+            votes=data['votes'],
+        )
+
+        db.session.add(new_comment)
+        db.session.commit()
+
+        response_dict = new_comment.to_dict()
+
+        response = make_response(
+            response_dict,
+            201
+        )
+        return response
+
+class CommentById(Resource):
+    def get(self, id):
+        comment = Comment.query.filter(Comment.id == id).first()
+
+        if comment:
+
+            response = make_response(
+                jsonify(comment.to_dict()),
+                200
+            )
+            return response
+
+        return {'error': '404 Not Found'}, 404
+    
+    def patch(self, id):
+        comment = Comment.query.filter(Comment.id == id).first()
+
+        if not comment:
+            return {'error': '404 Not Found'}, 404
+        data = request.get_json()
+
+        for key in data:
+            setattr(comment, key, data[key])
+        
+        db.session.add(comment)
+        db.session.commit()
+
+        response = make_response(
+            comment.to_dict(),
+            200
+        )
+        return response
+
+
 
 api.add_resource(Signup, '/signup')
 api.add_resource(AuthorizedSession, '/authorized')
@@ -176,6 +234,8 @@ api.add_resource(Logout, '/logout')
 api.add_resource(PostList, '/posts')
 api.add_resource(PostById, '/posts/<int:id>')
 api.add_resource(CreatePost, '/createpost')
+api.add_resource(CommentById, '/comment/<int:id>')
+api.add_resource(CreateComment, '/createcomment')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

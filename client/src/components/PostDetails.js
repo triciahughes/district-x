@@ -105,6 +105,8 @@ const PostDetails = ({ handleLogOutClick, user, userId }) => {
         id={data.id}
         comment={data.comment}
         username={data.user.username}
+        votes={data.votes}
+        fetchPostDetails={fetchPostDetails}
       />
     );
   });
@@ -223,7 +225,11 @@ const PostDetails = ({ handleLogOutClick, user, userId }) => {
           </Grid>
         </StyledPaper>
       </Box>
-      <CreateComment id={id} userId={userId} />
+      <CreateComment
+        id={id}
+        userId={userId}
+        fetchPostDetails={fetchPostDetails}
+      />
       <Typography align="center" fontWeight={100}>
         Comments
       </Typography>
