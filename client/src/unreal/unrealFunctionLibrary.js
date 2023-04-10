@@ -8,3 +8,6 @@ import { ue5, ue } from "./unrealHelper";
 export const AccountInitialized = (data) => {
   ue5("AccountInitialized", data);
 };
+export const ViewAccount = (data) => {
+  ue5("ViewAccount", data);
+};

@@ -69,13 +69,7 @@ const Comments = ({
     });
   }
 
-  ////////// profile /////////////
-  function handleProfileClick(e) {
-    e.preventDefault();
-    // history.push(`/profile/${username.id}`);
-    // console.log(username.id);
-  }
-
+  ////////// thumbnail conversion /////////////
   const commentThumbnail = `data:image/jpeg;base64,${commentThumbnailData}`;
 
   return (
@@ -93,13 +87,9 @@ const Comments = ({
           </Grid>
           <Grid justifyContent="left" item xs zeroMinWidth>
             <Link
-              href=""
+              href={`/profile/${username.id}`}
               underline="hover"
               color="#03a9f4"
-              onclick={(e) => {
-                e.preventDefault();
-                handleProfileClick();
-              }}
             >
               {username.username}
             </Link>

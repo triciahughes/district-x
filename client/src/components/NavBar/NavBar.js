@@ -27,16 +27,11 @@ function NavBar({ handleLogout, userData, handleCreatePostClick }) {
   }
 
   function handleUsernameClick() {
-    history.push(`/user/${userData.id}`);
+    history.push(`/profile/${userData.id}`);
   }
 
+  ////////////// Thumbnail Converter //////////////
   const data = `data:image/jpeg;base64,${userData.thumbnail}`;
-
-  // const imageConverter = ({ data }) => {
-  //   return `data:image/jpeg;base64,${data}`;
-  // };
-
-  // console.log(userData);
 
   return (
     <Drawer

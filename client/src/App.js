@@ -6,7 +6,6 @@ import SignInForm from "./components/SignInForm";
 import CreateAvatar from "./components/CreateAvatar";
 import CreatePost from "./components/CreatePost";
 import PostDetails from "./components/PostDetails";
-import UserProfile from "./components/UserProfile";
 import Profile from "./components/Profile";
 import Home from "./components/Home";
 import { useHistory } from "react-router-dom";
@@ -103,11 +102,13 @@ function App() {
           fetchPost={fetchPost}
         />
       </Route>
-      <Route path="/user/:id">
-        <UserProfile />
-      </Route>
       <Route path="/profile/:id">
-        <Profile />
+        <Profile
+          user={user.username}
+          handleLogout={handleLogout}
+          fetchPost={fetchPost}
+          userThumbnail={user.thumbnail}
+        />
       </Route>
     </>
   );

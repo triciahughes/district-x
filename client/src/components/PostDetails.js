@@ -46,8 +46,6 @@ const PostDetails = ({
     color: theme.palette.text.primary,
   }));
 
-  const data = `data:image/jpeg;base64,${userThumbnail}`;
-
   const [postDetails, setPostDetails] = useState();
   const { id } = useParams();
   const history = useHistory();
@@ -109,6 +107,8 @@ const PostDetails = ({
 
   // console.log(data);
 
+  const data = `data:image/jpeg;base64,${userThumbnail}`;
+
   const postThumbnail = `data:image/jpeg;base64,${postThumbnailData}`;
 
   const comment = comments?.map((data) => {
@@ -128,7 +128,7 @@ const PostDetails = ({
 
   ////////// user (self) profile /////////////
   function handleUsernameClick() {
-    history.push(`/user/${userId}`);
+    history.push(`/profile/${userId}`);
   }
 
   ////////// profile /////////////

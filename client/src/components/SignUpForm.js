@@ -26,7 +26,7 @@ const validationSchema = yup.object({
   password: yup.string("Enter your password").required("Password is required"),
 });
 
-function SignUpForm({ setUser, fetchUser }) {
+function SignUpForm({ setUser }) {
   const history = useHistory();
 
   const formik = useFormik({
@@ -47,7 +47,6 @@ function SignUpForm({ setUser, fetchUser }) {
         .then((res) => res.json())
         .then((data) => {
           setUser(data);
-          console.log(data);
           history.push("/createavatar");
         });
     },
@@ -71,7 +70,6 @@ function SignUpForm({ setUser, fetchUser }) {
           <Box
             component="form"
             noValidate
-            // onSubmit={handleSubmit}
             sx={{ mt: 1 }}
             onSubmit={(e) => {
               e.preventDefault();

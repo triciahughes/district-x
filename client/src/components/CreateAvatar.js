@@ -4,8 +4,6 @@ import { AccountInitialized } from "../unreal/unrealFunctionLibrary";
 
 function CreateAvatar({ fetchUser, user, userId }) {
   const history = useHistory();
-  // console.log(user);
-  // console.log(userId);
 
   AccountInitialized({ name: `${user}` });
 

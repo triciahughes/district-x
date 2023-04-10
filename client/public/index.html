@@ -21,6 +21,15 @@
         // Dispatch the custom "accountFinalized" event on the `document` object.
         document.dispatchEvent(accountFinalizedEvent);
       };
+      ue.interface.viewAccount = function (data) {
+        // Create a new CustomEvent called "accountFinalized" with the provided `data` as the event detail.
+        const viewAccountEvent = new CustomEvent("viewAccount", {
+          detail: data,
+        });
+
+        // Dispatch the custom "accountFinalized" event on the `document` object.
+        document.dispatchEvent(viewAccountEvent);
+      };
     </script>
     <!--
 

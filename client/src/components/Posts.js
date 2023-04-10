@@ -78,7 +78,6 @@ function Posts({
       }
     });
   }
-  // console.log(postData);
 
   function handlePostUsernameClick() {
     history.push(`/profile/${postUserId}`);

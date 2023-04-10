@@ -246,6 +246,24 @@ class CommentById(Resource):
         )
         return response
 
+class UserById(Resource):
+
+    def get(self, id):
+
+        user = User.query.filter(User.id == id).first()
+
+        if user:
+
+            response = make_response(
+                jsonify(user.to_dict()),
+                200
+            )
+            return response
+
+        return {'error': '404 Not Found'}, 404
+
+
+
 
 
 api.add_resource(Signup, '/signup')
@@ -258,6 +276,7 @@ api.add_resource(PostById, '/posts/<int:id>')
 api.add_resource(CreatePost, '/createpost')
 api.add_resource(CommentById, '/comment/<int:id>')
 api.add_resource(CreateComment, '/createcomment')
+api.add_resource(UserById, '/user/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
