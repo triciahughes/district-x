@@ -46,6 +46,8 @@ const PostDetails = ({
     color: theme.palette.text.primary,
   }));
 
+  // console.log(userId);
+
   const [postDetails, setPostDetails] = useState();
   const { id } = useParams();
   const history = useHistory();
@@ -122,6 +124,7 @@ const PostDetails = ({
         fetchPostDetails={fetchPostDetails}
         commentUserId={data.user.id}
         commentThumbnailData={data.user.thumbnail}
+        userId={userId}
       />
     );
   });

@@ -19,6 +19,7 @@ import {
   ArrowDownward as ArrowDownwardIcon,
   ArrowUpward as ArrowUpwardIcon,
 } from "@mui/icons-material";
+import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 ///////////// IMPORTS //////////////
 
 function Posts({
@@ -42,6 +43,24 @@ function Posts({
     maxWidth: 700,
     color: theme.palette.text.primary,
   }));
+
+  const deleteButton =
+    postUserId === user.id ? (
+      <HighlightOffRoundedIcon
+        style={{ color: "#D9381E" }}
+        onClick={handleDeleteClick}
+      />
+    ) : null;
+
+  function handleDeleteClick() {
+    fetch(`/posts/${id}`, {
+      method: "DELETE",
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then(fetchPost());
+      }
+    });
+  }
 
   const postThumbnail = `data:image/jpeg;base64,${postThumbnailData}`;
 
@@ -137,6 +156,7 @@ function Posts({
                       sx={{ color: "#D9381E" }}
                     ></ArrowDownwardIcon>
                   </ListItemButton>
+                  {deleteButton}
                 </ListItem>
               </List>
             </ButtonGroup>

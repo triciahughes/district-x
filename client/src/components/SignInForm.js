@@ -91,7 +91,6 @@ function SignInForm({ setUser, fetchUser }) {
             <Box
               component="form"
               noValidate
-              // onSubmit={formik.handleSubmit}
               sx={{ mt: 1 }}
               onSubmit={(e) => {
                 e.preventDefault();

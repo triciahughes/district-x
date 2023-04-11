@@ -18,7 +18,7 @@ class User(db.Model, SerializerMixin):
     clothingData = db.Column(db.Integer)
     eyeStyle = db.Column(db.Integer)
     hairColor = db.Column(db.String)
-    hairStyle = db.column(db.Integer)
+    hairStyle = db.Column(db.Integer)
     skinColor = db.Column(db.String)
     thumbnail = db.Column(db.String)
 
@@ -58,7 +58,7 @@ class Post(db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     user = db.relationship('User', back_populates='posts')
-    comments = db.relationship('Comment', back_populates='post')
+    comments = db.relationship('Comment', backref='post', cascade="all, delete, delete-orphan")
 
     def __repr__(self):
         return f'<User: {self.user} Post: {self.post} Votes: {self.votes}>'
@@ -77,7 +77,7 @@ class Comment(db.Model, SerializerMixin):
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
 
     user = db.relationship('User', back_populates='comments')
-    post = db.relationship('Post', back_populates='comments')
+    # post = db.relationship('Post', backref='comments')
 
     def __repr__(self):
         return f'<Comment: {self.comment} >'

@@ -164,6 +164,21 @@ class PostById(Resource):
             200
         )
         return response
+    
+    def delete(self, id):
+        post = Post.query.filter(Post.id == id).first()
+
+        if not post:
+            return {'error': '404 Not Found'}, 404
+        
+        db.session.delete(post)
+        db.session.commit()
+
+        response = make_response(
+            "Post Deleted",
+            204
+        )
+        return response
 
 
 class CreatePost(Resource):
@@ -243,6 +258,21 @@ class CommentById(Resource):
         response = make_response(
             comment.to_dict(),
             200
+        )
+        return response
+
+    def delete(self, id):
+        comment = Comment.query.filter(Comment.id == id).first()
+
+        if not comment:
+            return {'error': '404 Not Found'}, 404
+        
+        db.session.delete(comment)
+        db.session.commit()
+
+        response = make_response(
+            "Comment Deleted",
+            204
         )
         return response
 

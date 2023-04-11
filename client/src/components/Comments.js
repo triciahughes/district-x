@@ -16,6 +16,8 @@ import {
   ArrowDownward as ArrowDownwardIcon,
   ArrowUpward as ArrowUpwardIcon,
 } from "@mui/icons-material";
+import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
+
 const drawerWidth = 240;
 
 const Comments = ({
@@ -26,6 +28,7 @@ const Comments = ({
   votes,
   fetchPostDetails,
   commentUserId,
+  userId,
 }) => {
   const history = useHistory();
   const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -35,6 +38,24 @@ const Comments = ({
     maxWidth: 700,
     color: theme.palette.text.primary,
   }));
+
+  const deleteButton =
+    commentUserId === userId ? (
+      <HighlightOffRoundedIcon
+        style={{ color: "#D9381E" }}
+        onClick={handleDeleteClick}
+      />
+    ) : null;
+
+  function handleDeleteClick() {
+    fetch(`/comment/${id}`, {
+      method: "DELETE",
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then(fetchPostDetails());
+      }
+    });
+  }
 
   //////////// upvotes && downvotes ////////////
   function handleUpvoteClick() {
@@ -113,6 +134,7 @@ const Comments = ({
                     sx={{ color: "#D9381E" }}
                   ></ArrowDownwardIcon>
                 </ListItemButton>
+                {deleteButton}
               </ListItem>
             </List>
           </ButtonGroup>
