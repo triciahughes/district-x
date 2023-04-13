@@ -10,6 +10,9 @@ import Profile from "./components/Profile";
 import Home from "./components/Home";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
+import { Typography } from "@mui/material";
+import SortIcon from "@material-ui/icons/Sort";
+import { Button } from "@mui/material";
 
 function App() {
   const [user, setUser] = useState({});
@@ -69,12 +72,20 @@ function App() {
   function handleSortPostsClick() {
     setPostSortBool((current) => !current);
     console.log(postSortBool);
-
-    // if (postSortBool === true) {
-    //   const sortedArray = [...post].sort((a, b) => b.votes - a.votes);
-    //   setPost(sortedArray);
-    // }
   }
+
+  const filterButton = postSortBool ? (
+    <Button onClick={handleSortPostsClick} style={{ color: "#ff9100" }}>
+      <Typography style={{ color: "#ff9100" }}>Top</Typography>
+      <SortIcon />
+    </Button>
+  ) : (
+    <Button onClick={handleSortPostsClick}>
+      <Typography style={{ color: "#03a9f4" }}>Top</Typography>
+      <SortIcon />
+    </Button>
+  );
+
   const sortedArray = [...post].sort((a, b) => b.votes - a.votes);
 
   const postData = postSortBool ? sortedArray : post;
@@ -106,7 +117,7 @@ function App() {
           user={user}
           handleSortPostsClick={handleSortPostsClick}
           posts={postData}
-          // sortedPosts={sortedPosts}
+          filterButton={filterButton}
         />
       </Route>
       <Route path="/createpost">

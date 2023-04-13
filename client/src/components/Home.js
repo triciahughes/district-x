@@ -17,6 +17,7 @@ function Home({
   handleCreatePostClick,
   user,
   handleSortPostsClick,
+  filterButton,
   // sortedPosts,
 }) {
   // const [postSortBool, setPostSortBool] = useState(false);
@@ -78,10 +79,10 @@ function Home({
             }}
           >
             <Grid>
-              <Button onClick={handleSortPostsClick}>
-                <Typography style={{ color: "#ff9100" }}>Top</Typography>
-                <SortIcon />
-              </Button>
+              {/* <Button onClick={handleSortPostsClick}> */}
+              {filterButton}
+              {/* <SortIcon />
+              </Button> */}
             </Grid>
           </Box>
         </Container>
