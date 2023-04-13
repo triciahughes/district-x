@@ -77,7 +77,7 @@ function Posts({
       body: JSON.stringify({ votes: newUpvotes }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(fetchPost());
+        res.json().then(fetchPost);
       }
     });
   }
@@ -93,7 +93,7 @@ function Posts({
       body: JSON.stringify({ votes: newDownvotes }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(fetchPost());
+        res.json().then(fetchPost);
       }
     });
   }

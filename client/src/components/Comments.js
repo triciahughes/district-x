@@ -52,7 +52,17 @@ const Comments = ({
       method: "DELETE",
     }).then((res) => {
       if (res.ok) {
-        res.json().then(fetchPostDetails());
+        //checks if the response is json
+        if (res.headers.get("Content-Type").includes("application/json")) {
+          res.json().then(() => fetchPostDetails());
+        } else {
+          fetchPostDetails();
+        }
+      } else {
+        // Handle any error status codes
+        console.error(
+          `Error deleting comment with id ${id}: ${res.status} ${res.statusText}`
+        );
       }
     });
   }

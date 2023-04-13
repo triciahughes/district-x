@@ -15,6 +15,8 @@ function App() {
   const [user, setUser] = useState({});
   const [post, setPost] = useState([]);
   const [showCreatePost, setShowCreatePost] = useState(false);
+  const [postSortBool, setPostSortBool] = useState(false);
+  // const [sortedPosts, setSortedPosts] = useState([]);
   const history = useHistory();
 
   const userFetch = useCallback(fetchUser, [history]);
@@ -43,6 +45,7 @@ function App() {
       if (res.ok) {
         res.json().then((postData) => {
           setPost(postData);
+          // setSortedPosts(postData);
         });
       }
     });
@@ -53,6 +56,7 @@ function App() {
       method: "DELETE",
     }).then(() => {
       setUser([]);
+
       fetchUser();
       history.push("/signin");
     });
@@ -61,6 +65,19 @@ function App() {
   function handleCreatePostClick() {
     setShowCreatePost(!showCreatePost);
   }
+
+  function handleSortPostsClick() {
+    setPostSortBool((current) => !current);
+    console.log(postSortBool);
+
+    // if (postSortBool === true) {
+    //   const sortedArray = [...post].sort((a, b) => b.votes - a.votes);
+    //   setPost(sortedArray);
+    // }
+  }
+  const sortedArray = [...post].sort((a, b) => b.votes - a.votes);
+
+  const postData = postSortBool ? sortedArray : post;
 
   return (
     <>
@@ -81,13 +98,15 @@ function App() {
         <Home
           handleLogout={handleLogout}
           userData={user}
-          posts={post}
           setPost={setPost}
           fetchPost={fetchPost}
           showCreatePost={showCreatePost}
           setShowCreatePost={setShowCreatePost}
           handleCreatePostClick={handleCreatePostClick}
           user={user}
+          handleSortPostsClick={handleSortPostsClick}
+          posts={postData}
+          // sortedPosts={sortedPosts}
         />
       </Route>
       <Route path="/createpost">
