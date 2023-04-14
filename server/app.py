@@ -8,7 +8,7 @@ from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import NotFound, Unauthorized
 from config import app, db, api
-from models import User, Post, Comment
+from models import User, Post, Comment, District
 from flask_cors import CORS
 
 CORS(app)
@@ -292,6 +292,39 @@ class UserById(Resource):
 
         return {'error': '404 Not Found'}, 404
 
+class GetDistrict(Resource):
+
+    def get(self):
+
+        districts = District.query.all()
+
+        district_dict = [district.to_dict() for district in districts]
+
+        response = make_response(
+            jsonify(district_dict),
+            200
+        )
+
+        return response
+
+class GetDistrictById(Resource):
+
+    def get(self, id):
+
+        district = District.query.filter(District.id == id).first()
+
+        if district:
+
+            response = make_response(
+                jsonify(district.to_dict()),
+                200
+            )
+            return response
+
+        return {'error': '404 Not Found'}, 404
+
+
+
 
 
 
@@ -307,6 +340,8 @@ api.add_resource(CreatePost, '/createpost')
 api.add_resource(CommentById, '/comment/<int:id>')
 api.add_resource(CreateComment, '/createcomment')
 api.add_resource(UserById, '/user/<int:id>')
+api.add_resource(GetDistrict, '/districts')
+api.add_resource(GetDistrictById, '/districts/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

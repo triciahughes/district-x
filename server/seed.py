@@ -8,7 +8,7 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, User, Post, Comment
+from models import db, User, Post, Comment, District
 
 if __name__ == '__main__':
     fake = Faker()
@@ -17,6 +17,7 @@ if __name__ == '__main__':
         print("Deleting all records...")
         Comment.query.delete()
         User.query.delete()
+        District.query.delete()
         Post.query.delete()
         # db.session.commit()
 
@@ -69,6 +70,7 @@ if __name__ == '__main__':
                 post=fake.sentence(),
                 votes=fake.random_int(min=0, max=100),
                 user_id=fake.random_int(min=1, max=2),
+                district_id=fake.random_int(min=1, max=5),
             )
 
             posts.append(post)
@@ -98,6 +100,30 @@ if __name__ == '__main__':
         db.session.commit()
 
         print("Seeding comments finished!")
+
+        print("Seeding Districts...")
+
+
+        district1 = District(
+            name="Trains"
+        )
+        district2 = District(
+            name="Planes"
+        )
+        district3 = District(
+            name="Legs"
+        )
+        district4 = District(
+            name="Boats"
+        )
+        district5 = District(
+            name="Bikes"
+        )
+
+        db.session.add_all([district1, district2, district3, district4, district5])
+        db.session.commit()
+
+        print("Seeding finished!")
 
 
 

@@ -42,20 +42,21 @@ class User(db.Model, SerializerMixin):
         )
 
     def __repr__(self):
-        return f'<Username: {self.username} Password: {self._password_hash}'
+        return f'<Username: {self.username} Password: {self._password_hash}>'
 
     
 class Post(db.Model, SerializerMixin):
 
     __tablename__ = 'posts'
 
-    # serialize_rules = ('-comments',)
+    serialize_rules = ('-district.posts',)
 
     id = db.Column(db.Integer, primary_key=True)
     post = db.Column(db.String)
     votes = db.Column(db.Integer)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    district_id = db.Column(db.Integer, db.ForeignKey('districts.id'))
 
     user = db.relationship('User', back_populates='posts')
     comments = db.relationship('Comment', backref='post', cascade="all, delete, delete-orphan")
@@ -81,3 +82,16 @@ class Comment(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<Comment: {self.comment} >'
+
+class District(db.Model, SerializerMixin):
+    __tablename__ = 'districts'
+
+    serialize_rules = ('-posts',)
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+
+    posts = db.relationship('Post', backref='district')
+
+    def __repr__(self):
+        return f'<District: {self.name}> '

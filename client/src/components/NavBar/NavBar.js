@@ -11,16 +11,38 @@ import {
   ListItemIcon,
   ListItemText,
   ListItemAvatar,
+  Typography,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
+import ArrowRightIcon from "@material-ui/icons/ArrowRight";
+import TrainIcon from "@mui/icons-material/Train";
+import AllInclusiveIcon from "@material-ui/icons/AllInclusive";
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 ///////////// IMPORTS //////////////
 
 const drawerWidth = 240;
 
-function NavBar({ handleLogout, userData, handleCreatePostClick }) {
+function NavBar({ handleLogout, userData, handleCreatePostClick, districts }) {
   const history = useHistory();
+
+  const districtList = districts.map((district) => {
+    return (
+      <ListItem
+        key={district.id}
+        disablePadding
+        id={district.id}
+        onClick={handleDistrictClick}
+      >
+        <ListItemButton>
+          <ListItemIcon>
+            <ArrowRightIcon />
+          </ListItemIcon>
+          <ListItemText primary={district.name} />
+        </ListItemButton>
+      </ListItem>
+    );
+  });
 
   function handleLogOutClick() {
     handleLogout();
@@ -28,6 +50,17 @@ function NavBar({ handleLogout, userData, handleCreatePostClick }) {
 
   function handleUsernameClick() {
     history.push(`/profile/${userData.id}`);
+  }
+
+  function handleAllDistrictsClick() {
+    history.push("/home");
+  }
+
+  function handleDistrictClick(e) {
+    // Get the ID of the clicked district by accessing the "id" property of the "currentTarget" element
+    const districtId = e.currentTarget.id;
+    // Navigate to the district page using the district ID
+    history.push(`/district/${districtId}`);
   }
 
   ////////////// Thumbnail Converter //////////////
@@ -53,9 +86,7 @@ function NavBar({ handleLogout, userData, handleCreatePostClick }) {
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemAvatar>
-                {/* <Avatar alt="Remy Sharp" src="" /> */}
                 <Avatar alt="Profile Picture" src={data} />
-                {/* {imageConverter} */}
               </ListItemAvatar>
               <ListItemText primary={text} />
             </ListItemButton>
@@ -81,6 +112,32 @@ function NavBar({ handleLogout, userData, handleCreatePostClick }) {
             <ListItemButton>
               <ListItemIcon>
                 <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List onClick={handleAllDistrictsClick}>
+        {["All Districts"].map((text) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <AllInclusiveIcon />
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <List>{districtList}</List>
+      <List>
+        {["More"].map((text) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <MoreHorizIcon />
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>

@@ -1,11 +1,9 @@
 import NavBar from "./NavBar/NavBar";
 import Posts from "./Posts";
 import CreatePost from "./CreatePost";
-import SortIcon from "@material-ui/icons/Sort";
-import { Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState, useEffect } from "react";
 
 function Home({
   handleLogout,
@@ -16,8 +14,8 @@ function Home({
   setShowCreatePost,
   handleCreatePostClick,
   user,
-  handleSortPostsClick,
   filterButton,
+  districts,
   // sortedPosts,
 }) {
   // const [postSortBool, setPostSortBool] = useState(false);
@@ -57,6 +55,7 @@ function Home({
         handleLogout={handleLogout}
         userData={userData}
         handleCreatePostClick={handleCreatePostClick}
+        districts={districts}
       />
       {showCreatePost ? (
         <CreatePost

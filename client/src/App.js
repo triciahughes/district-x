@@ -8,6 +8,7 @@ import CreatePost from "./components/CreatePost";
 import PostDetails from "./components/PostDetails";
 import Profile from "./components/Profile";
 import Home from "./components/Home";
+import Districts from "./Districts/Districts";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { Typography } from "@mui/material";
@@ -17,9 +18,9 @@ import { Button } from "@mui/material";
 function App() {
   const [user, setUser] = useState({});
   const [post, setPost] = useState([]);
+  const [districts, setDistricts] = useState([]);
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [postSortBool, setPostSortBool] = useState(false);
-  // const [sortedPosts, setSortedPosts] = useState([]);
   const history = useHistory();
 
   const userFetch = useCallback(fetchUser, [history]);
@@ -27,6 +28,7 @@ function App() {
   useEffect(() => {
     userFetch();
     fetchPost();
+    fetchDistricts();
   }, [userFetch]);
 
   function fetchUser() {
@@ -49,6 +51,16 @@ function App() {
         res.json().then((postData) => {
           setPost(postData);
           // setSortedPosts(postData);
+        });
+      }
+    });
+  }
+
+  function fetchDistricts() {
+    fetch("/districts").then((res) => {
+      if (res.ok) {
+        res.json().then((districtData) => {
+          setDistricts(districtData);
         });
       }
     });
@@ -118,6 +130,7 @@ function App() {
           handleSortPostsClick={handleSortPostsClick}
           posts={postData}
           filterButton={filterButton}
+          districts={districts}
         />
       </Route>
       <Route path="/createpost">
@@ -139,6 +152,9 @@ function App() {
           fetchPost={fetchPost}
           userThumbnail={user.thumbnail}
         />
+      </Route>
+      <Route path="/district/:id">
+        <Districts />
       </Route>
     </>
   );

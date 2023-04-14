@@ -25,8 +25,10 @@ import {
   ArrowDownward as ArrowDownwardIcon,
   ArrowUpward as ArrowUpwardIcon,
 } from "@mui/icons-material";
+import SortIcon from "@material-ui/icons/Sort";
+import { Button } from "@mui/material";
+import { Container, CssBaseline } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 const drawerWidth = 240;
 
@@ -46,9 +48,8 @@ const PostDetails = ({
     color: theme.palette.text.primary,
   }));
 
-  // console.log(userId);
-
   const [postDetails, setPostDetails] = useState();
+  const [commentSortBool, setCommentSortBool] = useState(false);
   const { id } = useParams();
   const history = useHistory();
 
@@ -98,6 +99,11 @@ const PostDetails = ({
     });
   }
 
+  function handleCommentSortClick() {
+    setCommentSortBool((current) => !current);
+    console.log(commentSortBool);
+  }
+
   //////////// variables ////////////
   const post = postDetails?.post;
   let votes = postDetails?.votes;
@@ -105,12 +111,9 @@ const PostDetails = ({
   const comments = postDetails?.comments.reverse();
   const postId = postDetails?.user.id;
   const postThumbnailData = postDetails?.user.thumbnail;
-  // const commentThumbnailData = comments?.user.thumbnail;
 
-  // console.log(data);
-
+  ////////// thumbnail data conversion ///////////
   const data = `data:image/jpeg;base64,${userThumbnail}`;
-
   const postThumbnail = `data:image/jpeg;base64,${postThumbnailData}`;
 
   const comment = comments?.map((data) => {
@@ -259,6 +262,26 @@ const PostDetails = ({
         userId={userId}
         fetchPostDetails={fetchPostDetails}
       />
+
+      <Container component="main" maxWidth="sm">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            marginBottom: 0,
+            marginLeft: 65,
+            width: "100%",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <Grid>
+            <Button onClick={handleCommentSortClick}>
+              <SortIcon />
+            </Button>
+          </Grid>
+        </Box>
+      </Container>
       <Typography align="center" fontWeight={100}>
         Comments
       </Typography>

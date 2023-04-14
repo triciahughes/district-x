@@ -106,6 +106,9 @@ function Posts({
     history?.push(`/post/${id}`);
   }
 
+  // console.log(user);
+  // console.log(postUserId);
+
   return (
     <>
       <Box
