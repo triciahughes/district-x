@@ -16,7 +16,6 @@ import {
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
-import TrainIcon from "@mui/icons-material/Train";
 import AllInclusiveIcon from "@material-ui/icons/AllInclusive";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 ///////////// IMPORTS //////////////

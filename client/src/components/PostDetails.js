@@ -184,7 +184,6 @@ const PostDetails = ({
               <ListItemButton>
                 <ListItemAvatar>
                   <HomeIcon />
-                  {/* <Avatar alt="Profile Picture" src="" /> */}
                 </ListItemAvatar>
                 <ListItemText primary={text} />
               </ListItemButton>

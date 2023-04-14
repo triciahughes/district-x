@@ -154,7 +154,13 @@ function App() {
         />
       </Route>
       <Route path="/district/:id">
-        <Districts />
+        <Districts
+          user={user}
+          handleLogout={handleLogout}
+          handleCreatePostClick={handleCreatePostClick}
+          showCreatePost={showCreatePost}
+          setShowCreatePost={setShowCreatePost}
+        />
       </Route>
     </>
   );
