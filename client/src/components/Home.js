@@ -18,8 +18,6 @@ function Home({
   districts,
   // sortedPosts,
 }) {
-  // const [postSortBool, setPostSortBool] = useState(false);
-  // const [sortedPosts, setSortedPosts] = useState(posts);
   ///////////// STYLES //////////////
   const theme = createTheme({
     palette: {
@@ -46,6 +44,7 @@ function Home({
         postUserId={post.user.id}
         userData={userData}
         postThumbnailData={post.user.thumbnail}
+        commentsCount={post.comments.length}
       />
     );
   });
@@ -77,12 +76,7 @@ function Home({
               alignItems: "center",
             }}
           >
-            <Grid>
-              {/* <Button onClick={handleSortPostsClick}> */}
-              {filterButton}
-              {/* <SortIcon />
-              </Button> */}
-            </Grid>
+            <Grid>{filterButton}</Grid>
           </Box>
         </Container>
       </ThemeProvider>

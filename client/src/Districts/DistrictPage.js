@@ -2,6 +2,8 @@ import React from "react";
 import CreatePost from "../components/CreatePost";
 import Posts from "../components/Posts";
 import { useHistory, useParams } from "react-router-dom";
+import { Box, Container, CssBaseline } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   Avatar,
   Drawer,
@@ -13,6 +15,7 @@ import {
   ListItemIcon,
   ListItemText,
   ListItemAvatar,
+  Grid,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -20,16 +23,29 @@ import HomeIcon from "@mui/icons-material/Home";
 ///////////// IMPORTS //////////////
 
 const drawerWidth = 240;
-const Districts = ({
+const DistrictPage = ({
   user,
   handleLogout,
   handleCreatePostClick,
   showCreatePost,
   setShowCreatePost,
   post,
+  filterButton,
 }) => {
   const history = useHistory();
   const { id } = useParams();
+
+  ///////////// STYLES //////////////
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#03a9f4",
+      },
+      secondary: {
+        main: "#ff9100",
+      },
+    },
+  });
 
   function handleHomeClick() {
     history.push("/home");
@@ -59,6 +75,7 @@ const Districts = ({
         postUserId={post.user.id}
         //   userData={userData}
         postThumbnailData={post.user.thumbnail}
+        commentsCount={post.comments.length}
       />
     );
   });
@@ -137,9 +154,26 @@ const Districts = ({
           //   fetchPost={fetchPost}
         />
       ) : null}
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="sm">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              marginBottom: 0,
+              marginLeft: 65,
+              width: "100%",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Grid>{filterButton}</Grid>
+          </Box>
+        </Container>
+      </ThemeProvider>
       {districtPosts}
     </>
   );
 };
 
-export default Districts;
+export default DistrictPage;

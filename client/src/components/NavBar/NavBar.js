@@ -51,7 +51,7 @@ function NavBar({ handleLogout, userData, handleCreatePostClick, districts }) {
   }
 
   function handleAllDistrictsClick() {
-    history.push("/home");
+    history.push("/districts/all");
   }
 
   function handleDistrictClick(e) {
@@ -122,19 +122,6 @@ function NavBar({ handleLogout, userData, handleCreatePostClick, districts }) {
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <AllInclusiveIcon />
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <List>{districtList}</List>
-      <List>
-        {["More"].map((text) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
                 <MoreHorizIcon />
               </ListItemIcon>
               <ListItemText primary={text} />
@@ -142,6 +129,7 @@ function NavBar({ handleLogout, userData, handleCreatePostClick, districts }) {
           </ListItem>
         ))}
       </List>
+      <List>{districtList}</List>
     </Drawer>
   );
 }

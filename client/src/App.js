@@ -8,7 +8,8 @@ import CreatePost from "./components/CreatePost";
 import PostDetails from "./components/PostDetails";
 import Profile from "./components/Profile";
 import Home from "./components/Home";
-import Districts from "./Districts/Districts";
+import DistrictPage from "./Districts/DistrictPage";
+import AllDistricts from "./Districts/AllDistricts";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { Typography } from "@mui/material";
@@ -154,13 +155,22 @@ function App() {
         />
       </Route>
       <Route path="/district/:id">
-        <Districts
+        <DistrictPage
           user={user}
           handleLogout={handleLogout}
           handleCreatePostClick={handleCreatePostClick}
           showCreatePost={showCreatePost}
           setShowCreatePost={setShowCreatePost}
           post={postData}
+          filterButton={filterButton}
+        />
+      </Route>
+      <Route path="/districts/all">
+        <AllDistricts
+          user={user}
+          handleLogout={handleLogout}
+          post={postData}
+          userData={user}
         />
       </Route>
     </>

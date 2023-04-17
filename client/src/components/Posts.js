@@ -29,6 +29,7 @@ function Posts({
   postUser,
   postUserId,
   postThumbnailData,
+  commentsCount,
 }) {
   const history = useHistory();
   ///////////// STYLES //////////////
@@ -102,9 +103,6 @@ function Posts({
     history?.push(`/post/${id}`);
   }
 
-  // console.log(user);
-  // console.log(postUserId);
-
   return (
     <>
       <Box
@@ -140,6 +138,15 @@ function Posts({
               <Typography fontWeight={100} onClick={handlePostClick}>
                 {posts}
               </Typography>
+              <Link
+                fontWeight={100}
+                sx={{ color: "#949391" }}
+                href=""
+                underline="hover"
+                onClick={handlePostClick}
+              >
+                {`${commentsCount} comments`}
+              </Link>
             </Grid>
             <ButtonGroup>
               <List>

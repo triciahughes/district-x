@@ -285,7 +285,6 @@ const PostDetails = ({
         Comments
       </Typography>
       {comment}
-      {/* <Comments postDetails={postDetails} /> */}
     </>
   );
 };
