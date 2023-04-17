@@ -1,5 +1,6 @@
 import React from "react";
 import CreatePost from "../components/CreatePost";
+import Posts from "../components/Posts";
 import { useHistory, useParams } from "react-router-dom";
 import {
   Avatar,
@@ -30,8 +31,6 @@ const Districts = ({
   const history = useHistory();
   const { id } = useParams();
 
-  console.log(id);
-
   function handleHomeClick() {
     history.push("/home");
   }
@@ -46,76 +45,93 @@ const Districts = ({
     (district) => district.district?.id === parseInt(id)
   );
 
-  console.log(post);
-
-  console.log(filteredDistricts);
+  const districtPosts = filteredDistricts.map((post) => {
+    return (
+      <Posts
+        user={user}
+        //   fetchPost={fetchPost}
+        key={post.id}
+        id={post.id}
+        votes={post.votes}
+        posts={post.post}
+        postUser={post.user.username}
+        postData={post}
+        postUserId={post.user.id}
+        //   userData={userData}
+        postThumbnailData={post.user.thumbnail}
+      />
+    );
+  });
 
   return (
-    <Drawer
-      sx={{
-        width: drawerWidth,
-        flexShrink: 0,
-        "& .MuiDrawer-paper": {
+    <>
+      <Drawer
+        sx={{
           width: drawerWidth,
-          boxSizing: "border-box",
-        },
-      }}
-      variant="permanent"
-      anchor="left"
-    >
-      <Toolbar />
-      <Divider />
-      <List>
-        {[`${user.username}`].map((text) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemAvatar>
-                <Avatar alt="Profile Picture" src={data} />
-              </ListItemAvatar>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List onClick={handleCreatePostClick}>
-        {["Create Post"].map((text) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <AddCircleIcon />
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <List onClick={handleHomeClick}>
-        {["Home"].map((text) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemAvatar>
-                <HomeIcon />
-              </ListItemAvatar>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <List onClick={handleLogOutClick}>
-        {["Logout"].map((text) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <LogoutIcon />
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-    </Drawer>
+          flexShrink: 0,
+          "& .MuiDrawer-paper": {
+            width: drawerWidth,
+            boxSizing: "border-box",
+          },
+        }}
+        variant="permanent"
+        anchor="left"
+      >
+        <Toolbar />
+        <Divider />
+        <List>
+          {[`${user.username}`].map((text) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemAvatar>
+                  <Avatar alt="Profile Picture" src={data} />
+                </ListItemAvatar>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+        <List onClick={handleCreatePostClick}>
+          {["Create Post"].map((text) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <AddCircleIcon />
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        <List onClick={handleHomeClick}>
+          {["Home"].map((text) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemAvatar>
+                  <HomeIcon />
+                </ListItemAvatar>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        <List onClick={handleLogOutClick}>
+          {["Logout"].map((text) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+      </Drawer>
+      {districtPosts}
+    </>
   );
 };
 
