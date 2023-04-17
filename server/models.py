@@ -49,7 +49,7 @@ class Post(db.Model, SerializerMixin):
 
     __tablename__ = 'posts'
 
-    serialize_rules = ('-district.posts',)
+    serialize_rules = ('-district.posts', 'district_id',)
 
     id = db.Column(db.Integer, primary_key=True)
     post = db.Column(db.String)

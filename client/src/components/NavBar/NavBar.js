@@ -11,7 +11,6 @@ import {
   ListItemIcon,
   ListItemText,
   ListItemAvatar,
-  Typography,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import LogoutIcon from "@mui/icons-material/Logout";

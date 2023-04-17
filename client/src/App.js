@@ -160,6 +160,7 @@ function App() {
           handleCreatePostClick={handleCreatePostClick}
           showCreatePost={showCreatePost}
           setShowCreatePost={setShowCreatePost}
+          post={postData}
         />
       </Route>
     </>

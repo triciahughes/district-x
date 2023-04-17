@@ -1,6 +1,6 @@
 import React from "react";
 import CreatePost from "../components/CreatePost";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import {
   Avatar,
   Drawer,
@@ -12,7 +12,6 @@ import {
   ListItemIcon,
   ListItemText,
   ListItemAvatar,
-  Typography,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -26,8 +25,12 @@ const Districts = ({
   handleCreatePostClick,
   showCreatePost,
   setShowCreatePost,
+  post,
 }) => {
   const history = useHistory();
+  const { id } = useParams();
+
+  console.log(id);
 
   function handleHomeClick() {
     history.push("/home");
@@ -38,6 +41,14 @@ const Districts = ({
   }
 
   const data = `data:image/jpeg;base64,${user.thumbnail}`;
+
+  const filteredDistricts = post.filter(
+    (district) => district.district?.id === parseInt(id)
+  );
+
+  console.log(post);
+
+  console.log(filteredDistricts);
 
   return (
     <Drawer

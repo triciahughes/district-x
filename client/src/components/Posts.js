@@ -1,7 +1,5 @@
 import * as React from "react";
-import PostDetails from "./PostDetails";
 import { useHistory } from "react-router-dom";
-import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import {
   Box,
@@ -29,9 +27,7 @@ function Posts({
   votes,
   posts,
   postUser,
-  postData,
   postUserId,
-  userData,
   postThumbnailData,
 }) {
   const history = useHistory();
