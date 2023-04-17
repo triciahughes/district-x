@@ -86,7 +86,7 @@ class Comment(db.Model, SerializerMixin):
 class District(db.Model, SerializerMixin):
     __tablename__ = 'districts'
 
-    serialize_rules = ('-posts',)
+    serialize_rules = ('posts',)
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)

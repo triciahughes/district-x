@@ -87,6 +87,27 @@ function App() {
     console.log(postSortBool);
   }
 
+  // The 'localeCompare()' method is used to compare the names of the districts and ensure that the sorting is done alphabetically.
+  // The function returns a negative number if 'a' should come before 'b', a positive number if 'a' should come after 'b', and zero if they are equal.
+  // This ensures that the districts are sorted in ascending order based on their names.
+  const sortedDistricts = [...districts].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
+  const districtList = sortedDistricts.map((district) => {
+    return (
+      <AllDistricts
+        key={district.id}
+        districts={district}
+        districtName={district.name}
+        user={user}
+        handleLogout={handleLogout}
+        // post={postData}
+        userData={user}
+      />
+    );
+  });
+
   const filterButton = postSortBool ? (
     <Button onClick={handleSortPostsClick} style={{ color: "#ff9100" }}>
       <Typography style={{ color: "#ff9100" }}>Top</Typography>
@@ -131,7 +152,7 @@ function App() {
           handleSortPostsClick={handleSortPostsClick}
           posts={postData}
           filterButton={filterButton}
-          districts={districts}
+          districts={sortedDistricts}
         />
       </Route>
       <Route path="/createpost">
@@ -165,14 +186,7 @@ function App() {
           filterButton={filterButton}
         />
       </Route>
-      <Route path="/districts/all">
-        <AllDistricts
-          user={user}
-          handleLogout={handleLogout}
-          post={postData}
-          userData={user}
-        />
-      </Route>
+      <Route path="/districts/all">{districtList}</Route>
     </>
   );
 }

@@ -21,10 +21,17 @@ import {
 import { styled } from "@mui/material/styles";
 import LogoutIcon from "@mui/icons-material/Logout";
 import HomeIcon from "@mui/icons-material/Home";
+import TelegramIcon from "@material-ui/icons/Telegram";
 ///////////// IMPORTS //////////////
 
 const drawerWidth = 240;
-const AllDistricts = ({ user, handleLogout, post, userData }) => {
+const AllDistricts = ({
+  user,
+  handleLogout,
+  userData,
+  districts,
+  districtName,
+}) => {
   const history = useHistory();
   ///////////// STYLES //////////////
   const theme = createTheme({
@@ -54,6 +61,10 @@ const AllDistricts = ({ user, handleLogout, post, userData }) => {
 
   function handleUsernameClick() {
     history.push(`/profile/${userData.id}`);
+  }
+
+  function handlePostClick() {
+    history?.push(`/district/${districts.id}`);
   }
 
   return (
@@ -117,7 +128,7 @@ const AllDistricts = ({ user, handleLogout, post, userData }) => {
           <Box
             sx={{
               marginTop: 8,
-              marginBottom: 0,
+              marginBottom: -5,
               marginLeft: 65,
               width: "100%",
               flexDirection: "row",
@@ -130,20 +141,20 @@ const AllDistricts = ({ user, handleLogout, post, userData }) => {
         sx={{
           flexGrow: 1,
           overflow: "hidden",
-          px: 3,
+          px: 0,
           backgroundColor: "white",
         }}
       >
         <StyledPaper
           sx={{
-            my: 2,
+            my: 1,
             mx: "auto",
             p: 2,
           }}
         >
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item>
-              <Avatar alt="Profile Picture" src="{postThumbnail}" />
+              <TelegramIcon fontSize="large" />
             </Grid>
             <Grid item xs>
               <Typography fontWeight={600}>
@@ -151,22 +162,19 @@ const AllDistricts = ({ user, handleLogout, post, userData }) => {
                   href=""
                   underline="hover"
                   color="orange"
-                  onClick="{handlePostUsernameClick}"
+                  onClick={handlePostClick}
                 >
-                  {"postUser"}
+                  {districtName}
                 </Link>
-              </Typography>
-              <Typography fontWeight={100} onClick="{handlePostClick}">
-                {"posts"}
               </Typography>
               <Link
                 fontWeight={100}
                 sx={{ color: "#949391" }}
                 href=""
                 underline="hover"
-                onClick="{handlePostClick}"
+                onClick={handlePostClick}
               >
-                {` comments`}
+                {`${districts.posts.length} posts in this district`}
               </Link>
             </Grid>
           </Grid>
