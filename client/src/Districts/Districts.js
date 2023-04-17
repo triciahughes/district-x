@@ -130,6 +130,13 @@ const Districts = ({
         </List>
         <Divider />
       </Drawer>
+      {showCreatePost ? (
+        <CreatePost
+          user={user}
+          setShowCreatePost={setShowCreatePost}
+          //   fetchPost={fetchPost}
+        />
+      ) : null}
       {districtPosts}
     </>
   );
