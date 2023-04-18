@@ -191,6 +191,7 @@ class CreatePost(Resource):
             post=data['post'],
             user_id=data['user_id'],
             votes=data['votes'],
+            district_id=data['district_id'],
         )
 
         db.session.add(new_post)

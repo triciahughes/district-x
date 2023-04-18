@@ -11,6 +11,7 @@ import {
   List,
   ListItem,
   ListItemButton,
+  Divider,
 } from "@mui/material";
 import Link from "@mui/material/Link";
 import {
@@ -30,6 +31,8 @@ function Posts({
   postUserId,
   postThumbnailData,
   commentsCount,
+  postDistrict,
+  postDistrictId,
 }) {
   const history = useHistory();
   ///////////// STYLES //////////////
@@ -44,7 +47,7 @@ function Posts({
   const deleteButton =
     postUserId === user.id ? (
       <HighlightOffRoundedIcon
-        style={{ color: "#D9381E" }}
+        style={{ color: "#D9381E", cursor: "pointer" }}
         onClick={handleDeleteClick}
       />
     ) : null;
@@ -57,6 +60,10 @@ function Posts({
         res.json().then(fetchPost());
       }
     });
+  }
+
+  function handleDistrictLabelClick() {
+    history.push(`/district/${postDistrictId}`);
   }
 
   const postThumbnail = `data:image/jpeg;base64,${postThumbnailData}`;
@@ -103,6 +110,9 @@ function Posts({
     history?.push(`/post/${id}`);
   }
 
+  const districtLabel =
+    postDistrict === undefined ? "" : `#${postDistrict.toLowerCase()}`;
+
   return (
     <>
       <Box
@@ -146,6 +156,14 @@ function Posts({
                 onClick={handlePostClick}
               >
                 {`${commentsCount} comments`}
+              </Link>
+              <br></br>
+              <Link
+                fontSize={"small"}
+                style={{ color: "#03a9f4" }}
+                onClick={handleDistrictLabelClick}
+              >
+                {districtLabel}
               </Link>
             </Grid>
             <ButtonGroup>

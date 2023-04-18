@@ -2,7 +2,7 @@ import React from "react";
 import CreatePost from "../components/CreatePost";
 import Posts from "../components/Posts";
 import { useHistory, useParams } from "react-router-dom";
-import { Box, Container, CssBaseline } from "@mui/material";
+import { Box, Container, CssBaseline, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   Avatar,
@@ -31,6 +31,8 @@ const DistrictPage = ({
   setShowCreatePost,
   post,
   filterButton,
+  fetchPost,
+  districtDetails,
 }) => {
   const history = useHistory();
   const { id } = useParams();
@@ -45,6 +47,16 @@ const DistrictPage = ({
         main: "#ff9100",
       },
     },
+  });
+
+  const filteredDistrict = districtDetails.filter((district) => {
+    if (district.id === parseInt(id)) {
+      return district.name;
+    }
+  });
+
+  const districtName = filteredDistrict.map((district) => {
+    return `#${district.name.toLowerCase()}`;
   });
 
   function handleHomeClick() {
@@ -147,11 +159,22 @@ const DistrictPage = ({
         </List>
         <Divider />
       </Drawer>
+      <Container
+        component="main"
+        sx={{
+          marginTop: 8,
+          marginBottom: 0,
+          marginLeft: 55,
+        }}
+      >
+        <h1>Welcome to the {districtName} district</h1>
+      </Container>
       {showCreatePost ? (
         <CreatePost
           user={user}
           setShowCreatePost={setShowCreatePost}
-          //   fetchPost={fetchPost}
+          districtId={parseInt(id)}
+          fetchPost={fetchPost}
         />
       ) : null}
       <ThemeProvider theme={theme}>

@@ -108,6 +108,10 @@ function App() {
     );
   });
 
+  const districtDetails = sortedDistricts.map((district) => {
+    return district;
+  });
+
   const filterButton = postSortBool ? (
     <Button onClick={handleSortPostsClick} style={{ color: "#ff9100" }}>
       <Typography style={{ color: "#ff9100" }}>Top</Typography>
@@ -184,6 +188,8 @@ function App() {
           setShowCreatePost={setShowCreatePost}
           post={postData}
           filterButton={filterButton}
+          districtDetails={districtDetails}
+          fetchPost={fetchPost}
         />
       </Route>
       <Route path="/districts/all">{districtList}</Route>

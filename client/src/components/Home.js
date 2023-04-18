@@ -45,6 +45,8 @@ function Home({
         userData={userData}
         postThumbnailData={post.user.thumbnail}
         commentsCount={post.comments.length}
+        postDistrict={post.district?.name}
+        postDistrictId={post.district?.id}
       />
     );
   });

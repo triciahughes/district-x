@@ -13,7 +13,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 ///////////// IMPORTS //////////////
 
-const CreatePost = ({ user, setShowCreatePost, fetchPost }) => {
+const CreatePost = ({ user, setShowCreatePost, fetchPost, districtId }) => {
   ///////////// STYLES //////////////
   const theme = createTheme({
     palette: {
@@ -25,6 +25,8 @@ const CreatePost = ({ user, setShowCreatePost, fetchPost }) => {
       },
     },
   });
+
+  const idDistrict = districtId === undefined ? null : districtId;
 
   const userId = user.id;
 
@@ -44,8 +46,9 @@ const CreatePost = ({ user, setShowCreatePost, fetchPost }) => {
         ...values,
         user_id: userId,
         votes: 0,
+        district_id: idDistrict,
       };
-      // console.log("clicked");
+      console.log(districtId);
       // console.log(submission);
       fetch("/createpost", {
         method: "POST",
@@ -59,6 +62,7 @@ const CreatePost = ({ user, setShowCreatePost, fetchPost }) => {
             fetchPost();
             setShowCreatePost(false);
             setSubmitting(false);
+            console.log(postData);
           });
         }
       });
