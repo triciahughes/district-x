@@ -33,9 +33,6 @@ const CreatePost = ({
     },
   });
 
-  console.log(districts);
-  console.log("Existing tags:", districtsName);
-
   let idDistrict = districtId === undefined ? null : districtId;
 
   const userId = user.id;
@@ -54,23 +51,23 @@ const CreatePost = ({
       console.log("Form values:", values);
       setSubmitting(true);
 
-      // Extracting hashtags from the post field
-      const hashtags = values.post
-        .match(/#\w+/gi)
-        ?.map((tag) => tag.toLowerCase().slice(1));
-      console.log("Hashtags:", hashtags);
+      const hashtagMatches = values?.post.match(/#\w+/gi);
+      const hashtags = hashtagMatches
+        ? hashtagMatches.map((tag) => tag.toLowerCase().slice(1))
+        : [];
 
       const filteredTags = districts?.filter((district) => {
-        if (district.name.toLowerCase().includes(hashtags)) {
+        if (
+          hashtags.some((hashtag) =>
+            district.name.toLowerCase().includes(hashtag)
+          )
+        ) {
           return district.id;
         }
       });
 
-      console.log("filtered tags", filteredTags);
-
-      if (filteredTags) {
+      if (filteredTags && filteredTags.length > 0) {
         idDistrict = filteredTags[0].id;
-        console.log(idDistrict);
       }
 
       const newValues = {
@@ -96,7 +93,6 @@ const CreatePost = ({
             fetchPost();
             setShowCreatePost(false);
             setSubmitting(false);
-            console.log(postData);
           });
         }
       });
