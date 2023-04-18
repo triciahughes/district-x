@@ -13,7 +13,14 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 ///////////// IMPORTS //////////////
 
-const CreatePost = ({ user, setShowCreatePost, fetchPost, districtId }) => {
+const CreatePost = ({
+  user,
+  setShowCreatePost,
+  fetchPost,
+  districtId,
+  districtsName,
+  districts,
+}) => {
   ///////////// STYLES //////////////
   const theme = createTheme({
     palette: {
@@ -26,7 +33,10 @@ const CreatePost = ({ user, setShowCreatePost, fetchPost, districtId }) => {
     },
   });
 
-  const idDistrict = districtId === undefined ? null : districtId;
+  console.log(districts);
+  console.log("Existing tags:", districtsName);
+
+  let idDistrict = districtId === undefined ? null : districtId;
 
   const userId = user.id;
 
@@ -41,15 +51,39 @@ const CreatePost = ({ user, setShowCreatePost, fetchPost, districtId }) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values, { setSubmitting }) => {
+      console.log("Form values:", values);
       setSubmitting(true);
-      const submission = {
+
+      // Extracting hashtags from the post field
+      const hashtags = values.post
+        .match(/#\w+/gi)
+        ?.map((tag) => tag.toLowerCase().slice(1));
+      console.log("Hashtags:", hashtags);
+
+      const filteredTags = districts?.filter((district) => {
+        if (district.name.toLowerCase().includes(hashtags)) {
+          return district.id;
+        }
+      });
+
+      console.log("filtered tags", filteredTags);
+
+      if (filteredTags) {
+        idDistrict = filteredTags[0].id;
+        console.log(idDistrict);
+      }
+
+      const newValues = {
         ...values,
+        post: values.post.replace(/#\w+/gi, "").trim(),
+      };
+
+      const submission = {
+        ...newValues,
         user_id: userId,
         votes: 0,
         district_id: idDistrict,
       };
-      console.log(districtId);
-      // console.log(submission);
       fetch("/createpost", {
         method: "POST",
         headers: {

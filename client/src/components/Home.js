@@ -16,6 +16,7 @@ function Home({
   user,
   filterButton,
   districts,
+  districtsName,
   // sortedPosts,
 }) {
   ///////////// STYLES //////////////
@@ -63,6 +64,8 @@ function Home({
           user={user}
           setShowCreatePost={setShowCreatePost}
           fetchPost={fetchPost}
+          districtsName={districtsName}
+          districts={districts}
         />
       ) : null}
       <ThemeProvider theme={theme}>

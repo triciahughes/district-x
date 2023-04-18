@@ -20,6 +20,7 @@ function App() {
   const [user, setUser] = useState({});
   const [post, setPost] = useState([]);
   const [districts, setDistricts] = useState([]);
+  const [districtsName, setDistrictsName] = useState([]);
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [postSortBool, setPostSortBool] = useState(false);
   const history = useHistory();
@@ -62,6 +63,9 @@ function App() {
       if (res.ok) {
         res.json().then((districtData) => {
           setDistricts(districtData);
+          const names = districtData.map((district) => district.name);
+          setDistrictsName(names);
+          console.log(districtsName);
         });
       }
     });
@@ -157,6 +161,7 @@ function App() {
           posts={postData}
           filterButton={filterButton}
           districts={sortedDistricts}
+          districtsName={districtsName}
         />
       </Route>
       <Route path="/createpost">
