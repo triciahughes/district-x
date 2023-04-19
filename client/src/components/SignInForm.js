@@ -50,6 +50,8 @@ function SignInForm({ setUser, fetchUser }) {
             fetchUser();
             history.push("/home");
           });
+        } else {
+          alert("Invalid username or password");
         }
       });
     },
@@ -109,6 +111,9 @@ function SignInForm({ setUser, fetchUser }) {
                 autoComplete="username"
                 autoFocus
               />
+              {formik.errors["username"] ? (
+                <p style={{ color: "#D9381E" }}>{formik.errors["username"]}</p>
+              ) : null}
               <TextField
                 margin="normal"
                 required
@@ -121,6 +126,9 @@ function SignInForm({ setUser, fetchUser }) {
                 onChange={formik.handleChange}
                 autoComplete="current-password"
               />
+              {formik.errors["password"] ? (
+                <p style={{ color: "#D9381E" }}>{formik.errors["password"]}</p>
+              ) : null}
               <Button
                 type="submit"
                 fullWidth

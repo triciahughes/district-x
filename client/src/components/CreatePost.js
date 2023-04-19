@@ -52,6 +52,7 @@ const CreatePost = ({
       setSubmitting(true);
 
       const hashtagMatches = values?.post.match(/#\w+/gi);
+
       const hashtags = hashtagMatches
         ? hashtagMatches.map((tag) => tag.toLowerCase().slice(1))
         : [];

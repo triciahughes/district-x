@@ -88,6 +88,7 @@ const DistrictPage = ({
         //   userData={userData}
         postThumbnailData={post.user.thumbnail}
         commentsCount={post.comments.length}
+        districtName={districtName}
       />
     );
   });

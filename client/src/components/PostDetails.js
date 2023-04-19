@@ -111,6 +111,8 @@ const PostDetails = ({
   const comments = postDetails?.comments.reverse();
   const postId = postDetails?.user.id;
   const postThumbnailData = postDetails?.user.thumbnail;
+  const postDistrictId = postDetails?.district.id;
+  console.log(postDistrictId);
 
   ////////// thumbnail data conversion ///////////
   const data = `data:image/jpeg;base64,${userThumbnail}`;
