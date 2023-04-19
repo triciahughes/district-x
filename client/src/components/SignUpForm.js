@@ -89,6 +89,9 @@ function SignUpForm({ setUser }) {
                 autoComplete="username"
               />
             </Grid>
+            {formik.errors["username"] ? (
+              <p style={{ color: "#D9381E" }}>{formik.errors["username"]}</p>
+            ) : null}
             <Grid item xs={12}>
               <TextField
                 required
@@ -103,6 +106,9 @@ function SignUpForm({ setUser }) {
                 autoComplete="new-password"
               />
             </Grid>
+            {formik.errors["password"] ? (
+              <p style={{ color: "#D9381E" }}>{formik.errors["password"]}</p>
+            ) : null}
             <Button
               type="submit"
               fullWidth

@@ -31,6 +31,7 @@ const Profile = ({ user, handleLogout, fetchPost, userThumbnail }) => {
       .then((res) => res.json())
       .then((data) => {
         ViewAccount({
+          username: data.username,
           skinColor: data.skinColor,
           clothing: data.clothingData,
           hairStyle: data.hairStyle,

@@ -38,6 +38,7 @@ const PostDetails = ({
   userId,
   userThumbnail,
   fetchPost,
+  postSortBool,
 }) => {
   ///////////// STYLES //////////////
   const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -99,10 +100,10 @@ const PostDetails = ({
     });
   }
 
-  function handleCommentSortClick() {
-    setCommentSortBool((current) => !current);
-    console.log(commentSortBool);
-  }
+  // function handleCommentSortClick() {
+  //   setCommentSortBool((current) => !current);
+  //   console.log(commentSortBool);
+  // }
 
   //////////// variables ////////////
   const post = postDetails?.post;
@@ -117,6 +118,12 @@ const PostDetails = ({
   ////////// thumbnail data conversion ///////////
   const data = `data:image/jpeg;base64,${userThumbnail}`;
   const postThumbnail = `data:image/jpeg;base64,${postThumbnailData}`;
+
+  // const commentSort = comments?.map((data) => data.votes).sort((a, b) => b - a);
+
+  // const commentSortArray = postSortBool ? commentSort : comments;
+
+  // console.log(commentSort);
 
   const comment = comments?.map((data) => {
     return (
@@ -276,11 +283,11 @@ const PostDetails = ({
             alignItems: "center",
           }}
         >
-          <Grid>
+          {/* <Grid>
             <Button onClick={handleCommentSortClick}>
               <SortIcon />
             </Button>
-          </Grid>
+          </Grid> */}
         </Box>
       </Container>
       <Typography align="center" fontWeight={100}>

@@ -1,4 +1,5 @@
 import { Link, useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -9,6 +10,18 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useFormik } from "formik";
 import * as yup from "yup";
+// import Images from "./Images";
+
+const images = [
+  "https://i.imgur.com/tgUZzzW.jpg",
+  "https://i.imgur.com/Vh2IJ7I.jpg",
+  "https://i.imgur.com/Hh13AJR.jpg",
+  "https://i.imgur.com/KDQIlPn.jpg",
+  "https://i.imgur.com/lWCDGYd.jpg",
+  "https://i.imgur.com/012NZkH.jpg",
+  "https://i.imgur.com/JbgIaSk.jpg",
+  "https://i.imgur.com/Gz3MnU1.jpg",
+];
 
 const theme = createTheme({
   palette: {
@@ -27,7 +40,45 @@ const validationSchema = yup.object({
 });
 
 function SignInForm({ setUser, fetchUser }) {
+  const [index, setIndex] = useState(0);
   const history = useHistory();
+  const [loadedImages, setLoadedImages] = useState([]);
+
+  useEffect(() => {
+    const preloadImages = async () => {
+      const promises = images.map(
+        (url) =>
+          new Promise(async (resolve) => {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+              const base64data = reader.result;
+              setLoadedImages((loadedImages) => {
+                return [...loadedImages, base64data];
+              });
+              resolve();
+            };
+
+            reader.readAsDataURL(blob);
+          })
+      );
+      await Promise.all(promises);
+    };
+
+    preloadImages();
+  }, [setLoadedImages]);
+
+  useEffect(() => {
+    if (loadedImages.length === images.length) {
+      const intervalId = setInterval(() => {
+        setIndex((index) => (index + 1) % images.length);
+      }, 3000);
+
+      return () => clearInterval(intervalId);
+    }
+  }, [loadedImages]);
 
   const formik = useFormik({
     initialValues: {
@@ -67,7 +118,7 @@ function SignInForm({ setUser, fetchUser }) {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
+            backgroundImage: `url(${loadedImages[index]})`,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -77,6 +128,7 @@ function SignInForm({ setUser, fetchUser }) {
             backgroundPosition: "center",
           }}
         />
+
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{

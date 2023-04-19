@@ -65,7 +65,6 @@ function App() {
           setDistricts(districtData);
           const names = districtData.map((district) => district.name);
           setDistrictsName(names);
-          console.log(districtsName);
         });
       }
     });
@@ -174,6 +173,7 @@ function App() {
           userId={user.id}
           userThumbnail={user.thumbnail}
           fetchPost={fetchPost}
+          postSortBool={postSortBool}
         />
       </Route>
       <Route path="/profile/:id">
