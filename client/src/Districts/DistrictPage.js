@@ -77,7 +77,7 @@ const DistrictPage = ({
     return (
       <Posts
         user={user}
-        //   fetchPost={fetchPost}
+        fetchPost={fetchPost}
         key={post.id}
         id={post.id}
         votes={post.votes}
