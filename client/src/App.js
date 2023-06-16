@@ -187,7 +187,11 @@ function App() {
         />
       </Route>
       <Route path="/profile/:id/posts">
-        <ProfilePosts />
+        <ProfilePosts
+          user={user.username}
+          handleLogout={handleLogout}
+          userThumbnail={user.thumbnail}
+        />
       </Route>
       <Route path="/profile/:id/comments">
         <ProfileComments />
