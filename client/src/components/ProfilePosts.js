@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+import Posts from "./Posts";
 import {
   Drawer,
   Toolbar,
@@ -15,50 +16,26 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useHistory, useParams } from "react-router-dom";
-import { ViewAccount } from "../unreal/unrealFunctionLibrary";
 const drawerWidth = 240;
-const Profile = ({ user, handleLogout, fetchPost, userThumbnail }) => {
+const ProfilePosts = ({ user, handleLogout, userThumbnail }) => {
   const history = useHistory();
   const { id } = useParams();
 
   const data = `data:image/jpeg;base64,${userThumbnail}`;
 
-  useEffect(() => {
-    fetchUserDetails();
-  }, [id]);
-
-  function fetchUserDetails() {
-    fetch(`/user/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        ViewAccount({
-          username: data.username,
-          skinColor: data.skinColor,
-          clothing: data.clothingData,
-          hairStyle: data.hairStyle,
-          hairColor: data.hairColor,
-          eyeStyle: data.eyeStyle,
-          backdropHue: data.backdrop,
-          thumbnailBase64: "",
-        });
-      });
-  }
-
-  ////////// Home ///////////////
-  function handleHomeClick() {
-    fetchPost();
-    history.push("/home");
-  }
-
   ///////// Post List By User //////
   function handlePostsByUserClick() {
-    history.push(`/profile/${id}/posts`);
+    // history.push(`/profile/${id}/posts`);
     console.log("Post Clicked");
   }
   ///////// Comment List By User //////
   function handleCommentsByUserClick() {
     history.push(`/profile/${id}/comments`);
     console.log("Comment Clicked");
+  }
+
+  function handleHomeClick() {
+    history.push("/home");
   }
 
   return (
@@ -142,8 +119,9 @@ const Profile = ({ user, handleLogout, fetchPost, userThumbnail }) => {
           ))}
         </List>
       </Drawer>
+      <Posts />
     </>
   );
 };
 
-export default Profile;
+export default ProfilePosts;

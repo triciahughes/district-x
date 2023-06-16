@@ -323,6 +323,22 @@ class GetDistrictById(Resource):
             return response
 
         return {'error': '404 Not Found'}, 404
+    
+class ProfilePostsById(Resource):
+
+    def get(self, id):
+
+        posts = Post.query.filter(Post.user_id == id).all()
+
+        if posts:
+
+            response = make_response(
+                jsonify([post.to_dict() for post in posts]),
+                200
+            )
+            return response
+
+        return {'error': '404 Not Found'}, 404
 
 
 
@@ -337,6 +353,7 @@ api.add_resource(Signin, '/signin')
 api.add_resource(Logout, '/logout')
 api.add_resource(PostList, '/posts')
 api.add_resource(PostById, '/posts/<int:id>')
+api.add_resource(ProfilePostsById, '/profileposts/<int:id>')
 api.add_resource(CreatePost, '/createpost')
 api.add_resource(CommentById, '/comment/<int:id>')
 api.add_resource(CreateComment, '/createcomment')

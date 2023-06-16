@@ -6,6 +6,8 @@ import SignInForm from "./components/SignInForm";
 import CreateAvatar from "./components/CreateAvatar";
 import CreatePost from "./components/CreatePost";
 import PostDetails from "./components/PostDetails";
+import ProfilePosts from "./components/ProfilePosts";
+import ProfileComments from "./components/ProfileComments";
 import Profile from "./components/Profile";
 import Home from "./components/Home";
 import DistrictPage from "./Districts/DistrictPage";
@@ -183,6 +185,16 @@ function App() {
           fetchPost={fetchPost}
           userThumbnail={user.thumbnail}
         />
+      </Route>
+      <Route path="/profile/posts/:id">
+        <ProfilePosts
+          user={user.username}
+          handleLogout={handleLogout}
+          userThumbnail={user.thumbnail}
+        />
+      </Route>
+      <Route path="/profile/:id/comments">
+        <ProfileComments />
       </Route>
       <Route path="/district/:id">
         <DistrictPage
