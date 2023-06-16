@@ -186,7 +186,7 @@ function App() {
           userThumbnail={user.thumbnail}
         />
       </Route>
-      <Route path="/profile/:id/posts">
+      <Route path="/profile/posts/:id">
         <ProfilePosts
           user={user.username}
           handleLogout={handleLogout}

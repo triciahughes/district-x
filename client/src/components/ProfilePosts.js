@@ -25,7 +25,7 @@ const ProfilePosts = ({ user, handleLogout, userThumbnail }) => {
 
   ///////// Post List By User //////
   function handlePostsByUserClick() {
-    history.push(`/profile/${id}/posts`);
+    // history.push(`/profile/${id}/posts`);
     console.log("Post Clicked");
   }
   ///////// Comment List By User //////
@@ -60,7 +60,7 @@ const ProfilePosts = ({ user, handleLogout, userThumbnail }) => {
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemAvatar>
-                  <Avatar alt="Profile Picture" src={"data"} />
+                  <Avatar alt="Profile Picture" src={data} />
                 </ListItemAvatar>
                 <ListItemText primary={text} />
               </ListItemButton>
@@ -119,7 +119,7 @@ const ProfilePosts = ({ user, handleLogout, userThumbnail }) => {
           ))}
         </List>
       </Drawer>
-      {/* <Posts id={id} /> */}
+      <Posts />
     </>
   );
 };
