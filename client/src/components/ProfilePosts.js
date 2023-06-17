@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Posts from "./Posts";
+// import React from "react";
 import {
   Drawer,
   Toolbar,
@@ -16,10 +17,54 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useHistory, useParams } from "react-router-dom";
+
 const drawerWidth = 240;
-const ProfilePosts = ({ user, handleLogout, userThumbnail }) => {
+const ProfilePosts = ({
+  user,
+  handleLogout,
+  userThumbnail,
+  // fetchProfilePost,
+}) => {
+  const [profilePost, setProfilePost] = useState([]);
   const history = useHistory();
   const { id } = useParams();
+
+  useEffect(() => {
+    fetchProfilePost();
+  }, []);
+
+  console.log("hello from profile post the id is: ", id);
+
+  function fetchProfilePost() {
+    fetch(`/profileposts/${id}`).then((res) => {
+      if (res.ok) {
+        res.json().then((profilePostData) => {
+          console.log(profilePostData);
+          setProfilePost(profilePostData);
+          console.log("hello from profile post");
+        });
+      }
+    });
+  }
+
+  const dynamicPost = profilePost?.map((post) => {
+    return (
+      <Posts
+        key={post.id}
+        id={post.id}
+        votes={post.votes}
+        posts={post.post}
+        postUser={post.user.username}
+        // postData={posts}
+        postUserId={post.user.id}
+        // userData={userData}
+        postThumbnailData={post.user.thumbnail}
+        commentsCount={post.comments.length}
+        postDistrict={post.district?.name}
+        postDistrictId={post.district?.id}
+      />
+    );
+  });
 
   const data = `data:image/jpeg;base64,${userThumbnail}`;
 
@@ -119,7 +164,7 @@ const ProfilePosts = ({ user, handleLogout, userThumbnail }) => {
           ))}
         </List>
       </Drawer>
-      <Posts />
+      {dynamicPost}
     </>
   );
 };

@@ -52,12 +52,12 @@ const Profile = ({ user, handleLogout, fetchPost, userThumbnail }) => {
 
   ///////// Post List By User //////
   function handlePostsByUserClick() {
-    history.push(`/profile/${id}/posts`);
+    history.push(`/profile/posts/${id}`);
     console.log("Post Clicked");
   }
   ///////// Comment List By User //////
   function handleCommentsByUserClick() {
-    history.push(`/profile/${id}/comments`);
+    history.push(`/profile/comments/${id}`);
     console.log("Comment Clicked");
   }
 
