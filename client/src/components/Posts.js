@@ -44,7 +44,7 @@ function Posts({
   }));
 
   const deleteButton =
-    postUserId === user.id ? (
+    postUserId === user?.id ? (
       <HighlightOffRoundedIcon
         style={{ color: "#D9381E", cursor: "pointer" }}
         onClick={handleDeleteClick}

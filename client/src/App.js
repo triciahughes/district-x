@@ -32,6 +32,7 @@ function App() {
   useEffect(() => {
     userFetch();
     fetchPost();
+    // fetchProfilePost();
     fetchDistricts();
   }, [userFetch]);
 
@@ -191,6 +192,7 @@ function App() {
           user={user.username}
           handleLogout={handleLogout}
           userThumbnail={user.thumbnail}
+          // fetchProfilePost={fetchProfilePost}
         />
       </Route>
       <Route path="/profile/:id/comments">
