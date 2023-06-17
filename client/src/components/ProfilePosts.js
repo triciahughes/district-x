@@ -75,7 +75,7 @@ const ProfilePosts = ({
   }
   ///////// Comment List By User //////
   function handleCommentsByUserClick() {
-    history.push(`/profile/${id}/comments`);
+    history.push(`/profile/comments/${id}`);
     console.log("Comment Clicked");
   }
 
