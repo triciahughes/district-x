@@ -339,6 +339,22 @@ class ProfilePostsById(Resource):
             return response
 
         return {'error': '404 Not Found'}, 404
+    
+class ProfileCommentsById(Resource):
+
+    def get(self, id):
+
+        comments = Comment.query.filter(Comment.user_id == id).all()
+
+        if comments:
+                
+            response = make_response(
+                jsonify([comment.to_dict() for comment in comments]),
+                200
+            )
+            return response
+        
+        return {'error': '404 Not Found'}, 404
 
 
 
@@ -356,6 +372,7 @@ api.add_resource(PostById, '/posts/<int:id>')
 api.add_resource(ProfilePostsById, '/profileposts/<int:id>')
 api.add_resource(CreatePost, '/createpost')
 api.add_resource(CommentById, '/comment/<int:id>')
+api.add_resource(ProfileCommentsById, '/profilecomments/<int:id>')
 api.add_resource(CreateComment, '/createcomment')
 api.add_resource(UserById, '/user/<int:id>')
 api.add_resource(GetDistrict, '/districts')
