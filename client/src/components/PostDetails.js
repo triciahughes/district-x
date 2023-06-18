@@ -71,7 +71,6 @@ const PostDetails = ({
   }
 
   //////////// upvotes && downvotes ////////////
-  console.log(userId);
 
   function handleUpvoteClick() {
     const newUpvotes = (votes += 1);
@@ -146,6 +145,10 @@ const PostDetails = ({
         commentUserId={data.user.id}
         commentThumbnailData={data.user.thumbnail}
         userId={userId}
+        userCoins={userCoins}
+        addCoins={addCoins}
+        subtractCoins={subtractCoins}
+        fetchUserPosts={fetchUserPosts}
       />
     );
   });

@@ -24,6 +24,7 @@ function App() {
   const [post, setPost] = useState([]);
   const [userId, setUserId] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
+  const [userComments, setUserComments] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [districtsName, setDistrictsName] = useState([]);
   const [showCreatePost, setShowCreatePost] = useState(false);
@@ -46,6 +47,7 @@ function App() {
           console.log(userData);
           setUserId(userData.id);
           fetchUserPosts(userData.id);
+          fetchUserComments(userData.id);
           // history.push("/home");
         });
       } else {
@@ -70,6 +72,16 @@ function App() {
       if (res.ok) {
         res.json().then((userPostData) => {
           setUserPosts(userPostData);
+        });
+      }
+    });
+  }
+
+  function fetchUserComments(userId) {
+    fetch(`/profilecomments/${userId}`).then((res) => {
+      if (res.ok) {
+        res.json().then((userCommentData) => {
+          setUserComments(userCommentData);
         });
       }
     });
@@ -152,9 +164,13 @@ function App() {
     .map((post) => post.votes)
     .reduce((a, b) => a + b, 0);
 
+  let userCommentsCoins = userComments
+    .map((comments) => comments.votes)
+    .reduce((a, b) => a + b, 0);
+
   const addCoins = () => (userCoins += 1);
   const subtractCoins = () => (userCoins -= 1);
-  // console.log(userCoins);
+  console.log(userCommentsCoins);
 
   return (
     <>
