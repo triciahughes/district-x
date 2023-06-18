@@ -23,6 +23,7 @@ import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 function Posts({
   user,
   fetchPost,
+  fetchUserPosts,
   id,
   votes,
   posts,
@@ -32,6 +33,8 @@ function Posts({
   commentsCount,
   postDistrict,
   postDistrictId,
+  addCoins,
+  subtractCoins,
 }) {
   const history = useHistory();
   ///////////// STYLES //////////////
@@ -72,6 +75,9 @@ function Posts({
   function handleUpvoteClick() {
     const newUpvotes = (votes += 1);
 
+    addCoins();
+    fetchUserPosts(user.id);
+
     fetch(`/posts/${id}`, {
       method: "PATCH",
       headers: {
@@ -87,6 +93,8 @@ function Posts({
 
   function handleDownvoteClick() {
     const newDownvotes = (votes -= 1);
+    subtractCoins();
+    fetchUserPosts(user.id);
 
     fetch(`/posts/${id}`, {
       method: "PATCH",

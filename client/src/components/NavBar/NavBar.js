@@ -21,7 +21,13 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
 const drawerWidth = 240;
 
-function NavBar({ handleLogout, userData, handleCreatePostClick, districts }) {
+function NavBar({
+  handleLogout,
+  userData,
+  handleCreatePostClick,
+  districts,
+  userCoins,
+}) {
   const history = useHistory();
 
   const districtList = districts.map((district) => {
@@ -88,6 +94,7 @@ function NavBar({ handleLogout, userData, handleCreatePostClick, districts }) {
               </ListItemAvatar>
               <ListItemText primary={text} />
             </ListItemButton>
+            <ListItemText primary={`${userCoins} coins`} />
           </ListItem>
         ))}
       </List>
