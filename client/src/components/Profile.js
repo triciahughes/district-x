@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import ProfilePosts from "./ProfilePosts";
 import {
   Drawer,
   Toolbar,
@@ -54,6 +55,7 @@ const Profile = ({ user, handleLogout, fetchPost, userThumbnail }) => {
   function handlePostsByUserClick() {
     history.push(`/profile/posts/${id}`);
     console.log("Post Clicked");
+    // <ProfilePosts userPostDataView={userPostDataView} />;
   }
   ///////// Comment List By User //////
   function handleCommentsByUserClick() {
@@ -142,6 +144,7 @@ const Profile = ({ user, handleLogout, fetchPost, userThumbnail }) => {
           ))}
         </List>
       </Drawer>
+      {/* <ProfilePosts userPostDataView={userPostDataView} />; */}
     </>
   );
 };

@@ -66,11 +66,6 @@ const ProfileComments = ({ user, handleLogout, userThumbnail }) => {
     history.push(`/profile/posts/${id}`);
     console.log("Post Clicked");
   }
-  ///////// Comment List By User //////
-  function handleCommentsByUserClick() {
-    // history.push(`/profile/${id}/comments`);
-    console.log("Comment Clicked");
-  }
 
   function handleHomeClick() {
     history.push("/home");
@@ -132,8 +127,8 @@ const ProfileComments = ({ user, handleLogout, userThumbnail }) => {
             </ListItem>
           ))}
         </List>
-        <List onClick={handlePostsByUserClick}>
-          {["Posts"].map((text) => (
+        <List style={{ color: "#949391" }}>
+          {["Comments"].map((text) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -144,8 +139,8 @@ const ProfileComments = ({ user, handleLogout, userThumbnail }) => {
             </ListItem>
           ))}
         </List>
-        <List onClick={handleCommentsByUserClick}>
-          {["Comments"].map((text) => (
+        <List onClick={handlePostsByUserClick}>
+          {["Posts"].map((text) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
