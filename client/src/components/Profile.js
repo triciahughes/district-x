@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import ProfilePosts from "./ProfilePosts";
+import React, { useEffect } from "react";
 import {
   Drawer,
   Toolbar,

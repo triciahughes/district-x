@@ -2,7 +2,7 @@ import NavBar from "./NavBar/NavBar";
 import Posts from "./Posts";
 import CreatePost from "./CreatePost";
 import { Grid } from "@mui/material";
-import { Box, Container, CssBaseline, Typography } from "@mui/material";
+import { Box, Container, CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function Home({
@@ -17,7 +17,6 @@ function Home({
   filterButton,
   districts,
   districtsName,
-  // sortedPosts,
 }) {
   ///////////// STYLES //////////////
   const theme = createTheme({

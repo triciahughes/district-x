@@ -6,7 +6,6 @@ import {
   CssBaseline,
   Grid,
   TextField,
-  Typography,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useFormik } from "formik";
@@ -26,9 +25,6 @@ const CreateComment = ({ id, userId, fetchPostDetails }) => {
     },
   });
 
-  // console.log(id);
-  // console.log(userId);
-
   const validationSchema = yup.object({
     comment: yup.string("Enter comment").required("Comment is required"),
   });
@@ -38,7 +34,6 @@ const CreateComment = ({ id, userId, fetchPostDetails }) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
-      // setSubmitting(true);
       const submission = {
         ...values,
         user_id: userId,
@@ -83,7 +78,6 @@ const CreateComment = ({ id, userId, fetchPostDetails }) => {
             sx={{ mt: 1 }}
             onSubmit={(e) => {
               e.preventDefault();
-              // console.log("submitted");
               formik.handleSubmit();
             }}
           >
