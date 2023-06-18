@@ -86,7 +86,7 @@ function Posts({
       body: JSON.stringify({ votes: newUpvotes }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(fetchPost);
+        res.json().then(fetchPost, fetchUserPosts(user.id));
       }
     });
   }
@@ -94,7 +94,7 @@ function Posts({
   function handleDownvoteClick() {
     const newDownvotes = (votes -= 1);
     subtractCoins();
-    fetchUserPosts(user.id);
+    // fetchUserPosts();
 
     fetch(`/posts/${id}`, {
       method: "PATCH",
@@ -104,7 +104,7 @@ function Posts({
       body: JSON.stringify({ votes: newDownvotes }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(fetchPost);
+        res.json().then(fetchPost, fetchUserPosts(user.id));
       }
     });
   }
