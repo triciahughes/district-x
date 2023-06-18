@@ -10,6 +10,7 @@ function Home({
   userData,
   posts,
   fetchPost,
+  fetchUserPosts,
   showCreatePost,
   setShowCreatePost,
   handleCreatePostClick,
@@ -17,6 +18,9 @@ function Home({
   filterButton,
   districts,
   districtsName,
+  userCoins,
+  addCoins,
+  subtractCoins,
 }) {
   ///////////// STYLES //////////////
   const theme = createTheme({
@@ -35,6 +39,7 @@ function Home({
       <Posts
         user={user}
         fetchPost={fetchPost}
+        fetchUserPosts={fetchUserPosts}
         key={post.id}
         id={post.id}
         votes={post.votes}
@@ -47,6 +52,9 @@ function Home({
         commentsCount={post.comments.length}
         postDistrict={post.district?.name}
         postDistrictId={post.district?.id}
+        userCoins={userCoins}
+        addCoins={addCoins}
+        subtractCoins={subtractCoins}
       />
     );
   });
@@ -57,6 +65,7 @@ function Home({
         userData={userData}
         handleCreatePostClick={handleCreatePostClick}
         districts={districts}
+        userCoins={userCoins}
       />
       {showCreatePost ? (
         <CreatePost

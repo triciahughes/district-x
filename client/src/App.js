@@ -20,7 +20,10 @@ import { Button } from "@mui/material";
 
 function App() {
   const [user, setUser] = useState({});
+  // const [userCoins, setUserCoins] = useState([]);
   const [post, setPost] = useState([]);
+  const [userId, setUserId] = useState([]);
+  const [userPosts, setUserPosts] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [districtsName, setDistrictsName] = useState([]);
   const [showCreatePost, setShowCreatePost] = useState(false);
@@ -32,7 +35,6 @@ function App() {
   useEffect(() => {
     userFetch();
     fetchPost();
-    // fetchProfilePost();
     fetchDistricts();
   }, [userFetch]);
 
@@ -41,6 +43,9 @@ function App() {
       if (res.ok) {
         res.json().then((userData) => {
           setUser(userData);
+          console.log(userData);
+          setUserId(userData.id);
+          fetchUserPosts(userData.id);
           // history.push("/home");
         });
       } else {
@@ -55,7 +60,16 @@ function App() {
       if (res.ok) {
         res.json().then((postData) => {
           setPost(postData);
-          // setSortedPosts(postData);
+        });
+      }
+    });
+  }
+
+  function fetchUserPosts(userId) {
+    fetch(`profileposts/${userId}`).then((res) => {
+      if (res.ok) {
+        res.json().then((userPostData) => {
+          setUserPosts(userPostData);
         });
       }
     });
@@ -134,6 +148,14 @@ function App() {
 
   const postData = postSortBool ? sortedArray : post;
 
+  let userCoins = userPosts
+    .map((post) => post.votes)
+    .reduce((a, b) => a + b, 0);
+
+  const addCoins = () => (userCoins += 1);
+  const subtractCoins = () => (userCoins -= 1);
+  // console.log(userCoins);
+
   return (
     <>
       <Route path="/signin">
@@ -155,6 +177,7 @@ function App() {
           userData={user}
           setPost={setPost}
           fetchPost={fetchPost}
+          fetchUserPosts={fetchUserPosts}
           showCreatePost={showCreatePost}
           setShowCreatePost={setShowCreatePost}
           handleCreatePostClick={handleCreatePostClick}
@@ -164,6 +187,9 @@ function App() {
           filterButton={filterButton}
           districts={sortedDistricts}
           districtsName={districtsName}
+          userCoins={userCoins}
+          addCoins={addCoins}
+          subtractCoins={subtractCoins}
         />
       </Route>
       <Route path="/createpost">
