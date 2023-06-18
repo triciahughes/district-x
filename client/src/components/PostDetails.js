@@ -104,7 +104,7 @@ const PostDetails = ({
       body: JSON.stringify({ votes: newDownvotes }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(fetchPostDetails());
+        res.json().then(fetchPostDetails(), fetchUserPosts(userId));
       }
     });
   }
