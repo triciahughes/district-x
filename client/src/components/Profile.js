@@ -18,14 +18,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useHistory, useParams } from "react-router-dom";
 import { ViewAccount } from "../unreal/unrealFunctionLibrary";
 const drawerWidth = 240;
-const Profile = ({
-  user,
-  handleLogout,
-  fetchPost,
-  userThumbnail,
-  setUserPostDataView,
-}) => {
-  // const [userPostDataView, setUserPostDataView] = useState(false);
+const Profile = ({ user, handleLogout, fetchPost, userThumbnail }) => {
   const history = useHistory();
   const { id } = useParams();
 
@@ -60,7 +53,6 @@ const Profile = ({
 
   ///////// Post List By User //////
   function handlePostsByUserClick() {
-    setUserPostDataView((current) => !current);
     history.push(`/profile/posts/${id}`);
     console.log("Post Clicked");
     // <ProfilePosts userPostDataView={userPostDataView} />;

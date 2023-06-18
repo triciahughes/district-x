@@ -25,7 +25,6 @@ function App() {
   const [districtsName, setDistrictsName] = useState([]);
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [postSortBool, setPostSortBool] = useState(false);
-  const [userPostDataView, setUserPostDataView] = useState(false);
   const history = useHistory();
 
   const userFetch = useCallback(fetchUser, [history]);
@@ -186,7 +185,6 @@ function App() {
           handleLogout={handleLogout}
           fetchPost={fetchPost}
           userThumbnail={user.thumbnail}
-          setUserPostDataView={setUserPostDataView}
         />
       </Route>
       <Route path="/profile/posts/:id">
@@ -194,7 +192,6 @@ function App() {
           user={user.username}
           handleLogout={handleLogout}
           userThumbnail={user.thumbnail}
-          userPostDataView={userPostDataView}
           // fetchProfilePost={fetchProfilePost}
         />
       </Route>
