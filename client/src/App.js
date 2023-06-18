@@ -195,8 +195,12 @@ function App() {
           // fetchProfilePost={fetchProfilePost}
         />
       </Route>
-      <Route path="/profile/:id/comments">
-        <ProfileComments />
+      <Route path="/profile/comments/:id">
+        <ProfileComments
+          user={user.username}
+          handleLogout={handleLogout}
+          userThumbnail={user.thumbnail}
+        />
       </Route>
       <Route path="/district/:id">
         <DistrictPage

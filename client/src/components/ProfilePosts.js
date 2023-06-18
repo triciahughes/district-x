@@ -19,12 +19,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useHistory, useParams } from "react-router-dom";
 
 const drawerWidth = 240;
-const ProfilePosts = ({
-  user,
-  handleLogout,
-  userThumbnail,
-  // fetchProfilePost,
-}) => {
+const ProfilePosts = ({ user, handleLogout, userThumbnail }) => {
   const [profilePost, setProfilePost] = useState([]);
   const history = useHistory();
   const { id } = useParams();
@@ -75,7 +70,7 @@ const ProfilePosts = ({
   }
   ///////// Comment List By User //////
   function handleCommentsByUserClick() {
-    history.push(`/profile/${id}/comments`);
+    history.push(`/profile/comments/${id}`);
     console.log("Comment Clicked");
   }
 
