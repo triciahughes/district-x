@@ -18,7 +18,6 @@ const CreatePost = ({
   setShowCreatePost,
   fetchPost,
   districtId,
-  districtsName,
   districts,
 }) => {
   ///////////// STYLES //////////////
@@ -122,7 +121,6 @@ const CreatePost = ({
             sx={{ mt: 1 }}
             onSubmit={(e) => {
               e.preventDefault();
-              // console.log("submitted");
               formik.handleSubmit();
             }}
           >
