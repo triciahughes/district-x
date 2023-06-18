@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Posts from "./Posts";
+import Comments from "./Comments";
 // import React from "react";
 import {
   Drawer,
@@ -29,7 +29,7 @@ const ProfileComments = ({ user, handleLogout, userThumbnail }) => {
     fetchProfileComments();
   }, []);
 
-  console.log("hello from profile post the id is: ", id);
+  console.log("hello from profile comments the id is: ", id);
 
   function fetchProfileComments() {
     fetch(`/profilecomments/${id}`).then((res) => {
@@ -42,6 +42,22 @@ const ProfileComments = ({ user, handleLogout, userThumbnail }) => {
       }
     });
   }
+
+  const dynamicComment = profileComments?.map((comment) => {
+    return (
+      <Comments
+        key={comment.id}
+        id={comment.id}
+        comment={comment.comment}
+        username={comment.user}
+        votes={comment.votes}
+        // fetchPostDetails={fetchPostDetails}
+        commentUserId={comment.user.id}
+        commentThumbnailData={comment.user.thumbnail}
+        // userId={userId}
+      />
+    );
+  });
 
   const data = `data:image/jpeg;base64,${userThumbnail}`;
 
@@ -141,6 +157,7 @@ const ProfileComments = ({ user, handleLogout, userThumbnail }) => {
           ))}
         </List>
       </Drawer>
+      {dynamicComment}
     </>
   );
 };

@@ -195,7 +195,7 @@ function App() {
           // fetchProfilePost={fetchProfilePost}
         />
       </Route>
-      <Route path="/profile/:id/comments">
+      <Route path="/profile/comments/:id">
         <ProfileComments
           user={user.username}
           handleLogout={handleLogout}
