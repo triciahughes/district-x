@@ -66,7 +66,7 @@ function App() {
   }
 
   function fetchUserPosts(userId) {
-    fetch(`profileposts/${userId}`).then((res) => {
+    fetch(`/profileposts/${userId}`).then((res) => {
       if (res.ok) {
         res.json().then((userPostData) => {
           setUserPosts(userPostData);
@@ -203,6 +203,10 @@ function App() {
           userThumbnail={user.thumbnail}
           fetchPost={fetchPost}
           postSortBool={postSortBool}
+          addCoins={addCoins}
+          subtractCoins={subtractCoins}
+          fetchUserPosts={fetchUserPosts}
+          userCoins={userCoins}
         />
       </Route>
       <Route path="/profile/:id">

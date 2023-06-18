@@ -38,6 +38,10 @@ const PostDetails = ({
   userId,
   userThumbnail,
   fetchPost,
+  addCoins,
+  subtractCoins,
+  fetchUserPosts,
+  userCoins,
   postSortBool,
 }) => {
   ///////////// STYLES //////////////
@@ -67,9 +71,11 @@ const PostDetails = ({
   }
 
   //////////// upvotes && downvotes ////////////
+  console.log(userId);
 
   function handleUpvoteClick() {
     const newUpvotes = (votes += 1);
+    addCoins();
 
     fetch(`/posts/${id}`, {
       method: "PATCH",
@@ -79,13 +85,16 @@ const PostDetails = ({
       body: JSON.stringify({ votes: newUpvotes }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(fetchPostDetails());
+        res.json().then(fetchPostDetails(), fetchUserPosts(userId));
       }
     });
   }
 
   function handleDownvoteClick() {
     const newDownvotes = (votes -= 1);
+    subtractCoins();
+    console.log("downvote clicked");
+    // fetchUserPosts(userId);
 
     fetch(`/posts/${id}`, {
       method: "PATCH",
@@ -183,6 +192,7 @@ const PostDetails = ({
                 </ListItemAvatar>
                 <ListItemText primary={text} />
               </ListItemButton>
+              <ListItemText primary={`${userCoins} coins`} />
             </ListItem>
           ))}
         </List>
