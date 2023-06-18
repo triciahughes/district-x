@@ -28,8 +28,6 @@ const ProfilePosts = ({ user, handleLogout, userThumbnail }) => {
     fetchProfilePost();
   }, []);
 
-  console.log("hello from profile post the id is: ", id);
-
   function fetchProfilePost() {
     fetch(`/profileposts/${id}`).then((res) => {
       if (res.ok) {
@@ -50,9 +48,7 @@ const ProfilePosts = ({ user, handleLogout, userThumbnail }) => {
         votes={post.votes}
         posts={post.post}
         postUser={post.user.username}
-        // postData={posts}
         postUserId={post.user.id}
-        // userData={userData}
         postThumbnailData={post.user.thumbnail}
         commentsCount={post.comments.length}
         postDistrict={post.district?.name}
@@ -63,11 +59,6 @@ const ProfilePosts = ({ user, handleLogout, userThumbnail }) => {
 
   const data = `data:image/jpeg;base64,${userThumbnail}`;
 
-  ///////// Post List By User //////
-  function handlePostsByUserClick() {
-    // history.push(`/profile/${id}/posts`);
-    console.log("Post Clicked");
-  }
   ///////// Comment List By User //////
   function handleCommentsByUserClick() {
     history.push(`/profile/comments/${id}`);
@@ -94,7 +85,6 @@ const ProfilePosts = ({ user, handleLogout, userThumbnail }) => {
         anchor="left"
       >
         <Toolbar />
-
         <List>
           {[`${user}`].map((text) => (
             <ListItem key={text} disablePadding>
@@ -134,9 +124,10 @@ const ProfilePosts = ({ user, handleLogout, userThumbnail }) => {
             </ListItem>
           ))}
         </List>
-        <List onClick={handlePostsByUserClick}>
+
+        <List>
           {["Posts"].map((text) => (
-            <ListItem key={text} disablePadding>
+            <ListItem style={{ color: "#949391" }} key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
                   <ArrowForwardIcon />

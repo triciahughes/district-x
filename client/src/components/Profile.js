@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import ProfilePosts from "./ProfilePosts";
 import {
   Drawer,
   Toolbar,
@@ -17,7 +18,14 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useHistory, useParams } from "react-router-dom";
 import { ViewAccount } from "../unreal/unrealFunctionLibrary";
 const drawerWidth = 240;
-const Profile = ({ user, handleLogout, fetchPost, userThumbnail }) => {
+const Profile = ({
+  user,
+  handleLogout,
+  fetchPost,
+  userThumbnail,
+  setUserPostDataView,
+}) => {
+  // const [userPostDataView, setUserPostDataView] = useState(false);
   const history = useHistory();
   const { id } = useParams();
 
@@ -52,8 +60,10 @@ const Profile = ({ user, handleLogout, fetchPost, userThumbnail }) => {
 
   ///////// Post List By User //////
   function handlePostsByUserClick() {
+    setUserPostDataView((current) => !current);
     history.push(`/profile/posts/${id}`);
     console.log("Post Clicked");
+    // <ProfilePosts userPostDataView={userPostDataView} />;
   }
   ///////// Comment List By User //////
   function handleCommentsByUserClick() {
@@ -142,6 +152,7 @@ const Profile = ({ user, handleLogout, fetchPost, userThumbnail }) => {
           ))}
         </List>
       </Drawer>
+      {/* <ProfilePosts userPostDataView={userPostDataView} />; */}
     </>
   );
 };
