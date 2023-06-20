@@ -26,7 +26,7 @@ function NavBar({
   userData,
   handleCreatePostClick,
   districts,
-  userCoins,
+  totalCoins,
 }) {
   const history = useHistory();
 
@@ -94,7 +94,7 @@ function NavBar({
               </ListItemAvatar>
               <ListItemText primary={text} />
             </ListItemButton>
-            <ListItemText primary={`${userCoins} coins`} />
+            <ListItemText primary={`${totalCoins} coins`} />
           </ListItem>
         ))}
       </List>

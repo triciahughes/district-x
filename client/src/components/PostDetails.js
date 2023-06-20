@@ -30,6 +30,8 @@ import { Button } from "@mui/material";
 import { Container, CssBaseline } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
+import ProfilePosts from "./ProfilePosts";
+import ProfileComments from "./ProfileComments";
 const drawerWidth = 240;
 
 const PostDetails = ({
@@ -42,7 +44,7 @@ const PostDetails = ({
   subtractCoins,
   fetchUserPosts,
   fetchUserComments,
-  userCoins,
+  totalCoins,
   postSortBool,
 }) => {
   ///////////// STYLES //////////////
@@ -146,7 +148,7 @@ const PostDetails = ({
         commentUserId={data.user.id}
         commentThumbnailData={data.user.thumbnail}
         userId={userId}
-        userCoins={userCoins}
+        totalCoins={totalCoins}
         addCoins={addCoins}
         subtractCoins={subtractCoins}
         fetchUserPosts={fetchUserPosts}
@@ -173,6 +175,8 @@ const PostDetails = ({
 
   return (
     <>
+      <ProfilePosts fetchPostDetails={fetchPostDetails} />
+      <ProfileComments fetchPostDetails={fetchPostDetails} />
       <Drawer
         sx={{
           width: drawerWidth,
@@ -197,7 +201,7 @@ const PostDetails = ({
                 </ListItemAvatar>
                 <ListItemText primary={text} />
               </ListItemButton>
-              <ListItemText primary={`${userCoins} coins`} />
+              <ListItemText primary={`${totalCoins} coins`} />
             </ListItem>
           ))}
         </List>

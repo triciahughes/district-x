@@ -212,7 +212,7 @@ function App() {
           districts={sortedDistricts}
           districtsName={districtsName}
           // userCoins={userCoins}
-          userCoins={totalCoins}
+          totalCoins={totalCoins}
           addCoins={addCoins}
           subtractCoins={subtractCoins}
         />
@@ -233,7 +233,7 @@ function App() {
           fetchUserPosts={fetchUserPosts}
           fetchUserComments={fetchUserComments}
           // userCoins={userCoins}
-          userCoins={totalCoins}
+          totalCoins={totalCoins}
         />
       </Route>
       <Route path="/profile/:id">
@@ -242,21 +242,34 @@ function App() {
           handleLogout={handleLogout}
           fetchPost={fetchPost}
           userThumbnail={user.thumbnail}
+          totalCoins={totalCoins}
         />
       </Route>
       <Route path="/profile/posts/:id">
         <ProfilePosts
-          user={user.username}
+          user={user}
+          sessionUser={user.username}
           handleLogout={handleLogout}
           userThumbnail={user.thumbnail}
+          totalCoins={totalCoins}
+          addCoins={addCoins}
+          subtractCoins={subtractCoins}
+          fetchUserPosts={fetchUserPosts}
+          fetchUserComments={fetchUserComments}
           // fetchProfilePost={fetchProfilePost}
         />
       </Route>
       <Route path="/profile/comments/:id">
         <ProfileComments
-          user={user.username}
+          user={user}
+          sessionUser={user.username}
           handleLogout={handleLogout}
           userThumbnail={user.thumbnail}
+          totalCoins={totalCoins}
+          addCoins={addCoins}
+          subtractCoins={subtractCoins}
+          fetchUserPosts={fetchUserPosts}
+          fetchUserComments={fetchUserComments}
         />
       </Route>
       <Route path="/district/:id">
