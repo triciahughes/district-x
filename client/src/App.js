@@ -24,6 +24,7 @@ function App() {
   const [post, setPost] = useState([]);
   const [userId, setUserId] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
+  const [userComments, setUserComments] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [districtsName, setDistrictsName] = useState([]);
   const [showCreatePost, setShowCreatePost] = useState(false);
@@ -46,6 +47,7 @@ function App() {
           console.log(userData);
           setUserId(userData.id);
           fetchUserPosts(userData.id);
+          fetchUserComments(userData.id);
           // history.push("/home");
         });
       } else {
@@ -66,10 +68,20 @@ function App() {
   }
 
   function fetchUserPosts(userId) {
-    fetch(`profileposts/${userId}`).then((res) => {
+    fetch(`/profileposts/${userId}`).then((res) => {
       if (res.ok) {
         res.json().then((userPostData) => {
           setUserPosts(userPostData);
+        });
+      }
+    });
+  }
+
+  function fetchUserComments(userId) {
+    fetch(`/profilecomments/${userId}`).then((res) => {
+      if (res.ok) {
+        res.json().then((userCommentData) => {
+          setUserComments(userCommentData);
         });
       }
     });
@@ -148,13 +160,25 @@ function App() {
 
   const postData = postSortBool ? sortedArray : post;
 
-  let userCoins = userPosts
-    .map((post) => post.votes)
-    .reduce((a, b) => a + b, 0);
+  ////// Need to figure out how to combine these. Refactoring most likely needed.
+  // let userCoins = userPosts
+  //   .map((post) => post.votes)
+  //   .reduce((a, b) => a + b, 0);
 
-  const addCoins = () => (userCoins += 1);
-  const subtractCoins = () => (userCoins -= 1);
-  // console.log(userCoins);
+  // let userCommentsCoins = userComments
+  //   .map((comments) => comments.votes)
+  //   .reduce((a, b) => a + b, 0);
+
+  let totalCoins = 0;
+
+  userPosts.forEach((post) => (totalCoins += post.votes));
+  userComments.forEach((comment) => (totalCoins += comment.votes));
+
+  // const addCoins = () => (userCoins += 1);
+  // const subtractCoins = () => (userCoins -= 1);
+  const addCoins = () => (totalCoins += 1);
+  const subtractCoins = () => (totalCoins -= 1);
+  console.log(totalCoins);
 
   return (
     <>
@@ -187,7 +211,8 @@ function App() {
           filterButton={filterButton}
           districts={sortedDistricts}
           districtsName={districtsName}
-          userCoins={userCoins}
+          // userCoins={userCoins}
+          totalCoins={totalCoins}
           addCoins={addCoins}
           subtractCoins={subtractCoins}
         />
@@ -203,6 +228,12 @@ function App() {
           userThumbnail={user.thumbnail}
           fetchPost={fetchPost}
           postSortBool={postSortBool}
+          addCoins={addCoins}
+          subtractCoins={subtractCoins}
+          fetchUserPosts={fetchUserPosts}
+          fetchUserComments={fetchUserComments}
+          // userCoins={userCoins}
+          totalCoins={totalCoins}
         />
       </Route>
       <Route path="/profile/:id">
@@ -211,21 +242,34 @@ function App() {
           handleLogout={handleLogout}
           fetchPost={fetchPost}
           userThumbnail={user.thumbnail}
+          totalCoins={totalCoins}
         />
       </Route>
       <Route path="/profile/posts/:id">
         <ProfilePosts
-          user={user.username}
+          user={user}
+          sessionUser={user.username}
           handleLogout={handleLogout}
           userThumbnail={user.thumbnail}
+          totalCoins={totalCoins}
+          addCoins={addCoins}
+          subtractCoins={subtractCoins}
+          fetchUserPosts={fetchUserPosts}
+          fetchUserComments={fetchUserComments}
           // fetchProfilePost={fetchProfilePost}
         />
       </Route>
       <Route path="/profile/comments/:id">
         <ProfileComments
-          user={user.username}
+          user={user}
+          sessionUser={user.username}
           handleLogout={handleLogout}
           userThumbnail={user.thumbnail}
+          totalCoins={totalCoins}
+          addCoins={addCoins}
+          subtractCoins={subtractCoins}
+          fetchUserPosts={fetchUserPosts}
+          fetchUserComments={fetchUserComments}
         />
       </Route>
       <Route path="/district/:id">

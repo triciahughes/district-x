@@ -20,7 +20,18 @@ import { useHistory, useParams } from "react-router-dom";
 
 const drawerWidth = 240;
 
-const ProfileComments = ({ user, handleLogout, userThumbnail }) => {
+const ProfileComments = ({
+  sessionUser,
+  handleLogout,
+  userThumbnail,
+  totalCoins,
+  addCoins,
+  subtractCoins,
+  user,
+  fetchUserPosts,
+  fetchUserComments,
+  fetchPostDetails,
+}) => {
   const [profileComments, setProfileComments] = useState([]);
   const history = useHistory();
   const { id } = useParams();
@@ -46,6 +57,7 @@ const ProfileComments = ({ user, handleLogout, userThumbnail }) => {
   const dynamicComment = profileComments?.map((comment) => {
     return (
       <Comments
+        userId={user.id}
         key={comment.id}
         id={comment.id}
         comment={comment.comment}
@@ -55,6 +67,11 @@ const ProfileComments = ({ user, handleLogout, userThumbnail }) => {
         commentUserId={comment.user.id}
         commentThumbnailData={comment.user.thumbnail}
         // userId={userId}
+        addCoins={addCoins}
+        subtractCoins={subtractCoins}
+        fetchUserPosts={fetchUserPosts}
+        fetchUserComments={fetchUserComments}
+        fetchPostDetails={fetchPostDetails}
       />
     );
   });
@@ -89,7 +106,7 @@ const ProfileComments = ({ user, handleLogout, userThumbnail }) => {
         <Toolbar />
 
         <List>
-          {[`${user}`].map((text) => (
+          {[`${sessionUser}`].map((text) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemAvatar>
@@ -97,6 +114,7 @@ const ProfileComments = ({ user, handleLogout, userThumbnail }) => {
                 </ListItemAvatar>
                 <ListItemText primary={text} />
               </ListItemButton>
+              <ListItemText primary={`${totalCoins} coins`} />
             </ListItem>
           ))}
         </List>

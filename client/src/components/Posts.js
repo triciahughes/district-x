@@ -76,7 +76,6 @@ function Posts({
     const newUpvotes = (votes += 1);
 
     addCoins();
-    fetchUserPosts(user.id);
 
     fetch(`/posts/${id}`, {
       method: "PATCH",

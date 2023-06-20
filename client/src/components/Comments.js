@@ -29,6 +29,11 @@ const Comments = ({
   fetchPostDetails,
   commentUserId,
   userId,
+  addCoins,
+  subtractCoins,
+  fetchUserPosts,
+  fetchUserComments,
+  totalCoins,
 }) => {
   const history = useHistory();
   const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -71,6 +76,8 @@ const Comments = ({
   function handleUpvoteClick() {
     const newUpvotes = (votes += 1);
 
+    addCoins();
+
     fetch(`/comment/${id}`, {
       method: "PATCH",
       headers: {
@@ -79,13 +86,21 @@ const Comments = ({
       body: JSON.stringify({ votes: newUpvotes }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(fetchPostDetails());
+        res
+          .json()
+          .then(
+            fetchPostDetails(),
+            fetchUserPosts(userId),
+            fetchUserComments(userId)
+          );
       }
     });
   }
 
   function handleDownvoteClick() {
     const newDownvotes = (votes -= 1);
+
+    subtractCoins();
 
     fetch(`/comment/${id}`, {
       method: "PATCH",
@@ -95,7 +110,13 @@ const Comments = ({
       body: JSON.stringify({ votes: newDownvotes }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(fetchPostDetails());
+        res
+          .json()
+          .then(
+            fetchPostDetails(),
+            fetchUserPosts(userId),
+            fetchUserComments(userId)
+          );
       }
     });
   }

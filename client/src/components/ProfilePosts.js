@@ -19,7 +19,18 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useHistory, useParams } from "react-router-dom";
 
 const drawerWidth = 240;
-const ProfilePosts = ({ user, handleLogout, userThumbnail }) => {
+const ProfilePosts = ({
+  user,
+  sessionUser,
+  handleLogout,
+  userThumbnail,
+  totalCoins,
+  addCoins,
+  subtractCoins,
+  fetchUserPosts,
+  fetchUserComments,
+  fetchPostDetails,
+}) => {
   const [profilePost, setProfilePost] = useState([]);
   const history = useHistory();
   const { id } = useParams();
@@ -53,6 +64,12 @@ const ProfilePosts = ({ user, handleLogout, userThumbnail }) => {
         commentsCount={post.comments.length}
         postDistrict={post.district?.name}
         postDistrictId={post.district?.id}
+        addCoins={addCoins}
+        subtractCoins={subtractCoins}
+        user={user}
+        fetchUserPosts={fetchUserPosts}
+        fetchUserComments={fetchUserComments}
+        fetchPostDetails={fetchPostDetails}
       />
     );
   });
@@ -86,7 +103,7 @@ const ProfilePosts = ({ user, handleLogout, userThumbnail }) => {
       >
         <Toolbar />
         <List>
-          {[`${user}`].map((text) => (
+          {[`${sessionUser}`].map((text) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemAvatar>
@@ -94,6 +111,7 @@ const ProfilePosts = ({ user, handleLogout, userThumbnail }) => {
                 </ListItemAvatar>
                 <ListItemText primary={text} />
               </ListItemButton>
+              <ListItemText primary={`${totalCoins} coins`} />
             </ListItem>
           ))}
         </List>

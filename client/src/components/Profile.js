@@ -17,7 +17,13 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useHistory, useParams } from "react-router-dom";
 import { ViewAccount } from "../unreal/unrealFunctionLibrary";
 const drawerWidth = 240;
-const Profile = ({ user, handleLogout, fetchPost, userThumbnail }) => {
+const Profile = ({
+  user,
+  handleLogout,
+  fetchPost,
+  userThumbnail,
+  totalCoins,
+}) => {
   const history = useHistory();
   const { id } = useParams();
 
@@ -88,6 +94,7 @@ const Profile = ({ user, handleLogout, fetchPost, userThumbnail }) => {
                 </ListItemAvatar>
                 <ListItemText primary={text} />
               </ListItemButton>
+              <ListItemText primary={`${totalCoins} coins`} />
             </ListItem>
           ))}
         </List>

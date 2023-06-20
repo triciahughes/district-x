@@ -30,6 +30,8 @@ import { Button } from "@mui/material";
 import { Container, CssBaseline } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
+import ProfilePosts from "./ProfilePosts";
+import ProfileComments from "./ProfileComments";
 const drawerWidth = 240;
 
 const PostDetails = ({
@@ -38,6 +40,11 @@ const PostDetails = ({
   userId,
   userThumbnail,
   fetchPost,
+  addCoins,
+  subtractCoins,
+  fetchUserPosts,
+  fetchUserComments,
+  totalCoins,
   postSortBool,
 }) => {
   ///////////// STYLES //////////////
@@ -70,6 +77,7 @@ const PostDetails = ({
 
   function handleUpvoteClick() {
     const newUpvotes = (votes += 1);
+    addCoins();
 
     fetch(`/posts/${id}`, {
       method: "PATCH",
@@ -79,13 +87,16 @@ const PostDetails = ({
       body: JSON.stringify({ votes: newUpvotes }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(fetchPostDetails());
+        res.json().then(fetchPostDetails(), fetchUserPosts(userId));
       }
     });
   }
 
   function handleDownvoteClick() {
     const newDownvotes = (votes -= 1);
+    subtractCoins();
+    console.log("downvote clicked");
+    // fetchUserPosts(userId);
 
     fetch(`/posts/${id}`, {
       method: "PATCH",
@@ -95,7 +106,7 @@ const PostDetails = ({
       body: JSON.stringify({ votes: newDownvotes }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(fetchPostDetails());
+        res.json().then(fetchPostDetails(), fetchUserPosts(userId));
       }
     });
   }
@@ -137,6 +148,11 @@ const PostDetails = ({
         commentUserId={data.user.id}
         commentThumbnailData={data.user.thumbnail}
         userId={userId}
+        totalCoins={totalCoins}
+        addCoins={addCoins}
+        subtractCoins={subtractCoins}
+        fetchUserPosts={fetchUserPosts}
+        fetchUserComments={fetchUserComments}
       />
     );
   });
@@ -159,6 +175,8 @@ const PostDetails = ({
 
   return (
     <>
+      <ProfilePosts fetchPostDetails={fetchPostDetails} />
+      <ProfileComments fetchPostDetails={fetchPostDetails} />
       <Drawer
         sx={{
           width: drawerWidth,
@@ -183,6 +201,7 @@ const PostDetails = ({
                 </ListItemAvatar>
                 <ListItemText primary={text} />
               </ListItemButton>
+              <ListItemText primary={`${totalCoins} coins`} />
             </ListItem>
           ))}
         </List>

@@ -18,7 +18,7 @@ function Home({
   filterButton,
   districts,
   districtsName,
-  userCoins,
+  totalCoins,
   addCoins,
   subtractCoins,
 }) {
@@ -52,7 +52,7 @@ function Home({
         commentsCount={post.comments.length}
         postDistrict={post.district?.name}
         postDistrictId={post.district?.id}
-        userCoins={userCoins}
+        totalCoins={totalCoins}
         addCoins={addCoins}
         subtractCoins={subtractCoins}
       />
@@ -65,7 +65,7 @@ function Home({
         userData={userData}
         handleCreatePostClick={handleCreatePostClick}
         districts={districts}
-        userCoins={userCoins}
+        totalCoins={totalCoins}
       />
       {showCreatePost ? (
         <CreatePost
