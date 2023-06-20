@@ -32,6 +32,7 @@ const Comments = ({
   addCoins,
   subtractCoins,
   fetchUserPosts,
+  fetchUserComments,
   userCoins,
 }) => {
   const history = useHistory();
@@ -85,7 +86,13 @@ const Comments = ({
       body: JSON.stringify({ votes: newUpvotes }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(fetchPostDetails(), fetchUserPosts(userId));
+        res
+          .json()
+          .then(
+            fetchPostDetails(),
+            fetchUserPosts(userId),
+            fetchUserComments(userId)
+          );
       }
     });
   }
@@ -103,7 +110,13 @@ const Comments = ({
       body: JSON.stringify({ votes: newDownvotes }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(fetchPostDetails(), fetchUserPosts(userId));
+        res
+          .json()
+          .then(
+            fetchPostDetails(),
+            fetchUserPosts(userId),
+            fetchUserComments(userId)
+          );
       }
     });
   }

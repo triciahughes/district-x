@@ -160,17 +160,25 @@ function App() {
 
   const postData = postSortBool ? sortedArray : post;
 
-  let userCoins = userPosts
-    .map((post) => post.votes)
-    .reduce((a, b) => a + b, 0);
+  ////// Need to figure out how to combine these. Refactoring most likely needed.
+  // let userCoins = userPosts
+  //   .map((post) => post.votes)
+  //   .reduce((a, b) => a + b, 0);
 
-  let userCommentsCoins = userComments
-    .map((comments) => comments.votes)
-    .reduce((a, b) => a + b, 0);
+  // let userCommentsCoins = userComments
+  //   .map((comments) => comments.votes)
+  //   .reduce((a, b) => a + b, 0);
 
-  const addCoins = () => (userCoins += 1);
-  const subtractCoins = () => (userCoins -= 1);
-  console.log(userCommentsCoins);
+  let totalCoins = 0;
+
+  userPosts.forEach((post) => (totalCoins += post.votes));
+  userComments.forEach((comment) => (totalCoins += comment.votes));
+
+  // const addCoins = () => (userCoins += 1);
+  // const subtractCoins = () => (userCoins -= 1);
+  const addCoins = () => (totalCoins += 1);
+  const subtractCoins = () => (totalCoins -= 1);
+  console.log(totalCoins);
 
   return (
     <>
@@ -203,7 +211,8 @@ function App() {
           filterButton={filterButton}
           districts={sortedDistricts}
           districtsName={districtsName}
-          userCoins={userCoins}
+          // userCoins={userCoins}
+          userCoins={totalCoins}
           addCoins={addCoins}
           subtractCoins={subtractCoins}
         />
@@ -222,7 +231,9 @@ function App() {
           addCoins={addCoins}
           subtractCoins={subtractCoins}
           fetchUserPosts={fetchUserPosts}
-          userCoins={userCoins}
+          fetchUserComments={fetchUserComments}
+          // userCoins={userCoins}
+          userCoins={totalCoins}
         />
       </Route>
       <Route path="/profile/:id">

@@ -41,6 +41,7 @@ const PostDetails = ({
   addCoins,
   subtractCoins,
   fetchUserPosts,
+  fetchUserComments,
   userCoins,
   postSortBool,
 }) => {
@@ -149,6 +150,7 @@ const PostDetails = ({
         addCoins={addCoins}
         subtractCoins={subtractCoins}
         fetchUserPosts={fetchUserPosts}
+        fetchUserComments={fetchUserComments}
       />
     );
   });
