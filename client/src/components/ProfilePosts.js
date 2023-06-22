@@ -68,6 +68,7 @@ const ProfilePosts = ({
         subtractCoins={subtractCoins}
         user={user}
         fetchUserPosts={fetchUserPosts}
+        fetchProfilePost={fetchProfilePost}
         fetchUserComments={fetchUserComments}
         fetchPostDetails={fetchPostDetails}
       />

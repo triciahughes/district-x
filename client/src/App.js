@@ -245,7 +245,7 @@ function App() {
           totalCoins={totalCoins}
         />
       </Route>
-      <Route path="/profile/posts/:id">
+      <Route path="/profile/:id/posts">
         <ProfilePosts
           user={user}
           sessionUser={user.username}

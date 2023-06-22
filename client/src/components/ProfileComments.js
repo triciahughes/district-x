@@ -80,7 +80,7 @@ const ProfileComments = ({
 
   ///////// Post List By User //////
   function handlePostsByUserClick() {
-    history.push(`/profile/posts/${id}`);
+    history.push(`/profile/${id}/posts`);
     console.log("Post Clicked");
   }
 
