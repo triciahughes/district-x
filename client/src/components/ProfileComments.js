@@ -71,6 +71,7 @@ const ProfileComments = ({
         subtractCoins={subtractCoins}
         fetchUserPosts={fetchUserPosts}
         fetchUserComments={fetchUserComments}
+        fetchProfileComments={fetchProfileComments}
         fetchPostDetails={fetchPostDetails}
       />
     );
@@ -80,7 +81,7 @@ const ProfileComments = ({
 
   ///////// Post List By User //////
   function handlePostsByUserClick() {
-    history.push(`/profile/posts/${id}`);
+    history.push(`/profile/${id}/posts`);
     console.log("Post Clicked");
   }
 

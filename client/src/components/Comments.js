@@ -33,6 +33,7 @@ const Comments = ({
   subtractCoins,
   fetchUserPosts,
   fetchUserComments,
+  fetchProfileComments,
   totalCoins,
 }) => {
   const history = useHistory();
@@ -89,9 +90,10 @@ const Comments = ({
         res
           .json()
           .then(
-            fetchPostDetails(),
+            fetchPostDetails,
             fetchUserPosts(userId),
-            fetchUserComments(userId)
+            fetchUserComments(userId),
+            fetchProfileComments(userId)
           );
       }
     });
@@ -113,9 +115,10 @@ const Comments = ({
         res
           .json()
           .then(
-            fetchPostDetails(),
+            fetchPostDetails,
             fetchUserPosts(userId),
-            fetchUserComments(userId)
+            fetchUserComments(userId),
+            fetchProfileComments(userId)
           );
       }
     });

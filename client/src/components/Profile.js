@@ -14,8 +14,9 @@ import {
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useHistory, useParams } from "react-router-dom";
+import { Route, useHistory, useParams } from "react-router-dom";
 import { ViewAccount } from "../unreal/unrealFunctionLibrary";
+import ProfilePosts from "./ProfilePosts";
 const drawerWidth = 240;
 const Profile = ({
   user,
@@ -58,13 +59,15 @@ const Profile = ({
 
   ///////// Post List By User //////
   function handlePostsByUserClick() {
-    history.push(`/profile/posts/${id}`);
+    history.push(`/profile/${id}/posts`);
+    // history.push(<Route path="/profile/:id" component={ProfilePosts} />);
     console.log("Post Clicked");
     // <ProfilePosts userPostDataView={userPostDataView} />;
   }
   ///////// Comment List By User //////
   function handleCommentsByUserClick() {
-    history.push(`/profile/comments/${id}`);
+    // history.push(`/profile/comments/${id}`);
+    history.push(`/profile/${id}/comments`);
     console.log("Comment Clicked");
   }
 

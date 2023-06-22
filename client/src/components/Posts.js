@@ -24,6 +24,7 @@ function Posts({
   user,
   fetchPost,
   fetchUserPosts,
+  fetchProfilePost,
   id,
   votes,
   posts,
@@ -75,6 +76,8 @@ function Posts({
   function handleUpvoteClick() {
     const newUpvotes = (votes += 1);
 
+    console.log("upvote clicked");
+
     addCoins();
 
     fetch(`/posts/${id}`, {
@@ -85,13 +88,17 @@ function Posts({
       body: JSON.stringify({ votes: newUpvotes }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(fetchPost, fetchUserPosts(user.id));
+        res
+          .json()
+          .then(fetchPost, fetchProfilePost(user.id), fetchUserPosts(user.id));
       }
     });
   }
 
   function handleDownvoteClick() {
     const newDownvotes = (votes -= 1);
+
+    console.log("downvote clicked");
     subtractCoins();
     // fetchUserPosts();
 
@@ -103,7 +110,9 @@ function Posts({
       body: JSON.stringify({ votes: newDownvotes }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(fetchPost, fetchUserPosts(user.id));
+        res
+          .json()
+          .then(fetchPost, fetchProfilePost(user.id), fetchUserPosts(user.id));
       }
     });
   }
