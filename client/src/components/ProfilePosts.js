@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Posts from "./Posts";
+import Home from "./Home";
 // import React from "react";
 import {
   Drawer,
@@ -16,7 +17,7 @@ import {
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Route } from "react-router-dom";
 
 const drawerWidth = 240;
 const ProfilePosts = ({
@@ -79,7 +80,7 @@ const ProfilePosts = ({
 
   ///////// Comment List By User //////
   function handleCommentsByUserClick() {
-    history.push(`/profile/comments/${id}`);
+    history.push(`/profile/${id}/comments`);
     console.log("Comment Clicked");
   }
 
@@ -89,7 +90,9 @@ const ProfilePosts = ({
 
   return (
     <>
-      {" "}
+      <Route path="/home">
+        <Home fetchProfilePost={fetchProfilePost} />
+      </Route>{" "}
       <Drawer
         sx={{
           width: drawerWidth,

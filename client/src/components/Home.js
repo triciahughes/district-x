@@ -11,6 +11,7 @@ function Home({
   posts,
   fetchPost,
   fetchUserPosts,
+  fetchProfilePost,
   showCreatePost,
   setShowCreatePost,
   handleCreatePostClick,
@@ -40,6 +41,7 @@ function Home({
         user={user}
         fetchPost={fetchPost}
         fetchUserPosts={fetchUserPosts}
+        fetchProfilePost={fetchProfilePost}
         key={post.id}
         id={post.id}
         votes={post.votes}

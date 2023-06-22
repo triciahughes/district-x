@@ -71,6 +71,7 @@ const ProfileComments = ({
         subtractCoins={subtractCoins}
         fetchUserPosts={fetchUserPosts}
         fetchUserComments={fetchUserComments}
+        fetchProfileComments={fetchProfileComments}
         fetchPostDetails={fetchPostDetails}
       />
     );

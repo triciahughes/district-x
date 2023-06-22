@@ -67,7 +67,7 @@ const Profile = ({
   ///////// Comment List By User //////
   function handleCommentsByUserClick() {
     // history.push(`/profile/comments/${id}`);
-    history.push(`/profile/comments/${id}`);
+    history.push(`/profile/${id}/comments`);
     console.log("Comment Clicked");
   }
 

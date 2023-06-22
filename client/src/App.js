@@ -57,6 +57,18 @@ function App() {
     });
   }
 
+  function handleLogout() {
+    fetch("/logout", {
+      method: "DELETE",
+    }).then(() => {
+      setUser([]);
+
+      fetchUser();
+      history.push("/signin");
+    });
+  }
+
+  /////////// Post Fetching  & Functinality ////////////
   function fetchPost() {
     fetch("/posts").then((res) => {
       if (res.ok) {
@@ -87,6 +99,11 @@ function App() {
     });
   }
 
+  function handleCreatePostClick() {
+    setShowCreatePost(!showCreatePost);
+  }
+
+  //////////// District Sorting & Rendering Functionality ////////////
   function fetchDistricts() {
     fetch("/districts").then((res) => {
       if (res.ok) {
@@ -98,27 +115,6 @@ function App() {
       }
     });
   }
-
-  function handleLogout() {
-    fetch("/logout", {
-      method: "DELETE",
-    }).then(() => {
-      setUser([]);
-
-      fetchUser();
-      history.push("/signin");
-    });
-  }
-
-  function handleCreatePostClick() {
-    setShowCreatePost(!showCreatePost);
-  }
-
-  function handleSortPostsClick() {
-    setPostSortBool((current) => !current);
-    console.log(postSortBool);
-  }
-
   // The 'localeCompare()' method is used to compare the names of the districts and ensure that the sorting is done alphabetically.
   // The function returns a negative number if 'a' should come before 'b', a positive number if 'a' should come after 'b', and zero if they are equal.
   // This ensures that the districts are sorted in ascending order based on their names.
@@ -144,6 +140,12 @@ function App() {
     return district;
   });
 
+  ////////////// Post Sorting Functionality //////////////
+
+  function handleSortPostsClick() {
+    setPostSortBool((current) => !current);
+    console.log(postSortBool);
+  }
   const filterButton = postSortBool ? (
     <Button onClick={handleSortPostsClick} style={{ color: "#ff9100" }}>
       <Typography style={{ color: "#ff9100" }}>Top</Typography>
@@ -160,7 +162,15 @@ function App() {
 
   const postData = postSortBool ? sortedArray : post;
 
-  ////// Need to figure out how to combine these. Refactoring most likely needed.
+  ///////// User Coins Functionality //////////
+  let totalCoins = 0;
+
+  userPosts.forEach((post) => (totalCoins += post.votes));
+  userComments.forEach((comment) => (totalCoins += comment.votes));
+
+  const addCoins = () => (totalCoins += 1);
+  const subtractCoins = () => (totalCoins -= 1);
+  //* OLD CODE FOR USER COINS FUNCTIONALITY *//
   // let userCoins = userPosts
   //   .map((post) => post.votes)
   //   .reduce((a, b) => a + b, 0);
@@ -168,17 +178,8 @@ function App() {
   // let userCommentsCoins = userComments
   //   .map((comments) => comments.votes)
   //   .reduce((a, b) => a + b, 0);
-
-  let totalCoins = 0;
-
-  userPosts.forEach((post) => (totalCoins += post.votes));
-  userComments.forEach((comment) => (totalCoins += comment.votes));
-
   // const addCoins = () => (userCoins += 1);
   // const subtractCoins = () => (userCoins -= 1);
-  const addCoins = () => (totalCoins += 1);
-  const subtractCoins = () => (totalCoins -= 1);
-  console.log(totalCoins);
 
   return (
     <>
@@ -259,7 +260,7 @@ function App() {
           // fetchProfilePost={fetchProfilePost}
         />
       </Route>
-      <Route path="/profile/comments/:id">
+      <Route path="/profile/:id/comments">
         <ProfileComments
           user={user}
           sessionUser={user.username}
