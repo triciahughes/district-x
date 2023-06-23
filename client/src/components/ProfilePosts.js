@@ -31,26 +31,28 @@ const ProfilePosts = ({
   fetchUserPosts,
   fetchUserComments,
   fetchPostDetails,
+  fetchProfilePost,
+  profilePost,
 }) => {
-  const [profilePost, setProfilePost] = useState([]);
+  // const [profilePost, setProfilePost] = useState([]);
   const history = useHistory();
   const { id } = useParams();
 
   useEffect(() => {
-    fetchProfilePost();
+    fetchProfilePost(id);
   }, []);
 
-  function fetchProfilePost() {
-    fetch(`/profileposts/${id}`).then((res) => {
-      if (res.ok) {
-        res.json().then((profilePostData) => {
-          console.log(profilePostData);
-          setProfilePost(profilePostData);
-          console.log("hello from profile post");
-        });
-      }
-    });
-  }
+  // function fetchProfilePost() {
+  //   fetch(`/profileposts/${id}`).then((res) => {
+  //     if (res.ok) {
+  //       res.json().then((profilePostData) => {
+  //         console.log(profilePostData);
+  //         setProfilePost(profilePostData);
+  //         console.log("hello from profile post");
+  //       });
+  //     }
+  //   });
+  // }
 
   const dynamicPost = profilePost?.map((post) => {
     return (
