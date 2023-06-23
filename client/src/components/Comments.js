@@ -92,8 +92,12 @@ const Comments = ({
             fetchPostDetails,
             fetchUserPosts(userId),
             fetchUserComments(userId),
-            fetchProfileComments(userId)
+            fetchProfileComments
           );
+      } else {
+        console.error(
+          `Error upvoting comment with id ${id}: ${res.status} ${res.statusText}`
+        );
       }
     });
   }
@@ -117,7 +121,7 @@ const Comments = ({
             fetchPostDetails,
             fetchUserPosts(userId),
             fetchUserComments(userId),
-            fetchProfileComments(userId)
+            fetchProfileComments
           );
       }
     });
