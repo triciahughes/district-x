@@ -86,7 +86,13 @@ const PostDetails = ({
       body: JSON.stringify({ votes: newUpvotes }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(fetchPostDetails(), fetchUserPosts(userId));
+        res
+          .json()
+          .then(
+            fetchPostDetails(),
+            fetchUserPosts(userId),
+            fetchProfilePost(userId)
+          );
       }
     });
   }
@@ -105,7 +111,13 @@ const PostDetails = ({
       body: JSON.stringify({ votes: newDownvotes }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(fetchPostDetails(), fetchUserPosts(userId));
+        res
+          .json()
+          .then(
+            fetchPostDetails(),
+            fetchUserPosts(userId),
+            fetchProfilePost(userId)
+          );
       }
     });
   }
