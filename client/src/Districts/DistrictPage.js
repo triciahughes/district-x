@@ -85,7 +85,6 @@ const DistrictPage = ({
         postUser={post.user.username}
         postData={post}
         postUserId={post.user.id}
-        //   userData={userData}
         postThumbnailData={post.user.thumbnail}
         commentsCount={post.comments.length}
         districtName={districtName}

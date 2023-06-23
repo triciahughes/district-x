@@ -20,7 +20,6 @@ import { Button } from "@mui/material";
 
 function App() {
   const [user, setUser] = useState({});
-  // const [userCoins, setUserCoins] = useState([]);
   const [post, setPost] = useState([]);
   const [profilePost, setProfilePost] = useState([]);
   const [userId, setUserId] = useState([]);
@@ -37,7 +36,6 @@ function App() {
   useEffect(() => {
     userFetch();
     fetchPost();
-    // fetchProfilePost();
     fetchDistricts();
   }, [userFetch]);
 
@@ -46,11 +44,9 @@ function App() {
       if (res.ok) {
         res.json().then((userData) => {
           setUser(userData);
-          console.log(userData);
           setUserId(userData.id);
           fetchUserPosts(userData.id);
           fetchUserComments(userData.id);
-          // history.push("/home");
         });
       } else {
         setUser([]);
@@ -227,7 +223,6 @@ function App() {
           filterButton={filterButton}
           districts={sortedDistricts}
           districtsName={districtsName}
-          // userCoins={userCoins}
           totalCoins={totalCoins}
           addCoins={addCoins}
           subtractCoins={subtractCoins}
@@ -248,7 +243,6 @@ function App() {
           subtractCoins={subtractCoins}
           fetchUserPosts={fetchUserPosts}
           fetchUserComments={fetchUserComments}
-          // userCoins={userCoins}
           totalCoins={totalCoins}
         />
       </Route>

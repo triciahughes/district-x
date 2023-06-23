@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Comments from "./Comments";
-// import React from "react";
 import {
   Drawer,
   Toolbar,
@@ -40,8 +39,6 @@ const ProfileComments = ({
     fetchProfileComments();
   }, []);
 
-  console.log("hello from profile comments the id is: ", id);
-
   function fetchProfileComments() {
     fetch(`/profilecomments/${id}`).then((res) => {
       if (res.ok) {
@@ -63,10 +60,8 @@ const ProfileComments = ({
         comment={comment.comment}
         username={comment.user}
         votes={comment.votes}
-        // fetchPostDetails={fetchPostDetails}
         commentUserId={comment.user.id}
         commentThumbnailData={comment.user.thumbnail}
-        // userId={userId}
         addCoins={addCoins}
         subtractCoins={subtractCoins}
         fetchUserPosts={fetchUserPosts}

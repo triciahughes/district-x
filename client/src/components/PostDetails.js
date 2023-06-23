@@ -25,8 +25,6 @@ import {
   ArrowDownward as ArrowDownwardIcon,
   ArrowUpward as ArrowUpwardIcon,
 } from "@mui/icons-material";
-import SortIcon from "@material-ui/icons/Sort";
-import { Button } from "@mui/material";
 import { Container, CssBaseline } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
