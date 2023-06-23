@@ -22,6 +22,7 @@ function App() {
   const [user, setUser] = useState({});
   // const [userCoins, setUserCoins] = useState([]);
   const [post, setPost] = useState([]);
+  const [profilePost, setProfilePost] = useState([]);
   const [userId, setUserId] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
   const [userComments, setUserComments] = useState([]);
@@ -36,6 +37,7 @@ function App() {
   useEffect(() => {
     userFetch();
     fetchPost();
+    // fetchProfilePost();
     fetchDistricts();
   }, [userFetch]);
 
@@ -94,6 +96,18 @@ function App() {
       if (res.ok) {
         res.json().then((userCommentData) => {
           setUserComments(userCommentData);
+        });
+      }
+    });
+  }
+
+  function fetchProfilePost(id) {
+    fetch(`/profileposts/${id}`).then((res) => {
+      if (res.ok) {
+        res.json().then((profilePostData) => {
+          console.log(profilePostData);
+          setProfilePost(profilePostData);
+          console.log("hello from profile post");
         });
       }
     });
@@ -203,6 +217,7 @@ function App() {
           setPost={setPost}
           fetchPost={fetchPost}
           fetchUserPosts={fetchUserPosts}
+          fetchProfilePost={fetchProfilePost}
           showCreatePost={showCreatePost}
           setShowCreatePost={setShowCreatePost}
           handleCreatePostClick={handleCreatePostClick}
@@ -257,7 +272,8 @@ function App() {
           subtractCoins={subtractCoins}
           fetchUserPosts={fetchUserPosts}
           fetchUserComments={fetchUserComments}
-          // fetchProfilePost={fetchProfilePost}
+          fetchProfilePost={fetchProfilePost}
+          profilePost={profilePost}
         />
       </Route>
       <Route path="/profile/:id/comments">
