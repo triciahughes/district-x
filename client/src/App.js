@@ -243,6 +243,7 @@ function App() {
           subtractCoins={subtractCoins}
           fetchUserPosts={fetchUserPosts}
           fetchUserComments={fetchUserComments}
+          fetchProfilePost={fetchProfilePost}
           totalCoins={totalCoins}
         />
       </Route>

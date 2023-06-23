@@ -1,7 +1,7 @@
 import Comments from "./Comments";
 import CreateComment from "./CreateComment";
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Route } from "react-router-dom";
 import {
   Drawer,
   Toolbar,
@@ -38,6 +38,7 @@ const PostDetails = ({
   userId,
   userThumbnail,
   fetchPost,
+  fetchProfilePost,
   addCoins,
   subtractCoins,
   fetchUserPosts,
@@ -143,6 +144,7 @@ const PostDetails = ({
         username={data.user}
         votes={data.votes}
         fetchPostDetails={fetchPostDetails}
+        fetchProfilePost={fetchProfilePost}
         commentUserId={data.user.id}
         commentThumbnailData={data.user.thumbnail}
         userId={userId}
@@ -173,8 +175,18 @@ const PostDetails = ({
 
   return (
     <>
-      <ProfilePosts fetchPostDetails={fetchPostDetails} />
-      <ProfileComments fetchPostDetails={fetchPostDetails} />
+      <Route path="/profile/:id/posts">
+        <ProfilePosts
+          fetchPostDetails={fetchPostDetails}
+          fetchProfilePost={fetchProfilePost}
+        />
+      </Route>
+      <Route path="/profile/:id/comments">
+        <ProfileComments
+          fetchPostDetails={fetchPostDetails}
+          fetchUserComments={fetchUserComments}
+        />
+      </Route>
       <Drawer
         sx={{
           width: drawerWidth,
