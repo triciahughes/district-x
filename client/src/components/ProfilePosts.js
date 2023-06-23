@@ -34,25 +34,12 @@ const ProfilePosts = ({
   fetchProfilePost,
   profilePost,
 }) => {
-  // const [profilePost, setProfilePost] = useState([]);
   const history = useHistory();
   const { id } = useParams();
 
   useEffect(() => {
     fetchProfilePost(id);
   }, []);
-
-  // function fetchProfilePost() {
-  //   fetch(`/profileposts/${id}`).then((res) => {
-  //     if (res.ok) {
-  //       res.json().then((profilePostData) => {
-  //         console.log(profilePostData);
-  //         setProfilePost(profilePostData);
-  //         console.log("hello from profile post");
-  //       });
-  //     }
-  //   });
-  // }
 
   const dynamicPost = profilePost?.map((post) => {
     return (
@@ -128,7 +115,6 @@ const ProfilePosts = ({
               <ListItemButton>
                 <ListItemAvatar>
                   <HomeIcon />
-                  {/* <Avatar alt="Profile Picture" src="" /> */}
                 </ListItemAvatar>
                 <ListItemText primary={text} />
               </ListItemButton>

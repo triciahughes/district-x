@@ -10,7 +10,6 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useFormik } from "formik";
 import * as yup from "yup";
-// import Images from "./Images";
 
 const images = [
   "https://i.imgur.com/tgUZzzW.jpg",

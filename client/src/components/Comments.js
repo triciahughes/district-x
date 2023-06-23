@@ -34,7 +34,6 @@ const Comments = ({
   fetchUserPosts,
   fetchUserComments,
   fetchProfileComments,
-  totalCoins,
 }) => {
   const history = useHistory();
   const StyledPaper = styled(Paper)(({ theme }) => ({
