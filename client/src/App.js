@@ -3,7 +3,8 @@ import { Route } from "react-router-dom";
 import * as React from "react";
 import SignUpForm from "./components/SignUpForm";
 import SignInForm from "./components/SignInForm";
-import CreateAvatar from "./components/CreateAvatar";
+// import CreateAvatar from "./components/CreateAvatar";
+import Customizer from "./pages/Customizer";
 import CreatePost from "./components/CreatePost";
 import PostDetails from "./components/PostDetails";
 import ProfilePosts from "./components/ProfilePosts";
@@ -199,12 +200,14 @@ function App() {
       <Route path="/signup">
         <SignUpForm setUser={setUser} fetchUser={fetchUser} />
       </Route>
-      <Route path="/createavatar">
-        <CreateAvatar
+      <Route path="/customizer">
+        {/* <Route path="/createavatar"> */}
+        {/* <CreateAvatar
           fetchUser={fetchUser}
           user={user.username}
           userId={user.id}
-        />
+        /> */}
+        <Customizer username={user.username} userId={user.id} />
       </Route>
       <Route path="/home">
         <Home
