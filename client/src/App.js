@@ -15,7 +15,7 @@ import AllDistricts from "./Districts/AllDistricts";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { Typography } from "@mui/material";
-import SortIcon from "@material-ui/icons/Sort";
+// import SortIcon from "@material-ui/icons/Sort";
 import { Button } from "@mui/material";
 
 function App() {
@@ -159,12 +159,12 @@ function App() {
   const filterButton = postSortBool ? (
     <Button onClick={handleSortPostsClick} style={{ color: "#ff9100" }}>
       <Typography style={{ color: "#ff9100" }}>Top</Typography>
-      <SortIcon />
+      {/* <SortIcon /> */}
     </Button>
   ) : (
     <Button onClick={handleSortPostsClick}>
       <Typography style={{ color: "#03a9f4" }}>Top</Typography>
-      <SortIcon />
+      {/* <SortIcon /> */}
     </Button>
   );
 

@@ -14,8 +14,8 @@ import {
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
-import ArrowRightIcon from "@material-ui/icons/ArrowRight";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+// import ArrowRightIcon from "@material-ui/icons/ArrowRight";
+// import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 ///////////// IMPORTS //////////////
 
 const drawerWidth = 240;
@@ -38,9 +38,7 @@ function NavBar({
         onClick={handleDistrictClick}
       >
         <ListItemButton>
-          <ListItemIcon>
-            <ArrowRightIcon />
-          </ListItemIcon>
+          <ListItemIcon>{/* <ArrowRightIcon /> */}</ListItemIcon>
           <ListItemText primary={district.name} />
         </ListItemButton>
       </ListItem>
@@ -127,9 +125,7 @@ function NavBar({
         {["All Districts"].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemIcon>
-                <MoreHorizIcon />
-              </ListItemIcon>
+              <ListItemIcon>{/* <MoreHorizIcon /> */}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>

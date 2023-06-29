@@ -12,7 +12,7 @@ import {
   ListItemAvatar,
   Avatar,
 } from "@mui/material";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+// import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useHistory, useParams } from "react-router-dom";
@@ -145,9 +145,7 @@ const ProfileComments = ({
           {["Comments"].map((text) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
-                <ListItemIcon>
-                  <ArrowForwardIcon />
-                </ListItemIcon>
+                <ListItemIcon>{/* <ArrowForwardIcon /> */}</ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
@@ -157,9 +155,7 @@ const ProfileComments = ({
           {["Posts"].map((text) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
-                <ListItemIcon>
-                  <ArrowForwardIcon />
-                </ListItemIcon>
+                <ListItemIcon>{/* <ArrowForwardIcon /> */}</ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>

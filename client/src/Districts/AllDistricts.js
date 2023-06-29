@@ -21,7 +21,7 @@ import {
 import { styled } from "@mui/material/styles";
 import LogoutIcon from "@mui/icons-material/Logout";
 import HomeIcon from "@mui/icons-material/Home";
-import TelegramIcon from "@material-ui/icons/Telegram";
+// import TelegramIcon from "@material-ui/icons/Telegram";
 ///////////// IMPORTS //////////////
 
 const drawerWidth = 240;
@@ -153,9 +153,7 @@ const AllDistricts = ({
           }}
         >
           <Grid container wrap="nowrap" spacing={2}>
-            <Grid item>
-              <TelegramIcon fontSize="large" />
-            </Grid>
+            <Grid item>{/* <TelegramIcon fontSize="large" /> */}</Grid>
             <Grid item xs>
               <Typography fontWeight={600}>
                 <Link
