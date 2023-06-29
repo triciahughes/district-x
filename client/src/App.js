@@ -199,17 +199,10 @@ function App() {
           path="/signin"
           element={<SignInForm setUser={setUser} fetchUser={fetchUser} />}
         />
-        {/* <Routes>
-        <Route path="/signin">
-          <SignInForm setUser={setUser} fetchUser={fetchUser} />
-        </Route> */}
         <Route
           path="/signup"
           element={<SignUpForm setUser={setUser} fetchUser={fetchUser} />}
         />
-        {/* <Route path="/signup">
-          <SignUpForm setUser={setUser} fetchUser={fetchUser} />
-        </Route> */}
         <Route
           path="/customizer"
           element={<Customizer username={user.username} userId={user.id} />}
@@ -247,35 +240,7 @@ function App() {
             />
           }
         />
-
-        {/* <Route path="/home">
-          <Home
-            handleLogout={handleLogout}
-            userData={user}
-            setPost={setPost}
-            fetchPost={fetchPost}
-            fetchUserPosts={fetchUserPosts}
-            fetchProfilePost={fetchProfilePost}
-            showCreatePost={showCreatePost}
-            setShowCreatePost={setShowCreatePost}
-            handleCreatePostClick={handleCreatePostClick}
-            user={user}
-            handleSortPostsClick={handleSortPostsClick}
-            posts={postData}
-            filterButton={filterButton}
-            districts={sortedDistricts}
-            districtsName={districtsName}
-            totalCoins={totalCoins}
-            addCoins={addCoins}
-            subtractCoins={subtractCoins}
-            sessionUserId={user.id}
-          />
-        </Route> */}
         <Route path="/createpost" element={<CreatePost />} />
-
-        {/* <Route path="/createpost">
-          <CreatePost />
-        </Route> */}
         <Route
           path="/post/:id"
           element={
@@ -295,23 +260,6 @@ function App() {
             />
           }
         />
-
-        {/* <Route path="/post/:id">
-          <PostDetails
-            user={user.username}
-            handleLogOutClick={handleLogout}
-            userId={user.id}
-            userThumbnail={user.thumbnail}
-            fetchPost={fetchPost}
-            postSortBool={postSortBool}
-            addCoins={addCoins}
-            subtractCoins={subtractCoins}
-            fetchUserPosts={fetchUserPosts}
-            fetchUserComments={fetchUserComments}
-            fetchProfilePost={fetchProfilePost}
-            totalCoins={totalCoins}
-          />
-        </Route> */}
         <Route
           path="/profile/:id"
           element={
@@ -353,23 +301,6 @@ function App() {
             />
           }
         />
-
-        {/* <Route path="/profile/:id/posts">
-          <ProfilePosts
-            user={user}
-            sessionUser={user.username}
-            sessionUserId={user.id}
-            handleLogout={handleLogout}
-            userThumbnail={user.thumbnail}
-            totalCoins={totalCoins}
-            addCoins={addCoins}
-            subtractCoins={subtractCoins}
-            fetchUserPosts={fetchUserPosts}
-            fetchUserComments={fetchUserComments}
-            fetchProfilePost={fetchProfilePost}
-            profilePost={profilePost}
-          />
-        </Route> */}
         <Route
           path="/profile/:id/comments"
           element={
@@ -387,21 +318,6 @@ function App() {
             />
           }
         />
-
-        {/* <Route path="/profile/:id/comments">
-          <ProfileComments
-            user={user}
-            sessionUser={user.username}
-            sessionUserId={user.id}
-            handleLogout={handleLogout}
-            userThumbnail={user.thumbnail}
-            totalCoins={totalCoins}
-            addCoins={addCoins}
-            subtractCoins={subtractCoins}
-            fetchUserPosts={fetchUserPosts}
-            fetchUserComments={fetchUserComments}
-          />
-        </Route> */}
         <Route
           path="/district/:id"
           element={
@@ -419,22 +335,7 @@ function App() {
             />
           }
         />
-
-        {/* <Route path="/district/:id">
-          <DistrictPage
-            user={user}
-            handleLogout={handleLogout}
-            handleCreatePostClick={handleCreatePostClick}
-            showCreatePost={showCreatePost}
-            setShowCreatePost={setShowCreatePost}
-            post={postData}
-            filterButton={filterButton}
-            districtDetails={districtDetails}
-            fetchPost={fetchPost}
-          />
-        </Route> */}
         <Route path="/districts/all" element={{ districtList }} />
-        {/* <Route path="/districts/all">{districtList}</Route> */}
       </Routes>
     </>
   );
