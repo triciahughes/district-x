@@ -23,6 +23,7 @@ const drawerWidth = 240;
 const ProfilePosts = ({
   user,
   sessionUser,
+  sessionUserId,
   handleLogout,
   userThumbnail,
   totalCoins,
@@ -61,6 +62,7 @@ const ProfilePosts = ({
         fetchProfilePost={fetchProfilePost}
         fetchUserComments={fetchUserComments}
         fetchPostDetails={fetchPostDetails}
+        sessionUserId={sessionUserId}
       />
     );
   });

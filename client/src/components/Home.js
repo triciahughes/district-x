@@ -22,6 +22,7 @@ function Home({
   totalCoins,
   addCoins,
   subtractCoins,
+  sessionUserId,
 }) {
   ///////////// STYLES //////////////
   const theme = createTheme({
@@ -57,6 +58,7 @@ function Home({
         totalCoins={totalCoins}
         addCoins={addCoins}
         subtractCoins={subtractCoins}
+        sessionUserId={sessionUserId}
       />
     );
   });
