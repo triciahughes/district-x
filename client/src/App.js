@@ -226,6 +226,7 @@ function App() {
           totalCoins={totalCoins}
           addCoins={addCoins}
           subtractCoins={subtractCoins}
+          sessionUserId={user.id}
         />
       </Route>
       <Route path="/createpost">
@@ -260,6 +261,7 @@ function App() {
         <ProfilePosts
           user={user}
           sessionUser={user.username}
+          sessionUserId={user.id}
           handleLogout={handleLogout}
           userThumbnail={user.thumbnail}
           totalCoins={totalCoins}
@@ -275,6 +277,7 @@ function App() {
         <ProfileComments
           user={user}
           sessionUser={user.username}
+          sessionUserId={user.id}
           handleLogout={handleLogout}
           userThumbnail={user.thumbnail}
           totalCoins={totalCoins}

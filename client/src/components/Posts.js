@@ -36,6 +36,7 @@ function Posts({
   postDistrictId,
   addCoins,
   subtractCoins,
+  sessionUserId,
 }) {
   const history = useHistory();
   ///////////// STYLES //////////////
@@ -90,7 +91,11 @@ function Posts({
       if (res.ok) {
         res
           .json()
-          .then(fetchPost, fetchProfilePost(user.id), fetchUserPosts(user.id));
+          .then(
+            fetchPost,
+            fetchProfilePost(user.id),
+            fetchUserPosts(sessionUserId)
+          );
       }
     });
   }
@@ -112,7 +117,11 @@ function Posts({
       if (res.ok) {
         res
           .json()
-          .then(fetchPost, fetchProfilePost(user.id), fetchUserPosts(user.id));
+          .then(
+            fetchPost,
+            fetchProfilePost(user.id),
+            fetchUserPosts(sessionUserId)
+          );
       }
     });
   }
