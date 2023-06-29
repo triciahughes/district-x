@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Grid,
   Paper,
@@ -35,7 +35,7 @@ const Comments = ({
   fetchUserComments,
   fetchProfileComments,
 }) => {
-  const history = useHistory();
+  const history = useNavigate();
   const StyledPaper = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
     ...theme.typography.body2,

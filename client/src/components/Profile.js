@@ -14,7 +14,7 @@ import {
 // import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ViewAccount } from "../unreal/unrealFunctionLibrary";
 
 const drawerWidth = 240;
@@ -25,7 +25,7 @@ const Profile = ({
   userThumbnail,
   totalCoins,
 }) => {
-  const history = useHistory();
+  const history = useNavigate();
   const { id } = useParams();
 
   const data = `data:image/jpeg;base64,${userThumbnail}`;

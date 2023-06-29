@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 // import { slideAnimation } from "../../config/motion";
 
 const FinalizeCharacterBtn = () => {
   const [hovered, setHovered] = useState(false);
-  const history = useHistory();
+  //   const history = useNavigate();
+  const navigate = useNavigate();
 
   const handleMouseEnter = () => setHovered(true);
   const handleMouseLeave = () => setHovered(false);
@@ -29,7 +31,8 @@ const FinalizeCharacterBtn = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    history("/home");
+    navigate("/home");
+    // history("/home");
   };
   //ADD SLIDE ANIMATION
   return (

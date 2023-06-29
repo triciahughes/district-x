@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -40,7 +40,7 @@ const validationSchema = yup.object({
 
 function SignInForm({ setUser, fetchUser }) {
   const [index, setIndex] = useState(0);
-  const history = useHistory();
+  const history = useNavigate();
   const [loadedImages, setLoadedImages] = useState([]);
 
   useEffect(() => {

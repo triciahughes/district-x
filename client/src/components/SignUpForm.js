@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -27,7 +27,7 @@ const validationSchema = yup.object({
 });
 
 function SignUpForm({ setUser }) {
-  const history = useHistory();
+  const history = useNavigate();
 
   const formik = useFormik({
     initialValues: {

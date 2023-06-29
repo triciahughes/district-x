@@ -1,5 +1,5 @@
 // import React, { useEffect, useState } from "react";
-import { Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import * as React from "react";
 import SignUpForm from "./components/SignUpForm";
 import SignInForm from "./components/SignInForm";
@@ -13,7 +13,7 @@ import Profile from "./components/Profile";
 import Home from "./components/Home";
 import DistrictPage from "./Districts/DistrictPage";
 import AllDistricts from "./Districts/AllDistricts";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { Typography } from "@mui/material";
 // import SortIcon from "@material-ui/icons/Sort";
@@ -30,7 +30,7 @@ function App() {
   const [districtsName, setDistrictsName] = useState([]);
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [postSortBool, setPostSortBool] = useState(false);
-  const history = useHistory();
+  const history = useNavigate();
 
   const userFetch = useCallback(fetchUser, [history]);
 
@@ -194,116 +194,248 @@ function App() {
 
   return (
     <>
-      <Route path="/signin">
-        <SignInForm setUser={setUser} fetchUser={fetchUser} />
-      </Route>
-      <Route path="/signup">
-        <SignUpForm setUser={setUser} fetchUser={fetchUser} />
-      </Route>
-      <Route path="/customizer">
+      <Routes>
+        <Route
+          path="/signin"
+          element={<SignInForm setUser={setUser} fetchUser={fetchUser} />}
+        />
+        {/* <Routes>
+        <Route path="/signin">
+          <SignInForm setUser={setUser} fetchUser={fetchUser} />
+        </Route> */}
+        <Route
+          path="/signup"
+          element={<SignUpForm setUser={setUser} fetchUser={fetchUser} />}
+        />
+        {/* <Route path="/signup">
+          <SignUpForm setUser={setUser} fetchUser={fetchUser} />
+        </Route> */}
+        <Route
+          path="/customizer"
+          element={<Customizer username={user.username} userId={user.id} />}
+        />
         {/* <Route path="/createavatar"> */}
         {/* <CreateAvatar
           fetchUser={fetchUser}
           user={user.username}
           userId={user.id}
         /> */}
-        <Customizer username={user.username} userId={user.id} />
-      </Route>
-      <Route path="/home">
-        <Home
-          handleLogout={handleLogout}
-          userData={user}
-          setPost={setPost}
-          fetchPost={fetchPost}
-          fetchUserPosts={fetchUserPosts}
-          fetchProfilePost={fetchProfilePost}
-          showCreatePost={showCreatePost}
-          setShowCreatePost={setShowCreatePost}
-          handleCreatePostClick={handleCreatePostClick}
-          user={user}
-          handleSortPostsClick={handleSortPostsClick}
-          posts={postData}
-          filterButton={filterButton}
-          districts={sortedDistricts}
-          districtsName={districtsName}
-          totalCoins={totalCoins}
-          addCoins={addCoins}
-          subtractCoins={subtractCoins}
-          sessionUserId={user.id}
+
+        <Route
+          path="/home"
+          element={
+            <Home
+              handleLogout={handleLogout}
+              userData={user}
+              setPost={setPost}
+              fetchPost={fetchPost}
+              fetchUserPosts={fetchUserPosts}
+              fetchProfilePost={fetchProfilePost}
+              showCreatePost={showCreatePost}
+              setShowCreatePost={setShowCreatePost}
+              handleCreatePostClick={handleCreatePostClick}
+              user={user}
+              handleSortPostsClick={handleSortPostsClick}
+              posts={postData}
+              filterButton={filterButton}
+              districts={sortedDistricts}
+              districtsName={districtsName}
+              totalCoins={totalCoins}
+              addCoins={addCoins}
+              subtractCoins={subtractCoins}
+              sessionUserId={user.id}
+            />
+          }
         />
-      </Route>
-      <Route path="/createpost">
-        <CreatePost />
-      </Route>
-      <Route path="/post/:id">
-        <PostDetails
-          user={user.username}
-          handleLogOutClick={handleLogout}
-          userId={user.id}
-          userThumbnail={user.thumbnail}
-          fetchPost={fetchPost}
-          postSortBool={postSortBool}
-          addCoins={addCoins}
-          subtractCoins={subtractCoins}
-          fetchUserPosts={fetchUserPosts}
-          fetchUserComments={fetchUserComments}
-          fetchProfilePost={fetchProfilePost}
-          totalCoins={totalCoins}
+
+        {/* <Route path="/home">
+          <Home
+            handleLogout={handleLogout}
+            userData={user}
+            setPost={setPost}
+            fetchPost={fetchPost}
+            fetchUserPosts={fetchUserPosts}
+            fetchProfilePost={fetchProfilePost}
+            showCreatePost={showCreatePost}
+            setShowCreatePost={setShowCreatePost}
+            handleCreatePostClick={handleCreatePostClick}
+            user={user}
+            handleSortPostsClick={handleSortPostsClick}
+            posts={postData}
+            filterButton={filterButton}
+            districts={sortedDistricts}
+            districtsName={districtsName}
+            totalCoins={totalCoins}
+            addCoins={addCoins}
+            subtractCoins={subtractCoins}
+            sessionUserId={user.id}
+          />
+        </Route> */}
+        <Route path="/createpost" element={<CreatePost />} />
+
+        {/* <Route path="/createpost">
+          <CreatePost />
+        </Route> */}
+        <Route
+          path="/post/:id"
+          element={
+            <PostDetails
+              user={user.username}
+              handleLogOutClick={handleLogout}
+              userId={user.id}
+              userThumbnail={user.thumbnail}
+              fetchPost={fetchPost}
+              postSortBool={postSortBool}
+              addCoins={addCoins}
+              subtractCoins={subtractCoins}
+              fetchUserPosts={fetchUserPosts}
+              fetchUserComments={fetchUserComments}
+              fetchProfilePost={fetchProfilePost}
+              totalCoins={totalCoins}
+            />
+          }
         />
-      </Route>
-      <Route path="/profile/:id">
-        <Profile
-          user={user.username}
-          handleLogout={handleLogout}
-          fetchPost={fetchPost}
-          userThumbnail={user.thumbnail}
-          totalCoins={totalCoins}
+
+        {/* <Route path="/post/:id">
+          <PostDetails
+            user={user.username}
+            handleLogOutClick={handleLogout}
+            userId={user.id}
+            userThumbnail={user.thumbnail}
+            fetchPost={fetchPost}
+            postSortBool={postSortBool}
+            addCoins={addCoins}
+            subtractCoins={subtractCoins}
+            fetchUserPosts={fetchUserPosts}
+            fetchUserComments={fetchUserComments}
+            fetchProfilePost={fetchProfilePost}
+            totalCoins={totalCoins}
+          />
+        </Route> */}
+        <Route
+          path="/profile/:id"
+          element={
+            <Profile
+              user={user.username}
+              handleLogout={handleLogout}
+              fetchPost={fetchPost}
+              userThumbnail={user.thumbnail}
+              totalCoins={totalCoins}
+            />
+          }
         />
-      </Route>
-      <Route path="/profile/:id/posts">
-        <ProfilePosts
-          user={user}
-          sessionUser={user.username}
-          sessionUserId={user.id}
-          handleLogout={handleLogout}
-          userThumbnail={user.thumbnail}
-          totalCoins={totalCoins}
-          addCoins={addCoins}
-          subtractCoins={subtractCoins}
-          fetchUserPosts={fetchUserPosts}
-          fetchUserComments={fetchUserComments}
-          fetchProfilePost={fetchProfilePost}
-          profilePost={profilePost}
+
+        {/* <Route path="/profile/:id">
+          <Profile
+            user={user.username}
+            handleLogout={handleLogout}
+            fetchPost={fetchPost}
+            userThumbnail={user.thumbnail}
+            totalCoins={totalCoins}
+          />
+        </Route> */}
+        <Route
+          path="/profile/:id/posts"
+          element={
+            <ProfilePosts
+              user={user}
+              sessionUser={user.username}
+              sessionUserId={user.id}
+              handleLogout={handleLogout}
+              userThumbnail={user.thumbnail}
+              totalCoins={totalCoins}
+              addCoins={addCoins}
+              subtractCoins={subtractCoins}
+              fetchUserPosts={fetchUserPosts}
+              fetchUserComments={fetchUserComments}
+              fetchProfilePost={fetchProfilePost}
+              profilePost={profilePost}
+            />
+          }
         />
-      </Route>
-      <Route path="/profile/:id/comments">
-        <ProfileComments
-          user={user}
-          sessionUser={user.username}
-          sessionUserId={user.id}
-          handleLogout={handleLogout}
-          userThumbnail={user.thumbnail}
-          totalCoins={totalCoins}
-          addCoins={addCoins}
-          subtractCoins={subtractCoins}
-          fetchUserPosts={fetchUserPosts}
-          fetchUserComments={fetchUserComments}
+
+        {/* <Route path="/profile/:id/posts">
+          <ProfilePosts
+            user={user}
+            sessionUser={user.username}
+            sessionUserId={user.id}
+            handleLogout={handleLogout}
+            userThumbnail={user.thumbnail}
+            totalCoins={totalCoins}
+            addCoins={addCoins}
+            subtractCoins={subtractCoins}
+            fetchUserPosts={fetchUserPosts}
+            fetchUserComments={fetchUserComments}
+            fetchProfilePost={fetchProfilePost}
+            profilePost={profilePost}
+          />
+        </Route> */}
+        <Route
+          path="/profile/:id/comments"
+          element={
+            <ProfileComments
+              user={user}
+              sessionUser={user.username}
+              sessionUserId={user.id}
+              handleLogout={handleLogout}
+              userThumbnail={user.thumbnail}
+              totalCoins={totalCoins}
+              addCoins={addCoins}
+              subtractCoins={subtractCoins}
+              fetchUserPosts={fetchUserPosts}
+              fetchUserComments={fetchUserComments}
+            />
+          }
         />
-      </Route>
-      <Route path="/district/:id">
-        <DistrictPage
-          user={user}
-          handleLogout={handleLogout}
-          handleCreatePostClick={handleCreatePostClick}
-          showCreatePost={showCreatePost}
-          setShowCreatePost={setShowCreatePost}
-          post={postData}
-          filterButton={filterButton}
-          districtDetails={districtDetails}
-          fetchPost={fetchPost}
+
+        {/* <Route path="/profile/:id/comments">
+          <ProfileComments
+            user={user}
+            sessionUser={user.username}
+            sessionUserId={user.id}
+            handleLogout={handleLogout}
+            userThumbnail={user.thumbnail}
+            totalCoins={totalCoins}
+            addCoins={addCoins}
+            subtractCoins={subtractCoins}
+            fetchUserPosts={fetchUserPosts}
+            fetchUserComments={fetchUserComments}
+          />
+        </Route> */}
+        <Route
+          path="/district/:id"
+          element={
+            <ProfileComments
+              user={user}
+              sessionUser={user.username}
+              sessionUserId={user.id}
+              handleLogout={handleLogout}
+              userThumbnail={user.thumbnail}
+              totalCoins={totalCoins}
+              addCoins={addCoins}
+              subtractCoins={subtractCoins}
+              fetchUserPosts={fetchUserPosts}
+              fetchUserComments={fetchUserComments}
+            />
+          }
         />
-      </Route>
-      <Route path="/districts/all">{districtList}</Route>
+
+        {/* <Route path="/district/:id">
+          <DistrictPage
+            user={user}
+            handleLogout={handleLogout}
+            handleCreatePostClick={handleCreatePostClick}
+            showCreatePost={showCreatePost}
+            setShowCreatePost={setShowCreatePost}
+            post={postData}
+            filterButton={filterButton}
+            districtDetails={districtDetails}
+            fetchPost={fetchPost}
+          />
+        </Route> */}
+        <Route path="/districts/all" element={{ districtList }} />
+        {/* <Route path="/districts/all">{districtList}</Route> */}
+      </Routes>
     </>
   );
 }

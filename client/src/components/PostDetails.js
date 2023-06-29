@@ -1,7 +1,7 @@
 import Comments from "./Comments";
 import CreateComment from "./CreateComment";
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams, Route } from "react-router-dom";
+import { useNavigate, useParams, Route } from "react-router-dom";
 import {
   Drawer,
   Toolbar,
@@ -58,7 +58,7 @@ const PostDetails = ({
   const [postDetails, setPostDetails] = useState();
   const [commentSortBool, setCommentSortBool] = useState(false);
   const { id } = useParams();
-  const history = useHistory();
+  const history = useNavigate();
 
   useEffect(() => {
     fetchPostDetails();

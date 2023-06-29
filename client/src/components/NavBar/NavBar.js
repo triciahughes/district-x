@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Avatar,
   Drawer,
@@ -27,7 +27,7 @@ function NavBar({
   districts,
   totalCoins,
 }) {
-  const history = useHistory();
+  const history = useNavigate();
 
   const districtList = districts.map((district) => {
     return (

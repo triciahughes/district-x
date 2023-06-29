@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AccountInitialized } from "../unreal/unrealFunctionLibrary";
 
 function CreateAvatar({ fetchUser, user, userId }) {
-  const history = useHistory();
+  const history = useNavigate();
 
   AccountInitialized({ name: `${user}` });
 

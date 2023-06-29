@@ -22,7 +22,7 @@
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "react-markdown": "^6.0.2",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^6.14.0",
     "react-scripts": "^5.0.1",
     "styled-components": "^5.3.9",
     "three": "^0.154.0",

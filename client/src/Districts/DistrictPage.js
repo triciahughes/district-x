@@ -1,7 +1,7 @@
 import React from "react";
 import CreatePost from "../components/CreatePost";
 import Posts from "../components/Posts";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
@@ -34,7 +34,7 @@ const DistrictPage = ({
   fetchPost,
   districtDetails,
 }) => {
-  const history = useHistory();
+  const history = useNavigate();
   const { id } = useParams();
 
   ///////////// STYLES //////////////

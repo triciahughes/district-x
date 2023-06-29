@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Box, Container, CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Paper } from "@mui/material";
@@ -32,7 +32,7 @@ const AllDistricts = ({
   districts,
   districtName,
 }) => {
-  const history = useHistory();
+  const history = useNavigate();
   ///////////// STYLES //////////////
   const theme = createTheme({
     palette: {

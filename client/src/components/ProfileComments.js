@@ -15,7 +15,7 @@ import {
 // import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -32,7 +32,7 @@ const ProfileComments = ({
   fetchPostDetails,
 }) => {
   const [profileComments, setProfileComments] = useState([]);
-  const history = useHistory();
+  const history = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {

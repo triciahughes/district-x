@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import {
   Box,
@@ -38,7 +38,7 @@ function Posts({
   subtractCoins,
   sessionUserId,
 }) {
-  const history = useHistory();
+  const history = useNavigate();
   ///////////// STYLES //////////////
   const StyledPaper = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
