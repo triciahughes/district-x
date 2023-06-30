@@ -35,7 +35,7 @@ const Comments = ({
   fetchUserComments,
   fetchProfileComments,
 }) => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const StyledPaper = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
     ...theme.typography.body2,

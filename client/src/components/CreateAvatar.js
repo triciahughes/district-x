@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AccountInitialized } from "../unreal/unrealFunctionLibrary";
 
 function CreateAvatar({ fetchUser, user, userId }) {
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   AccountInitialized({ name: `${user}` });
 
@@ -36,7 +36,7 @@ function CreateAvatar({ fetchUser, user, userId }) {
         }),
       }).then((res) => {
         if (res.ok) {
-          res.json().then(fetchUser(), history.push("/home"));
+          res.json().then(fetchUser(), navigate("/home"));
         }
       });
     };

@@ -25,7 +25,7 @@ const Profile = ({
   userThumbnail,
   totalCoins,
 }) => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const data = `data:image/jpeg;base64,${userThumbnail}`;
@@ -54,16 +54,16 @@ const Profile = ({
   ////////// Home ///////////////
   function handleHomeClick() {
     fetchPost();
-    history.push("/home");
+    navigate("/home");
   }
 
   ///////// Post List By User //////
   function handlePostsByUserClick() {
-    history.push(`/profile/${id}/posts`);
+    navigate(`/profile/${id}/posts`);
   }
   ///////// Comment List By User //////
   function handleCommentsByUserClick() {
-    history.push(`/profile/${id}/comments`);
+    navigate(`/profile/${id}/comments`);
     console.log("Comment Clicked");
   }
 

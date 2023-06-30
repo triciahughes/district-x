@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const FinalizeCharacterBtn = () => {
   const [hovered, setHovered] = useState(false);
-  //   const history = useNavigate();
+  //   const navigate = useNavigate();
   const navigate = useNavigate();
 
   const handleMouseEnter = () => setHovered(true);

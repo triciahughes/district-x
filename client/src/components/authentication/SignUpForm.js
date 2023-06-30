@@ -27,7 +27,7 @@ const validationSchema = yup.object({
 });
 
 function SignUpForm({ setUser }) {
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -47,7 +47,7 @@ function SignUpForm({ setUser }) {
         .then((res) => res.json())
         .then((data) => {
           setUser(data);
-          history.push("/createavatar");
+          navigate("/customizer");
         });
     },
   });

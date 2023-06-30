@@ -27,7 +27,7 @@ function NavBar({
   districts,
   totalCoins,
 }) {
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const districtList = districts.map((district) => {
     return (
@@ -50,18 +50,18 @@ function NavBar({
   }
 
   function handleUsernameClick() {
-    history.push(`/profile/${userData.id}`);
+    navigate(`/profile/${userData.id}`);
   }
 
   function handleAllDistrictsClick() {
-    history.push("/districts/all");
+    navigate("/districts/all");
   }
 
   function handleDistrictClick(e) {
     // Get the ID of the clicked district by accessing the "id" property of the "currentTarget" element
     const districtId = e.currentTarget.id;
     // Navigate to the district page using the district ID
-    history.push(`/district/${districtId}`);
+    navigate(`/district/${districtId}`);
   }
 
   ////////////// Thumbnail Converter //////////////

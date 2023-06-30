@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import {
   Box,
@@ -38,7 +38,7 @@ function Posts({
   subtractCoins,
   sessionUserId,
 }) {
-  const history = useNavigate();
+  const navigate = useNavigate();
   ///////////// STYLES //////////////
   const StyledPaper = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
@@ -67,7 +67,7 @@ function Posts({
   }
 
   function handleDistrictLabelClick() {
-    history.push(`/district/${postDistrictId}`);
+    navigate(`/district/${postDistrictId}`);
   }
 
   const postThumbnail = `data:image/jpeg;base64,${postThumbnailData}`;
@@ -127,11 +127,11 @@ function Posts({
   }
 
   function handlePostUsernameClick() {
-    history.push(`/profile/${postUserId}`);
+    navigate(`/profile/${postUserId}`);
   }
 
   function handlePostClick() {
-    history?.push(`/post/${id}`);
+    navigate(`/post/${id}`);
   }
 
   const districtLabel =

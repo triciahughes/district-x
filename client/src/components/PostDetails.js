@@ -58,7 +58,7 @@ const PostDetails = ({
   const [postDetails, setPostDetails] = useState();
   const [commentSortBool, setCommentSortBool] = useState(false);
   const { id } = useParams();
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchPostDetails();
@@ -171,18 +171,18 @@ const PostDetails = ({
 
   ////////// user (self) profile /////////////
   function handleUsernameClick() {
-    history.push(`/profile/${userId}`);
+    navigate(`/profile/${userId}`);
   }
 
   ////////// profile /////////////
   function handleProfileClick() {
-    history.push(`/profile/${postId}`);
+    navigate(`/profile/${postId}`);
   }
 
   ////////// Home ///////////////
   function handleHomeClick() {
     fetchPost();
-    history.push("/home");
+    navigate("/home");
   }
 
   return (

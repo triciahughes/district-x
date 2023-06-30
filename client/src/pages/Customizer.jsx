@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Canvas from "../canvas";
 
 const Customizer = ({ username, userId }) => {
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   //   useEffect(() => {
   //     Define the event listener

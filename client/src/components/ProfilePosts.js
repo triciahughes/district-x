@@ -35,7 +35,7 @@ const ProfilePosts = ({
   fetchProfilePost,
   profilePost,
 }) => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
@@ -71,12 +71,12 @@ const ProfilePosts = ({
 
   ///////// Comment List By User //////
   function handleCommentsByUserClick() {
-    history.push(`/profile/${id}/comments`);
+    navigate(`/profile/${id}/comments`);
     console.log("Comment Clicked");
   }
 
   function handleHomeClick() {
-    history.push("/home");
+    navigate("/home");
   }
 
   return (

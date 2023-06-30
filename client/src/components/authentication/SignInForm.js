@@ -40,7 +40,7 @@ const validationSchema = yup.object({
 
 function SignInForm({ setUser, fetchUser }) {
   const [index, setIndex] = useState(0);
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [loadedImages, setLoadedImages] = useState([]);
 
   useEffect(() => {
@@ -98,7 +98,7 @@ function SignInForm({ setUser, fetchUser }) {
           res.json().then((userData) => {
             setUser(userData);
             fetchUser();
-            history.push("/home");
+            navigate("/home");
           });
         } else {
           alert("Invalid username or password");

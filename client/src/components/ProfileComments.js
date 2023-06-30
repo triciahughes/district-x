@@ -32,7 +32,7 @@ const ProfileComments = ({
   fetchPostDetails,
 }) => {
   const [profileComments, setProfileComments] = useState([]);
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
@@ -76,12 +76,12 @@ const ProfileComments = ({
 
   ///////// Post List By User //////
   function handlePostsByUserClick() {
-    history.push(`/profile/${id}/posts`);
+    navigate(`/profile/${id}/posts`);
     console.log("Post Clicked");
   }
 
   function handleHomeClick() {
-    history.push("/home");
+    navigate("/home");
   }
 
   return (

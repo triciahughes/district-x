@@ -32,7 +32,7 @@ const AllDistricts = ({
   districts,
   districtName,
 }) => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   ///////////// STYLES //////////////
   const theme = createTheme({
     palette: {
@@ -56,11 +56,11 @@ const AllDistricts = ({
   const data = `data:image/jpeg;base64,${user.thumbnail}`;
 
   function handleHomeClick() {
-    history.push("/home");
+    navigate("/home");
   }
 
   function handleUsernameClick() {
-    history.push(`/profile/${userData.id}`);
+    navigate(`/profile/${userData.id}`);
   }
 
   function handlePostClick() {

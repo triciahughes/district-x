@@ -1,8 +1,7 @@
 // import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import * as React from "react";
-import SignUpForm from "./components/SignUpForm";
-import SignInForm from "./components/SignInForm";
+import { SignUpForm, SignInForm } from "./components";
 // import CreateAvatar from "./components/CreateAvatar";
 import Customizer from "./pages/Customizer";
 import CreatePost from "./components/CreatePost";
@@ -11,8 +10,8 @@ import ProfilePosts from "./components/ProfilePosts";
 import ProfileComments from "./components/ProfileComments";
 import Profile from "./components/Profile";
 import Home from "./components/Home";
-import DistrictPage from "./Districts/DistrictPage";
-import AllDistricts from "./Districts/AllDistricts";
+import DistrictPage from "./pages/districts/DistrictPage";
+import AllDistricts from "./pages/districts/AllDistricts";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { Typography } from "@mui/material";
@@ -30,9 +29,9 @@ function App() {
   const [districtsName, setDistrictsName] = useState([]);
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [postSortBool, setPostSortBool] = useState(false);
-  const history = useNavigate();
+  const navigate = useNavigate();
 
-  const userFetch = useCallback(fetchUser, [history]);
+  const userFetch = useCallback(fetchUser, [navigate]);
 
   useEffect(() => {
     userFetch();
@@ -51,7 +50,7 @@ function App() {
         });
       } else {
         setUser([]);
-        history.push("/signin");
+        navigate("/signup");
       }
     });
   }
@@ -63,7 +62,7 @@ function App() {
       setUser([]);
 
       fetchUser();
-      history.push("/signin");
+      navigate("/signin");
     });
   }
 
@@ -201,7 +200,8 @@ function App() {
         />
         <Route
           path="/signup"
-          element={<SignUpForm setUser={setUser} fetchUser={fetchUser} />}
+          element={<SignUpForm setUser={setUser} />}
+          // element={<SignUpForm setUser={setUser} fetchUser={fetchUser} />}
         />
         <Route
           path="/customizer"
