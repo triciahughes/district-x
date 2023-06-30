@@ -41,6 +41,7 @@ function App() {
 
   function fetchUser() {
     fetch("/authorized").then((res) => {
+      console.log(res);
       if (res.ok) {
         res.json().then((userData) => {
           setUser(userData);
@@ -50,7 +51,7 @@ function App() {
         });
       } else {
         setUser([]);
-        navigate("/signup");
+        navigate("/signin");
       }
     });
   }
@@ -196,6 +197,7 @@ function App() {
       <Routes>
         <Route
           path="/signin"
+          exact
           element={<SignInForm setUser={setUser} fetchUser={fetchUser} />}
         />
         <Route

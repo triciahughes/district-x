@@ -17,7 +17,7 @@ import {
 // import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useNavigate, useParams, Route } from "react-router-dom";
+import { useNavigate, useParams, Route, Routes } from "react-router-dom";
 
 const drawerWidth = 240;
 const ProfilePosts = ({
@@ -81,9 +81,12 @@ const ProfilePosts = ({
 
   return (
     <>
-      <Route path="/home">
-        <Home fetchProfilePost={fetchProfilePost} />
-      </Route>{" "}
+      <Routes>
+        <Route
+          path="/home"
+          elements={<Home fetchProfilePost={fetchProfilePost} />}
+        />{" "}
+      </Routes>
       <Drawer
         sx={{
           width: drawerWidth,

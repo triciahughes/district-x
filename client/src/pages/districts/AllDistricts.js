@@ -64,7 +64,7 @@ const AllDistricts = ({
   }
 
   function handlePostClick() {
-    history?.push(`/district/${districts.id}`);
+    navigate(`/district/${districts.id}`);
   }
 
   return (
