@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import Canvas from "../canvas";
 
 const Customizer = ({ username, userId }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   //   useEffect(() => {
   //     Define the event listener

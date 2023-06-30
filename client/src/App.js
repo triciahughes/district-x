@@ -1,5 +1,5 @@
 // import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, redirect } from "react-router-dom";
 import * as React from "react";
 import { SignUpForm, SignInForm } from "./components";
 // import CreateAvatar from "./components/CreateAvatar";
@@ -51,7 +51,7 @@ function App() {
         });
       } else {
         setUser([]);
-        navigate("/signin");
+        redirect("/signin");
       }
     });
   }

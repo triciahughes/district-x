@@ -2,7 +2,7 @@ import React from "react";
 import CreatePost from "../../components/CreatePost";
 import Posts from "../../components/Posts.js";
 import { useNavigate, useParams } from "react-router-dom";
-import { Box, Container, CssBaseline, Typography } from "@mui/material";
+import { Box, Container, CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   Avatar,
