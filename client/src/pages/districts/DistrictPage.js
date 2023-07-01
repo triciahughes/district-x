@@ -1,5 +1,5 @@
 import React from "react";
-import CreatePost from "../../components/CreatePost";
+import CreatePost from "../../create/CreatePost";
 import Posts from "../../components/Posts.js";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Container, CssBaseline } from "@mui/material";

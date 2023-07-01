@@ -4,11 +4,11 @@ import * as React from "react";
 import { SignUpForm, SignInForm } from "./components";
 // import CreateAvatar from "./components/CreateAvatar";
 import Customizer from "./pages/Customizer";
-import CreatePost from "./components/CreatePost";
-import PostDetails from "./components/PostDetails";
-import ProfilePosts from "./components/ProfilePosts";
-import ProfileComments from "./components/ProfileComments";
-import Profile from "./components/Profile";
+import CreatePost from "./create/CreatePost";
+import PostDetails from "./pages/PostDetails";
+import ProfilePosts from "./pages/ProfilePosts";
+import ProfileComments from "./pages/ProfileComments";
+import Profile from "./pages/Profile";
 import Home from "./components/Home";
 import DistrictPage from "./pages/districts/DistrictPage";
 import AllDistricts from "./pages/districts/AllDistricts";
@@ -41,7 +41,6 @@ function App() {
 
   function fetchUser() {
     fetch("/authorized").then((res) => {
-      console.log(res);
       if (res.ok) {
         res.json().then((userData) => {
           setUser(userData);

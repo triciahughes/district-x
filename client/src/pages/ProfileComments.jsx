@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Posts from "./Posts";
-import Home from "./Home";
-// import React from "react";
+import Comments from "../components/Comments";
 import {
   Drawer,
   Toolbar,
@@ -17,62 +15,69 @@ import {
 // import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useNavigate, useParams, Route, Routes } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const drawerWidth = 240;
-const ProfilePosts = ({
-  user,
+
+const ProfileComments = ({
   sessionUser,
-  sessionUserId,
   handleLogout,
   userThumbnail,
   totalCoins,
   addCoins,
   subtractCoins,
+  user,
   fetchUserPosts,
   fetchUserComments,
   fetchPostDetails,
-  fetchProfilePost,
-  profilePost,
 }) => {
+  const [profileComments, setProfileComments] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
-    fetchProfilePost(id);
+    fetchProfileComments();
   }, []);
 
-  const dynamicPost = profilePost?.map((post) => {
+  function fetchProfileComments() {
+    fetch(`/profilecomments/${id}`).then((res) => {
+      if (res.ok) {
+        res.json().then((profileCommentData) => {
+          console.log(profileCommentData);
+          setProfileComments(profileCommentData);
+          console.log("hello from profile post");
+        });
+      }
+    });
+  }
+
+  const dynamicComment = profileComments?.map((comment) => {
     return (
-      <Posts
-        key={post.id}
-        id={post.id}
-        votes={post.votes}
-        posts={post.post}
-        postUser={post.user.username}
-        postUserId={post.user.id}
-        postThumbnailData={post.user.thumbnail}
-        commentsCount={post.comments.length}
-        postDistrict={post.district?.name}
-        postDistrictId={post.district?.id}
+      <Comments
+        userId={user.id}
+        key={comment.id}
+        id={comment.id}
+        comment={comment.comment}
+        username={comment.user}
+        votes={comment.votes}
+        commentUserId={comment.user.id}
+        commentThumbnailData={comment.user.thumbnail}
         addCoins={addCoins}
         subtractCoins={subtractCoins}
-        user={user}
         fetchUserPosts={fetchUserPosts}
-        fetchProfilePost={fetchProfilePost}
         fetchUserComments={fetchUserComments}
+        fetchProfileComments={fetchProfileComments}
         fetchPostDetails={fetchPostDetails}
-        sessionUserId={sessionUserId}
       />
     );
   });
 
   const data = `data:image/jpeg;base64,${userThumbnail}`;
 
-  ///////// Comment List By User //////
-  function handleCommentsByUserClick() {
-    navigate(`/profile/${id}/comments`);
-    console.log("Comment Clicked");
+  ///////// Post List By User //////
+  function handlePostsByUserClick() {
+    navigate(`/profile/${id}/posts`);
+    console.log("Post Clicked");
   }
 
   function handleHomeClick() {
@@ -81,12 +86,7 @@ const ProfilePosts = ({
 
   return (
     <>
-      <Routes>
-        <Route
-          path="/home"
-          elements={<Home fetchProfilePost={fetchProfilePost} />}
-        />{" "}
-      </Routes>
+      {" "}
       <Drawer
         sx={{
           width: drawerWidth,
@@ -100,6 +100,7 @@ const ProfilePosts = ({
         anchor="left"
       >
         <Toolbar />
+
         <List>
           {[`${sessionUser}`].map((text) => (
             <ListItem key={text} disablePadding>
@@ -120,6 +121,7 @@ const ProfilePosts = ({
               <ListItemButton>
                 <ListItemAvatar>
                   <HomeIcon />
+                  {/* <Avatar alt="Profile Picture" src="" /> */}
                 </ListItemAvatar>
                 <ListItemText primary={text} />
               </ListItemButton>
@@ -139,18 +141,7 @@ const ProfilePosts = ({
             </ListItem>
           ))}
         </List>
-
-        <List>
-          {["Posts"].map((text) => (
-            <ListItem style={{ color: "#949391" }} key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>{/* <ArrowForwardIcon /> */}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <List onClick={handleCommentsByUserClick}>
+        <List style={{ color: "#949391" }}>
           {["Comments"].map((text) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
@@ -160,10 +151,20 @@ const ProfilePosts = ({
             </ListItem>
           ))}
         </List>
+        <List onClick={handlePostsByUserClick}>
+          {["Posts"].map((text) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>{/* <ArrowForwardIcon /> */}</ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
       </Drawer>
-      {dynamicPost}
+      {dynamicComment}
     </>
   );
 };
 
-export default ProfilePosts;
+export default ProfileComments;

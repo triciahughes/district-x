@@ -1,6 +1,6 @@
-import NavBar from "./NavBar/NavBar";
+import NavBar from "./nav/NavBar";
 import Posts from "./Posts";
-import CreatePost from "./CreatePost";
+import CreatePost from "../create/CreatePost";
 import { Grid } from "@mui/material";
 import { Box, Container, CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";

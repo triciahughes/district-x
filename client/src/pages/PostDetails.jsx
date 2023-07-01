@@ -1,5 +1,5 @@
-import Comments from "./Comments";
-import CreateComment from "./CreateComment";
+import Comments from "../components/Comments";
+import CreateComment from "../create/CreateComment";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Route, Routes } from "react-router-dom";
 import {
