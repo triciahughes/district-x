@@ -24,6 +24,7 @@ function Posts({
   user,
   fetchPost,
   fetchUserPosts,
+  fetchPostDetails,
   fetchProfilePost,
   id,
   votes,
@@ -93,10 +94,17 @@ function Posts({
       if (res.ok) {
         res
           .json()
-          .then(fetchPost, fetchProfilePost(user.id), fetchUserPosts(user.id));
+          .then(
+            fetchPost,
+            fetchUserPosts,
+            fetchPostDetails,
+            console.log(votes)
+          );
       }
     });
   }
+
+  // fetchProfilePost(user.id)
 
   function handleDownvoteClick() {
     const newDownvotes = (votes -= 1);
@@ -113,9 +121,7 @@ function Posts({
       body: JSON.stringify({ votes: newDownvotes }),
     }).then((res) => {
       if (res.ok) {
-        res
-          .json()
-          .then(fetchPost, fetchProfilePost(user.id), fetchUserPosts(user.id));
+        res.json().then(fetchPost, fetchUserPosts(user.id));
       }
     });
   }

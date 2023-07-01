@@ -189,7 +189,7 @@ const PostDetails = ({
     <>
       <Routes>
         <Route
-          path="/profile/:id/posts"
+          path="/profile/:id/posts/*"
           element={
             <ProfilePosts
               fetchPostDetails={fetchPostDetails}
