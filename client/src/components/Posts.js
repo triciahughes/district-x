@@ -74,6 +74,8 @@ function Posts({
 
   //////////// upvotes && downvotes ////////////
 
+  //// WAS USING fetchUserPosts(sessionUserId) BELOW //////
+
   function handleUpvoteClick() {
     const newUpvotes = (votes += 1);
 
@@ -91,11 +93,7 @@ function Posts({
       if (res.ok) {
         res
           .json()
-          .then(
-            fetchPost,
-            fetchProfilePost(user.id),
-            fetchUserPosts(sessionUserId)
-          );
+          .then(fetchPost, fetchProfilePost(user.id), fetchUserPosts(user.id));
       }
     });
   }
@@ -117,11 +115,7 @@ function Posts({
       if (res.ok) {
         res
           .json()
-          .then(
-            fetchPost,
-            fetchProfilePost(user.id),
-            fetchUserPosts(sessionUserId)
-          );
+          .then(fetchPost, fetchProfilePost(user.id), fetchUserPosts(user.id));
       }
     });
   }

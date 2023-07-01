@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Grid,
   Paper,
@@ -36,6 +36,7 @@ const Comments = ({
   fetchProfileComments,
 }) => {
   const navigate = useNavigate();
+  // const { id } = useParams();
   const StyledPaper = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
     ...theme.typography.body2,
@@ -90,9 +91,11 @@ const Comments = ({
           .json()
           .then(
             fetchPostDetails,
+            console.log(userId),
+            console.log(username.id),
             fetchUserPosts(userId),
-            fetchUserComments(userId),
-            fetchProfileComments
+            fetchUserComments,
+            fetchProfileComments()
           );
       } else {
         console.error(
@@ -121,7 +124,7 @@ const Comments = ({
             fetchPostDetails,
             fetchUserPosts(userId),
             fetchUserComments(userId),
-            fetchProfileComments
+            fetchProfileComments()
           );
       }
     });

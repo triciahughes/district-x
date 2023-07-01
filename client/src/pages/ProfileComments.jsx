@@ -45,7 +45,7 @@ const ProfileComments = ({
         res.json().then((profileCommentData) => {
           console.log(profileCommentData);
           setProfileComments(profileCommentData);
-          console.log("hello from profile post");
+          console.log("hello from profile comments");
         });
       }
     });

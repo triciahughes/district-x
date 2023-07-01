@@ -77,8 +77,8 @@ function App() {
     });
   }
 
-  function fetchUserPosts(userId) {
-    fetch(`/profileposts/${userId}`).then((res) => {
+  function fetchUserPosts(profileUserId) {
+    fetch(`/profileposts/${profileUserId}`).then((res) => {
       if (res.ok) {
         res.json().then((userPostData) => {
           setUserPosts(userPostData);
@@ -87,8 +87,8 @@ function App() {
     });
   }
 
-  function fetchUserComments(userId) {
-    fetch(`/profilecomments/${userId}`).then((res) => {
+  function fetchUserComments(profileUserId) {
+    fetch(`/profilecomments/${profileUserId}`).then((res) => {
       if (res.ok) {
         res.json().then((userCommentData) => {
           setUserComments(userCommentData);
@@ -284,7 +284,7 @@ function App() {
           />
         </Route> */}
         <Route
-          path="/profile/:id/posts"
+          path="/profile/:id/posts/*"
           element={
             <ProfilePosts
               user={user}
