@@ -91,8 +91,6 @@ const Comments = ({
           .json()
           .then(
             fetchPostDetails,
-            console.log(userId),
-            console.log(username.id),
             fetchUserPosts(userId),
             fetchUserComments,
             fetchProfileComments()

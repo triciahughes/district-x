@@ -95,9 +95,10 @@ function Posts({
         res
           .json()
           .then(
-            fetchPost,
-            fetchUserPosts,
             fetchPostDetails,
+            fetchUserPosts(user.id),
+            fetchPost,
+            fetchProfilePost(),
             console.log(votes)
           );
       }

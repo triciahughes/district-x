@@ -33,6 +33,8 @@ function App() {
 
   const userFetch = useCallback(fetchUser, [navigate]);
 
+  ///// I need to reconfigure fetchProfilePost maybe to live in profilePosts or posts and be passed ////
+
   useEffect(() => {
     userFetch();
     fetchPost();
