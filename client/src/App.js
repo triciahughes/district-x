@@ -80,15 +80,17 @@ function App() {
   }
 
   function fetchUserPosts(profileUserId) {
-    fetch(`/profileposts/${profileUserId}`).then((res) => {
-      if (res.ok) {
-        res.json().then((userPostData) => {
-          setUserPosts(userPostData);
-        });
-      }
-    });
+    // fetch(`/profileposts/${profileUserId}`).then((res) => {
+    //   if (res.ok) {
+    //     res.json().then((userPostData) => {
+    //       setUserPosts(userPostData);
+    //     });
+    //   }
+    // });
+    console.log("hello from fetchUserPosts", profileUserId);
   }
 
+  //// specific for logged in user ////
   function fetchUserComments(profileUserId) {
     fetch(`/profilecomments/${profileUserId}`).then((res) => {
       if (res.ok) {
@@ -97,9 +99,12 @@ function App() {
         });
       }
     });
+    console.log("hello from fetchUserComments", profileUserId);
   }
 
+  //// For ALL users not just logged in user ////
   function fetchProfilePost(id) {
+    console.log("hello from fetchProfilePost in App: ", id);
     fetch(`/profileposts/${id}`).then((res) => {
       if (res.ok) {
         res.json().then((profilePostData) => {

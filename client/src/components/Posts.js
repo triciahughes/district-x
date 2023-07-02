@@ -98,7 +98,7 @@ function Posts({
             fetchPostDetails,
             fetchUserPosts(user.id),
             fetchPost,
-            fetchProfilePost(),
+            fetchProfilePost(user.id),
             console.log(votes)
           );
       }

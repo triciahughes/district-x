@@ -1,5 +1,6 @@
-import { Canvas } from "@react-three/fiber";
-import { Environment, Center } from "@react-three/drei";
+import { Canvas, useThree } from "@react-three/fiber";
+import * as THREE from "three";
+import { OrbitControls, Environment, Center } from "@react-three/drei";
 import {
   RightArrowIcon,
   LeftArrowIcon,
@@ -11,21 +12,44 @@ import Backdrop from "./Backdrop";
 import CameraRig from "./CameraRig";
 
 const CanvasModel = ({ username, userId }) => {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
   return (
     <div>
       <Canvas
         shadows
-        camera={{ position: [0, 0, 0], fov: 25 }}
+        camera={{ position: [0, 0, 10], fov: 22 }}
         gl={{ preserveDrawingBuffer: true }}
-        style={{ position: "absolute", width: "100%", height: "100%" }}
+        style={{
+          position: "fixed",
+          width: width,
+          height: height,
+        }}
+      >
+        <Backdrop />
+      </Canvas>
+
+      <Canvas
+        shadows
+        camera={{ position: [0, 0, 13], fov: 20 }}
+        gl={{ preserveDrawingBuffer: true }}
+        style={{
+          position: "fixed",
+          width: width,
+          height: height,
+        }}
       >
         <ambientLight intensity={0.5} />
         <Environment preset="city" />
-
+        <OrbitControls
+          target={[0, 0, 0]}
+          minPolarAngle={Math.PI / 2}
+          maxPolarAngle={Math.PI / 2}
+        />
         <CameraRig>
-          <Backdrop />
           <Center>
-            <Avatar />
+            <Avatar position={[0.15, -1.7, 0]} />
           </Center>
         </CameraRig>
       </Canvas>

@@ -92,7 +92,7 @@ const Comments = ({
           .then(
             fetchPostDetails,
             fetchUserPosts(userId),
-            fetchUserComments,
+            fetchUserComments(userId),
             fetchProfileComments()
           );
       } else {
