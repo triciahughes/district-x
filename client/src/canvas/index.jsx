@@ -5,15 +5,53 @@ import {
   RightArrowIcon,
   LeftArrowIcon,
   FinalizeCharacterBtn,
+  ColorPicker,
+  ColorPickerBtn,
 } from "../components";
 
 import Avatar from "./Avatar";
 import Backdrop from "./Backdrop";
 import CameraRig from "./CameraRig";
+import { Color } from "three";
+import { useSnapshot } from "valtio";
+import state from "../store";
 
 const CanvasModel = ({ username, userId }) => {
+  const snap = useSnapshot(state);
   const width = window.innerWidth;
   const height = window.innerHeight;
+
+  const getComplementaryColor = (hexColor) => {
+    // Convert hexColor to RGB
+    const rgbColor =
+      hexColor.charAt(0) === "#" ? hexColor.substring(1, 7) : hexColor;
+    const r = parseInt(rgbColor.substring(0, 2), 16);
+    const g = parseInt(rgbColor.substring(2, 4), 16);
+    const b = parseInt(rgbColor.substring(4, 6), 16);
+
+    // Get the complementary color by subtracting each color value from 255
+    const rComplement = 150 + r;
+    const gComplement = 150 - g;
+    const bComplement = 150 - b;
+
+    // Convert the complementary RGB color back to hexadecimal
+    const hexComplement =
+      "#" +
+      ((1 << 24) + (rComplement << 16) + (gComplement << 8) + bComplement)
+        .toString(16)
+        .slice(1)
+        .toUpperCase();
+
+    return hexComplement;
+  };
+
+  const newColor = getComplementaryColor(snap.color);
+
+  // const newColor = findSecondColor(snap.color);
+
+  /// subtract red from white and get cyan (0xFFFFFF - 0xFF0000 = 0x00FFFF)
+
+  // findSecondColor(snap.color);
 
   return (
     <div>
@@ -26,6 +64,7 @@ const CanvasModel = ({ username, userId }) => {
           position: "fixed",
           width: width,
           height: height,
+          background: `linear-gradient(${snap.color}, ${newColor})`,
         }}
       >
         <Backdrop /> {/* Backdrop component */}
@@ -80,6 +119,7 @@ const CanvasModel = ({ username, userId }) => {
       >
         {username}
       </div>
+      <ColorPickerBtn ColorPicker={ColorPicker} />
       {/* Customize Arrow Icons */}
       <RightArrowIcon top="25%" />
       <RightArrowIcon top="50%" />

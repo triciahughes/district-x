@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
+
 // import { useNavigate } from "react-router-dom";
 import Canvas from "../canvas";
+// import FinalizeCharacterBtn from "../components/elements/FinalizeCharacterBtn";
 
 const Customizer = ({ username, userId }) => {
   // const navigate = useNavigate();
@@ -41,6 +43,7 @@ const Customizer = ({ username, userId }) => {
 
   return (
     <>
+      {/* <FinalizeCharacterBtn /> */}
       <Canvas username={username} userId={userId} />
     </>
   );
