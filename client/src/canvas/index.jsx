@@ -58,7 +58,7 @@ const CanvasModel = ({ username, userId }) => {
       {/* First Canvas for the Backdrop component */}
       <Canvas
         shadows
-        camera={{ position: [0, 0, 13], fov: 22 }} // Camera configuration
+        camera={{ position: [0, 0, 13], fov: 20 }} // Camera configuration
         gl={{ preserveDrawingBuffer: true }} // WebGL configuration
         style={{
           position: "fixed",
@@ -76,7 +76,7 @@ const CanvasModel = ({ username, userId }) => {
         camera={{ position: [0, 0, 13], fov: 20 }} // Camera configuration
         gl={{ preserveDrawingBuffer: true }} // WebGL configuration
         style={{
-          position: "fixed",
+          // position: "relative",
           width: width,
           height: height,
         }}
@@ -84,7 +84,7 @@ const CanvasModel = ({ username, userId }) => {
         <ambientLight intensity={0.5} /> {/* Light configuration */}
         <Environment preset="city" /> {/* Environment configuration */}
         <OrbitControls // OrbitControls for camera rotation
-          target={[-0.1, 0, 0]}
+          target={[-0.3, 0.75, 0]}
           minPolarAngle={Math.PI / 2}
           maxPolarAngle={Math.PI / 2}
         />

@@ -33,6 +33,12 @@ const Avatar = ({ position }) => {
     console.log("Avatar position changed:", position);
   }, [position]);
 
+  // Create an AxesHelper to visualize the pivot point
+  useEffect(() => {
+    const axesHelper = new THREE.AxesHelper(5);
+    groupRef.current.add(axesHelper);
+  }, []);
+
   // const texture = useLoader(
   //   TextureLoader,
   //   "/Avatar_Abbi_WithAnim_clothing_01.png"
