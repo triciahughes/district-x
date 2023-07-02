@@ -1,5 +1,6 @@
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, Environment, Center } from "@react-three/drei";
+import React from "react";
 import {
   RightArrowIcon,
   LeftArrowIcon,
@@ -16,42 +17,48 @@ const CanvasModel = ({ username, userId }) => {
 
   return (
     <div>
+      {/* First Canvas for the Backdrop component */}
       <Canvas
         shadows
-        camera={{ position: [0, 0, 10], fov: 22 }}
-        gl={{ preserveDrawingBuffer: true }}
+        camera={{ position: [0, 0, 13], fov: 22 }} // Camera configuration
+        gl={{ preserveDrawingBuffer: true }} // WebGL configuration
         style={{
           position: "fixed",
           width: width,
           height: height,
         }}
       >
-        <Backdrop />
+        <Backdrop /> {/* Backdrop component */}
       </Canvas>
 
+      {/* Second Canvas for Avatar and OrbitControls */}
       <Canvas
         shadows
-        camera={{ position: [0, 0, 13], fov: 20 }}
-        gl={{ preserveDrawingBuffer: true }}
+        camera={{ position: [0, 0, 13], fov: 20 }} // Camera configuration
+        gl={{ preserveDrawingBuffer: true }} // WebGL configuration
         style={{
           position: "fixed",
           width: width,
           height: height,
         }}
       >
-        <ambientLight intensity={0.5} />
-        <Environment preset="city" />
-        <OrbitControls
-          target={[0, 0, 0]}
+        <ambientLight intensity={0.5} /> {/* Light configuration */}
+        <Environment preset="city" /> {/* Environment configuration */}
+        <OrbitControls // OrbitControls for camera rotation
+          target={[-0.1, 0, 0]}
           minPolarAngle={Math.PI / 2}
           maxPolarAngle={Math.PI / 2}
         />
         <CameraRig>
+          {" "}
+          {/* CameraRig component */}
           <Center>
-            <Avatar position={[0.15, -1.7, 0]} />
+            {/* Avatar component with specified position */}
+            <Avatar position={[0, 0, 0]} />
           </Center>
         </CameraRig>
       </Canvas>
+      {/* Display Username */}
       <div
         style={{
           position: "fixed",
@@ -73,6 +80,7 @@ const CanvasModel = ({ username, userId }) => {
       >
         {username}
       </div>
+      {/* Customize Arrow Icons */}
       <RightArrowIcon top="25%" />
       <RightArrowIcon top="50%" />
       <RightArrowIcon top="75%" />
@@ -81,6 +89,7 @@ const CanvasModel = ({ username, userId }) => {
       <LeftArrowIcon top="50%" />
       <LeftArrowIcon top="75%" />
 
+      {/* Button to Finalize Character */}
       <FinalizeCharacterBtn />
     </div>
   );

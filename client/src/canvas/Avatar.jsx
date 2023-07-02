@@ -27,6 +27,10 @@ const Avatar = ({ position }) => {
     });
   }, [scene, texture]);
 
+  useEffect(() => {
+    console.log("Avatar position changed:", position);
+  }, [position]);
+
   return (
     <>
       <group position={position}>
