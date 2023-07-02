@@ -27,14 +27,6 @@ const Avatar = ({ position }) => {
     });
   }, [scene, texture]);
 
-  // scene.traverse(function (child) {
-  //   if (child instanceof THREE.Mesh && child.material.materialIndex === 0) {
-  //     // Create a new material that uses the loaded texture
-  //     const material = new THREE.MeshBasicMaterial({ map: texture });
-  //     child.material = material;
-  //   }
-  // });
-
   return (
     <>
       <group position={position}>
@@ -42,18 +34,6 @@ const Avatar = ({ position }) => {
       </group>
     </>
   );
-
-  // const texture = new THREE.Texture("/Avatar_Abbi_WithAnim_clothing_01.png");
-  // texture.load("/Avatar_Abbi_WithAnim_clothing_01.png");
-  // const Model = () => {
-  //   const { scene } = useGLTF("/Avatar_Abbi_WithAnim.glb");
-  //   return <primitive object={scene} />;
-  // };
-  // return (
-  //   <group>
-  //     <Model />
-  //   </group>
-  // );
 };
 
 export default Avatar;

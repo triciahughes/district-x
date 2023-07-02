@@ -1,5 +1,4 @@
 import { Canvas, useThree } from "@react-three/fiber";
-import * as THREE from "three";
 import { OrbitControls, Environment, Center } from "@react-three/drei";
 import {
   RightArrowIcon,
