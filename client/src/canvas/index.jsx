@@ -57,6 +57,8 @@ const CanvasModel = ({ username, userId }) => {
     setCameraPosition([0, 0, 13]);
     console.log(orbit, position, avatar);
   };
+
+  // Function to handle the click event for changing the outfit to the left
   const handleLeftOutfitClick = () => {
     // Get the index of the current outfit in the outfitsArray
     const currentOutfitIndex = outfitsArray.findIndex(
