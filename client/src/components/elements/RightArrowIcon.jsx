@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ArrowIcon from "../../assets/RightArrowIcon.png";
 
-const RightArrowIcon = ({ top }) => {
+const RightArrowIcon = ({ top, handleRightOutfitClick }) => {
   const [hovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => setHovered(true);
@@ -22,7 +22,7 @@ const RightArrowIcon = ({ top }) => {
     <img
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={() => console.log("Right arrow clicked")}
+      onClick={handleRightOutfitClick}
       src={ArrowIcon}
       alt="Right Arrow Icon"
       style={iconStyle}

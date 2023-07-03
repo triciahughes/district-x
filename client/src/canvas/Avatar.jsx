@@ -1,19 +1,26 @@
-import React, { useRef, useEffect } from "react";
-import { useGLTF, useAnimations } from "@react-three/drei";
 import * as THREE from "three";
 import { TextureLoader } from "three";
+import React, { useRef, useEffect } from "react";
+import { useGLTF, useAnimations } from "@react-three/drei";
+// import { useLoader } from "react-three-fiber";
 
-const Avatar = ({ position }) => {
+const Avatar = ({ position, outfit }) => {
   const groupRef = useRef();
-  const { nodes, materials, animations, scene } = useGLTF(
-    "/SM_Dx_Avatar_Male.glb"
-  );
+  const { nodes, materials, animations, scene } = useGLTF(`${outfit.model}`);
   const { actions } = useAnimations(animations, groupRef);
 
   useEffect(() => {
     console.log("Available animations: ", actions);
+    // console.log("Animations:", animations);
+
     if (actions.Anim_Idle_Quin_0) {
       actions.Anim_Idle_Quin_0.play();
+    } else {
+      console.warn("There is no animation named 'idle'");
+    }
+
+    if (actions.Anim_Idle_Abbi_0) {
+      actions.Anim_Idle_Abbi_0.play();
     } else {
       console.warn("There is no animation named 'idle'");
     }
@@ -26,7 +33,6 @@ const Avatar = ({ position }) => {
       scene.getObjectByName(nodeName)
     );
     // selectedNodes is now an array
-    console.log(selectedNodes);
   }, [actions, scene]);
 
   useEffect(() => {
@@ -39,26 +45,26 @@ const Avatar = ({ position }) => {
     groupRef.current.add(axesHelper);
   }, []);
 
-  // const texture = useLoader(
-  //   TextureLoader,
-  //   "/Avatar_Abbi_WithAnim_clothing_01.png"
-  // );
+  console.log(outfit);
 
-  //Set the texture to the 0th material in the scene
-  // useEffect(() => {
-  //   scene.traverse((node) => {
-  //     if (node.isMesh) {
-  //       // console.log("Mesh name: ", node.name);
-  //       // console.log("UV1 map: ", node.geometry.attributes.uv);
-  //       // console.log("UV2 map: ", node.geometry.attributes.uv2);
-  //       // create new material using the loaded texture
-  //       const newMaterial = new THREE.MeshStandardMaterial({ map: texture });
-  //       node.material = newMaterial;
-  //       console.dir(node);
-  //       console.dir(node.material);
-  //     }
-  //   });
-  // }, [scene, texture]);
+  console.log(materials);
+
+  useEffect(() => {
+    const textureLoader = new THREE.TextureLoader();
+    const texture = textureLoader.load(`${outfit.texture}`);
+
+    // Flip the texture along the Y-axis
+    texture.flipY = false;
+    // update the color space to be sRGB
+    texture.colorSpace = "srgb";
+
+    const avatarClothingMaterial =
+      materials["M_Clothing_01"] || materials["MI_Clothing_Abbi_02"];
+    if (avatarClothingMaterial) {
+      avatarClothingMaterial.map = texture;
+      avatarClothingMaterial.needsUpdate = true;
+    }
+  }, [materials, outfit]);
 
   return (
     <>

@@ -1,6 +1,6 @@
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, Environment, Center } from "@react-three/drei";
-import React from "react";
+import React, { useState } from "react";
 import {
   RightArrowIcon,
   LeftArrowIcon,
@@ -20,6 +20,33 @@ const CanvasModel = ({ username, userId }) => {
   const snap = useSnapshot(state);
   const width = window.innerWidth;
   const height = window.innerHeight;
+  const [outfit, setOutfit] = useState({
+    model: "SM_Dx_Avatar_Female.glb",
+    texture: "/T_Dx_Female_Outfit_01.png",
+  });
+
+  const outfitsArray = [
+    { model: "SM_Dx_Avatar_Female.glb", texture: "/T_Dx_Female_Outfit_01.png" },
+    { model: "SM_Dx_Avatar_Female.glb", texture: "/T_Dx_Female_Outfit_02.png" },
+    { model: "SM_Dx_Avatar_Female.glb", texture: "/T_Dx_Female_Outfit_03.png" },
+    { model: "SM_Dx_Avatar_Male.glb", texture: "/T_Dx_Male_Outfit_01.png" },
+    { model: "SM_Dx_Avatar_Male.glb", texture: "/T_Dx_Male_Outfit_02.png" },
+    { model: "SM_Dx_Avatar_Male.glb", texture: "/T_Dx_Male_Outfit_03.png" },
+  ];
+
+  // Function to handle the click event for changing the outfit to the right
+  const handleRightOutfitClick = () => {
+    // Get the index of the current outfit in the outfitsArray
+    const currentOutfitIndex = outfitsArray.findIndex(
+      (item) => item.model === outfit.model && item.texture === outfit.texture
+    );
+
+    // Calculate the index of the next outfit, wrapping around to 0 if necessary
+    const nextOutfitIndex = (currentOutfitIndex + 1) % outfitsArray.length;
+
+    // Update the outfit state with the URL of the next outfit
+    setOutfit(outfitsArray[nextOutfitIndex]);
+  };
 
   const getComplementaryColor = (hexColor) => {
     // Convert hexColor to RGB
@@ -46,12 +73,6 @@ const CanvasModel = ({ username, userId }) => {
   };
 
   const newColor = getComplementaryColor(snap.color);
-
-  // const newColor = findSecondColor(snap.color);
-
-  /// subtract red from white and get cyan (0xFFFFFF - 0xFF0000 = 0x00FFFF)
-
-  // findSecondColor(snap.color);
 
   return (
     <div>
@@ -93,7 +114,7 @@ const CanvasModel = ({ username, userId }) => {
           {/* CameraRig component */}
           <Center>
             {/* Avatar component with specified position */}
-            <Avatar position={[0, 0, 0]} />
+            <Avatar position={[0, 0, 0]} outfit={outfit} />
           </Center>
         </CameraRig>
       </Canvas>
@@ -123,7 +144,10 @@ const CanvasModel = ({ username, userId }) => {
       {/* Customize Arrow Icons */}
       <RightArrowIcon top="25%" />
       <RightArrowIcon top="50%" />
-      <RightArrowIcon top="75%" />
+      <RightArrowIcon
+        top="75%"
+        handleRightOutfitClick={handleRightOutfitClick}
+      />
 
       <LeftArrowIcon top="25%" />
       <LeftArrowIcon top="50%" />
