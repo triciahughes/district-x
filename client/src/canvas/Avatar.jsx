@@ -15,11 +15,7 @@ const Avatar = ({ position, outfit }) => {
 
     if (actions.Anim_Idle_Quin_0) {
       actions.Anim_Idle_Quin_0.play();
-    } else {
-      console.warn("There is no animation named 'idle'");
-    }
-
-    if (actions.Anim_Idle_Abbi_0) {
+    } else if (actions.Anim_Idle_Abbi_0) {
       actions.Anim_Idle_Abbi_0.play();
     } else {
       console.warn("There is no animation named 'idle'");
