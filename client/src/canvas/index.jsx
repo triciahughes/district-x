@@ -57,6 +57,24 @@ const CanvasModel = ({ username, userId }) => {
     setCameraPosition([0, 0, 13]);
     console.log(orbit, position, avatar);
   };
+  const handleLeftOutfitClick = () => {
+    // Get the index of the current outfit in the outfitsArray
+    const currentOutfitIndex = outfitsArray.findIndex(
+      (item) => item.model === outfit.model && item.texture === outfit.texture
+    );
+
+    // Calculate the index of the previous outfit, wrapping around to the last index if necessary
+    const previousOutfitIndex =
+      (currentOutfitIndex - 1 + outfitsArray.length) % outfitsArray.length;
+
+    // Update the outfit state with the URL of the previous outfit
+    setOutfit(outfitsArray[previousOutfitIndex]);
+
+    setOrbit([-0.3, 0.75, 0]);
+    setPosition([0, 0, 0]);
+    setCameraPosition([0, 0, 13]);
+    console.log(orbit, position, avatar);
+  };
 
   const getComplementaryColor = (hexColor) => {
     // Convert hexColor to RGB
@@ -167,7 +185,7 @@ const CanvasModel = ({ username, userId }) => {
 
       <LeftArrowIcon top="25%" />
       <LeftArrowIcon top="50%" />
-      <LeftArrowIcon top="75%" />
+      <LeftArrowIcon top="75%" handleLeftOutfitClick={handleLeftOutfitClick} />
 
       {/* Button to Finalize Character */}
       <FinalizeCharacterBtn />
