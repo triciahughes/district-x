@@ -1,6 +1,6 @@
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, Environment, Center } from "@react-three/drei";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   RightArrowIcon,
   LeftArrowIcon,
@@ -9,7 +9,8 @@ import {
   ColorPickerBtn,
 } from "../components";
 
-import Avatar from "./Avatar";
+import AvatarAbbi from "./AvatarAbbi";
+import AvatarQuin from "./AvatarQuin";
 import Backdrop from "./Backdrop";
 import CameraRig from "./CameraRig";
 import { Color } from "three";
@@ -20,20 +21,22 @@ const CanvasModel = ({ username, userId }) => {
   const snap = useSnapshot(state);
   const [orbit, setOrbit] = useState([-0.3, 0.75, 0]);
   const [position, setPosition] = useState([0, 0, 0]);
+  const [cameraPosition, setCameraPosition] = useState([0, 0, 13]);
   const [outfit, setOutfit] = useState({
-    model: "SM_Dx_Avatar_Female.glb",
+    model: true,
     texture: "/T_Dx_Female_Outfit_01.png",
   });
+  const [avatar, setAvatar] = useState(true);
   const width = window.innerWidth;
   const height = window.innerHeight;
 
   const outfitsArray = [
-    { model: "SM_Dx_Avatar_Female.glb", texture: "/T_Dx_Female_Outfit_01.png" },
-    { model: "SM_Dx_Avatar_Female.glb", texture: "/T_Dx_Female_Outfit_02.png" },
-    { model: "SM_Dx_Avatar_Female.glb", texture: "/T_Dx_Female_Outfit_03.png" },
-    { model: "SM_Dx_Avatar_Male.glb", texture: "/T_Dx_Male_Outfit_01.png" },
-    { model: "SM_Dx_Avatar_Male.glb", texture: "/T_Dx_Male_Outfit_02.png" },
-    { model: "SM_Dx_Avatar_Male.glb", texture: "/T_Dx_Male_Outfit_03.png" },
+    { model: true, texture: "/T_Dx_Female_Outfit_01.png" },
+    { model: true, texture: "/T_Dx_Female_Outfit_02.png" },
+    { model: true, texture: "/T_Dx_Female_Outfit_03.png" },
+    { model: false, texture: "/T_Dx_Male_Outfit_01.png" },
+    { model: false, texture: "/T_Dx_Male_Outfit_02.png" },
+    { model: false, texture: "/T_Dx_Male_Outfit_03.png" },
   ];
 
   // Function to handle the click event for changing the outfit to the right
@@ -51,7 +54,8 @@ const CanvasModel = ({ username, userId }) => {
 
     setOrbit([-0.3, 0.75, 0]);
     setPosition([0, 0, 0]);
-    console.log(orbit, position);
+    setCameraPosition([0, 0, 13]);
+    console.log(orbit, position, avatar);
   };
 
   const getComplementaryColor = (hexColor) => {
@@ -85,7 +89,7 @@ const CanvasModel = ({ username, userId }) => {
       {/* First Canvas for the Backdrop component */}
       <Canvas
         shadows
-        camera={{ position: [0, 0, 13], fov: 20 }} // Camera configuration
+        camera={{ position: cameraPosition, fov: 20 }} // Camera configuration
         gl={{ preserveDrawingBuffer: true }} // WebGL configuration
         style={{
           position: "fixed",
@@ -100,7 +104,7 @@ const CanvasModel = ({ username, userId }) => {
       {/* Second Canvas for Avatar and OrbitControls */}
       <Canvas
         shadows
-        camera={{ position: [0, 0, 13], fov: 20 }} // Camera configuration
+        camera={{ position: cameraPosition, fov: 20 }} // Camera configuration
         gl={{ preserveDrawingBuffer: true }} // WebGL configuration
         style={{
           // position: "relative",
@@ -120,7 +124,13 @@ const CanvasModel = ({ username, userId }) => {
           {/* CameraRig component */}
           <Center>
             {/* Avatar component with specified position */}
-            <Avatar position={position} outfit={outfit} />
+            {outfit.model ? (
+              <AvatarAbbi position={position} outfit={outfit} />
+            ) : (
+              <AvatarQuin position={position} outfit={outfit} />
+            )}
+            {/* // <Avatar position={position} outfit={outfit} /> */}
+            {/* // <Avatar position={position} outfit={outfit} /> */}
           </Center>
         </CameraRig>
       </Canvas>
