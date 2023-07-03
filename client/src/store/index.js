@@ -3,7 +3,7 @@ import { proxy } from "valtio";
 const state = proxy({
   edit: true,
   inSession: false,
-  color: "#e66465",
+  color: "#7BDCB5",
 });
 
 export default state;

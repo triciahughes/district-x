@@ -18,12 +18,14 @@ import state from "../store";
 
 const CanvasModel = ({ username, userId }) => {
   const snap = useSnapshot(state);
-  const width = window.innerWidth;
-  const height = window.innerHeight;
+  const [orbit, setOrbit] = useState([-0.3, 0.75, 0]);
+  const [position, setPosition] = useState([0, 0, 0]);
   const [outfit, setOutfit] = useState({
     model: "SM_Dx_Avatar_Female.glb",
     texture: "/T_Dx_Female_Outfit_01.png",
   });
+  const width = window.innerWidth;
+  const height = window.innerHeight;
 
   const outfitsArray = [
     { model: "SM_Dx_Avatar_Female.glb", texture: "/T_Dx_Female_Outfit_01.png" },
@@ -46,6 +48,10 @@ const CanvasModel = ({ username, userId }) => {
 
     // Update the outfit state with the URL of the next outfit
     setOutfit(outfitsArray[nextOutfitIndex]);
+
+    setOrbit([-0.3, 0.75, 0]);
+    setPosition([0, 0, 0]);
+    console.log(orbit, position);
   };
 
   const getComplementaryColor = (hexColor) => {
@@ -105,7 +111,7 @@ const CanvasModel = ({ username, userId }) => {
         <ambientLight intensity={0.5} /> {/* Light configuration */}
         <Environment preset="city" /> {/* Environment configuration */}
         <OrbitControls // OrbitControls for camera rotation
-          target={[-0.3, 0.75, 0]}
+          target={orbit}
           minPolarAngle={Math.PI / 2}
           maxPolarAngle={Math.PI / 2}
         />
@@ -114,7 +120,7 @@ const CanvasModel = ({ username, userId }) => {
           {/* CameraRig component */}
           <Center>
             {/* Avatar component with specified position */}
-            <Avatar position={[0, 0, 0]} outfit={outfit} />
+            <Avatar position={position} outfit={outfit} />
           </Center>
         </CameraRig>
       </Canvas>
