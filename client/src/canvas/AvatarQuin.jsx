@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { TextureLoader } from "three";
 import React, { useRef, useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 // import { useLoader } from "react-three-fiber";
 
 const AvatarQuin = ({ position, outfit }) => {
@@ -9,7 +10,27 @@ const AvatarQuin = ({ position, outfit }) => {
   const { nodes, materials, animations, scene } = useGLTF(
     `SM_Dx_Avatar_Male.glb`
   );
+
   const { actions } = useAnimations(animations, groupRef);
+
+  //By using separate instances of GLTFLoader and faceGLTF for each component instance, we ensure that the loading and rendering of the face mesh is isolated and independent for each avatar. This approach prevents interference and allows each instance to have its own unique face rendering during the initial render.///
+  useEffect(() => {
+    const faceGLTFLoader = new GLTFLoader(); // Create a new instance of GLTFLoader
+
+    faceGLTFLoader.load(`SM_Dx_EyeCard.glb`, (gltf) => {
+      const faceGLTF = gltf; // Store the loaded GLTF data in a local variable
+
+      if (faceGLTF) {
+        const headBone = scene.getObjectByName("head");
+
+        const faceMesh = faceGLTF.scene.children[0].clone();
+        faceMesh.position.set(0.2, 0, 0); // Adjust the position as needed
+        faceMesh.rotation.set(0, -0.1, -1.6); // Adjust the rotation as needed
+
+        headBone.add(faceMesh);
+      }
+    });
+  }, [scene]);
 
   useEffect(() => {
     console.log("Available animations: ", actions);
@@ -44,11 +65,15 @@ const AvatarQuin = ({ position, outfit }) => {
 
   console.log(outfit);
 
-  console.log(materials);
+  console.log("materials: ", materials);
 
   useEffect(() => {
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load(`${outfit.texture}`);
+    // const faceTexture = textureLoader.load(`/T_Dx_EyeCard_Angry.png`);
+
+    // faceMesh.position.copy(headPosition);
+    // faceMesh.rotation.copy(headRotation);
 
     // Flip the texture along the Y-axis
     texture.flipY = false;

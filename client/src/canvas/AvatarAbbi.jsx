@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { TextureLoader } from "three";
 import React, { useRef, useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 // import { useLoader } from "react-three-fiber";
 
 const AvatarAbbi = ({ position, outfit }) => {
@@ -10,6 +11,24 @@ const AvatarAbbi = ({ position, outfit }) => {
     `SM_Dx_Avatar_Female.glb`
   );
   const { actions } = useAnimations(animations, groupRef);
+
+  useEffect(() => {
+    const faceGLTFLoader = new GLTFLoader(); // Create a new instance of GLTFLoader
+
+    faceGLTFLoader.load(`SM_Dx_EyeCard.glb`, (gltf) => {
+      const faceGLTF = gltf; // Store the loaded GLTF data in a local variable
+
+      if (faceGLTF) {
+        const headBone = scene.getObjectByName("head");
+
+        const faceMesh = faceGLTF.scene.children[0].clone();
+        faceMesh.position.set(0.2, 0, 0.03); // Adjust the position as needed
+        faceMesh.rotation.set(0, -0.25, -1.6); // Adjust the rotation as needed
+
+        headBone.add(faceMesh);
+      }
+    });
+  }, [scene]);
 
   useEffect(() => {
     console.log("Available animations: ", actions);
