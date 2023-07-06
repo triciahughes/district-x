@@ -48,9 +48,9 @@ const CanvasModel = ({ username, userId }) => {
       case "nextEyes":
         handleRightFaceClick();
         break;
-      // case "prevEyes":
-      //   handleLeftFaceClick();
-      //   break;
+      case "prevEyes":
+        handleLeftFaceClick();
+        break;
     }
   };
 
@@ -74,6 +74,14 @@ const CanvasModel = ({ username, userId }) => {
     setFace(facesArray[nextFaceIndex]);
     console.log("face", face);
   };
+  const handleLeftFaceClick = () => {
+    const currentFaceIndex = facesArray.findIndex((item) => item === face);
+    const nextFaceIndex =
+      (currentFaceIndex - 1 + facesArray.length) % facesArray.length;
+
+    setFace(facesArray[nextFaceIndex]);
+    console.log("face", face);
+  };
 
   /////// Outfit Changing Logic ///////
   const outfitsArray = [
@@ -84,23 +92,6 @@ const CanvasModel = ({ username, userId }) => {
     { model: false, texture: "/T_Dx_Male_Outfit_02.png" },
     { model: false, texture: "/T_Dx_Male_Outfit_03.png" },
   ];
-
-  // const handleArrowBtnClick = (btnType) => {
-  //   switch (btnType) {
-  //     case "nextOutfit":
-  //       handleRightOutfitClick();
-  //       break;
-  //     case "prevOutfit":
-  //       handleLeftOutfitClick();
-  //       break;
-  //     case "nextFace":
-  //       break;
-  //     case "prevFace":
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
 
   // Function to handle the click event for changing the outfit to the right
   const handleRightOutfitClick = () => {
@@ -257,7 +248,11 @@ const CanvasModel = ({ username, userId }) => {
       />
 
       <LeftArrowIcon top="25%" />
-      <LeftArrowIcon top="50%" />
+      <LeftArrowIcon
+        top="50%"
+        handleActiveFunction={handleActiveFunction}
+        activeFunction={"prevEyes"}
+      />
       <LeftArrowIcon
         top="75%"
         handleActiveFunction={handleActiveFunction}
