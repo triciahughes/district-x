@@ -208,7 +208,7 @@ const CanvasModel = ({ username, userId }) => {
           <Center>
             {/* Avatar component with specified position */}
             {outfit.model ? (
-              <AvatarAbbi position={position} outfit={outfit} />
+              <AvatarAbbi position={position} outfit={outfit} face={face} />
             ) : (
               <AvatarQuin position={position} outfit={outfit} face={face} />
             )}

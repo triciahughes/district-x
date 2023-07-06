@@ -5,30 +5,58 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 // import { useLoader } from "react-three-fiber";
 
-const AvatarAbbi = ({ position, outfit }) => {
+const AvatarAbbi = ({ position, outfit, face }) => {
   const groupRef = useRef();
   const { nodes, materials, animations, scene } = useGLTF(
     `SM_Dx_Avatar_Female.glb`
   );
   const { actions } = useAnimations(animations, groupRef);
 
+  /////Face Mesh ///////
   useEffect(() => {
-    const faceGLTFLoader = new GLTFLoader(); // Create a new instance of GLTFLoader
+    const faceGLTFLoader = new GLTFLoader();
 
     faceGLTFLoader.load(`SM_Dx_EyeCard.glb`, (gltf) => {
-      const faceGLTF = gltf; // Store the loaded GLTF data in a local variable
+      const faceGLTF = gltf;
+      const faceMesh = faceGLTF.scene.children[0].clone();
 
       if (faceGLTF) {
         const headBone = scene.getObjectByName("head");
 
-        const faceMesh = faceGLTF.scene.children[0].clone();
-        faceMesh.position.set(0.2, 0, 0.03); // Adjust the position as needed
-        faceMesh.rotation.set(0, -0.25, -1.6); // Adjust the rotation as needed
+        // Remove existing face mesh if one exists
+        const existingFaceMesh = headBone.getObjectByName("faceMesh");
+        if (existingFaceMesh) {
+          headBone.remove(existingFaceMesh);
+        }
+
+        faceMesh.name = "faceMesh"; // Give a name to the face mesh for easier tracking
+        faceMesh.position.set(0.1, 0, 0.03);
+        faceMesh.rotation.set(0, -0.1, -1.6);
 
         headBone.add(faceMesh);
+        console.log("Face mesh added to head bone:", faceMesh.material);
+
+        ////// Face Texture ///////
+        const textureLoader = new THREE.TextureLoader();
+        const texture = textureLoader.load(`${face}`);
+
+        texture.flipY = !texture.flipY;
+
+        texture.colorSpace = "srgb";
+
+        const avatarFaceMaterial = faceMesh.material;
+
+        avatarFaceMaterial.map = texture;
+        avatarFaceMaterial.needsUpdate = true;
+
+        // console.log(avatarFaceMaterial);
+        // if (avatarFaceMaterial) {
+        //   avatarFaceMaterial.map = texture;
+        //   avatarFaceMaterial.needsUpdate = true;
+        // }
       }
     });
-  }, [scene]);
+  }, [face]);
 
   useEffect(() => {
     console.log("Available animations: ", actions);
