@@ -1,4 +1,4 @@
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas, act, useThree } from "@react-three/fiber";
 import { OrbitControls, Environment, Center } from "@react-three/drei";
 import React, { useState, useEffect } from "react";
 import {
@@ -26,10 +26,56 @@ const CanvasModel = ({ username, userId }) => {
     model: true,
     texture: "/T_Dx_Female_Outfit_01.png",
   });
+  const [face, setFace] = useState("/T_Dx_EyeCard_Default.png");
   const [avatar, setAvatar] = useState(true);
+
+  //// canvas size ////
   const width = window.innerWidth;
   const height = window.innerHeight;
 
+  // const [activeFunction, setActiveFunction] = useState("");
+  const handleActiveFunction = (activeFunction) => {
+    // if (activeFunction === "nextOutfit") {
+    //   handleRightOutfitClick();
+    // }
+    switch (activeFunction) {
+      case "nextOutfit":
+        handleRightOutfitClick();
+        break;
+      case "prevOutfit":
+        handleLeftOutfitClick();
+        break;
+      case "nextEyes":
+        handleRightFaceClick();
+        break;
+      // case "prevEyes":
+      //   handleLeftFaceClick();
+      //   break;
+    }
+  };
+
+  // console.log("activeFunction", activeFunction);
+
+  /////// Face Changing Logic ////////
+  const facesArray = [
+    "/T_Dx_EyeCard_Default.png",
+    "/T_Dx_EyeCard_Angry.png",
+    "/T_Dx_EyeCard_Happy.png",
+    "/T_Dx_EyeCard_Sad.png",
+    "/T_Dx_EyeCard_Wince.png",
+    "/T_Dx_EyeCard_Xs.png",
+    "/T_Dx_EyeCard_Eyelashes.png",
+  ];
+
+  const handleRightFaceClick = () => {
+    const currentFaceIndex = facesArray.findIndex((item) => item === face);
+    const nextFaceIndex = (currentFaceIndex + 1) % facesArray.length;
+
+    setFace(facesArray[nextFaceIndex]);
+    console.log("face", face);
+  };
+
+  /////// Outfit Changing Logic ///////
   const outfitsArray = [
     { model: true, texture: "/T_Dx_Female_Outfit_01.png" },
     { model: true, texture: "/T_Dx_Female_Outfit_02.png" },
@@ -38,6 +84,23 @@ const CanvasModel = ({ username, userId }) => {
     { model: false, texture: "/T_Dx_Male_Outfit_02.png" },
     { model: false, texture: "/T_Dx_Male_Outfit_03.png" },
   ];
+
+  // const handleArrowBtnClick = (btnType) => {
+  //   switch (btnType) {
+  //     case "nextOutfit":
+  //       handleRightOutfitClick();
+  //       break;
+  //     case "prevOutfit":
+  //       handleLeftOutfitClick();
+  //       break;
+  //     case "nextFace":
+  //       break;
+  //     case "prevFace":
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
 
   // Function to handle the click event for changing the outfit to the right
   const handleRightOutfitClick = () => {
@@ -147,7 +210,7 @@ const CanvasModel = ({ username, userId }) => {
             {outfit.model ? (
               <AvatarAbbi position={position} outfit={outfit} />
             ) : (
-              <AvatarQuin position={position} outfit={outfit} />
+              <AvatarQuin position={position} outfit={outfit} face={face} />
             )}
             {/* // <Avatar position={position} outfit={outfit} /> */}
             {/* // <Avatar position={position} outfit={outfit} /> */}
@@ -179,15 +242,28 @@ const CanvasModel = ({ username, userId }) => {
       <ColorPickerBtn ColorPicker={ColorPicker} />
       {/* Customize Arrow Icons */}
       <RightArrowIcon top="25%" />
-      <RightArrowIcon top="50%" />
+      <RightArrowIcon
+        top="50%"
+        // handleRightFaceClick={handleRightFaceClick}
+        handleActiveFunction={handleActiveFunction}
+        activeFunction={"nextEyes"}
+      />
       <RightArrowIcon
         top="75%"
-        handleRightOutfitClick={handleRightOutfitClick}
+        // handleRightOutfitClick={handleRightOutfitClick}
+        handleActiveFunction={handleActiveFunction}
+        activeFunction={"nextOutfit"}
+        // activeFunction={activeFunction}
       />
 
       <LeftArrowIcon top="25%" />
       <LeftArrowIcon top="50%" />
-      <LeftArrowIcon top="75%" handleLeftOutfitClick={handleLeftOutfitClick} />
+      <LeftArrowIcon
+        top="75%"
+        handleActiveFunction={handleActiveFunction}
+        activeFunction={"prevOutfit"}
+        // handleLeftOutfitClick={handleLeftOutfitClick}
+      />
 
       {/* Button to Finalize Character */}
       <FinalizeCharacterBtn />

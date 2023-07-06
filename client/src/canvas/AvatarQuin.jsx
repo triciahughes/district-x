@@ -5,7 +5,7 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 // import { useLoader } from "react-three-fiber";
 
-const AvatarQuin = ({ position, outfit }) => {
+const AvatarQuin = ({ position, outfit, face }) => {
   const groupRef = useRef();
   const { nodes, materials, animations, scene } = useGLTF(
     `SM_Dx_Avatar_Male.glb`
@@ -13,25 +13,56 @@ const AvatarQuin = ({ position, outfit }) => {
 
   const { actions } = useAnimations(animations, groupRef);
 
+  console.log(face);
+
   //By using separate instances of GLTFLoader and faceGLTF for each component instance, we ensure that the loading and rendering of the face mesh is isolated and independent for each avatar. This approach prevents interference and allows each instance to have its own unique face rendering during the initial render.///
+  /////Face Mesh ///////
   useEffect(() => {
-    const faceGLTFLoader = new GLTFLoader(); // Create a new instance of GLTFLoader
+    const faceGLTFLoader = new GLTFLoader();
 
     faceGLTFLoader.load(`SM_Dx_EyeCard.glb`, (gltf) => {
-      const faceGLTF = gltf; // Store the loaded GLTF data in a local variable
+      const faceGLTF = gltf;
+      const faceMesh = faceGLTF.scene.children[0].clone();
 
       if (faceGLTF) {
         const headBone = scene.getObjectByName("head");
 
-        const faceMesh = faceGLTF.scene.children[0].clone();
-        faceMesh.position.set(0.2, 0, 0); // Adjust the position as needed
-        faceMesh.rotation.set(0, -0.1, -1.6); // Adjust the rotation as needed
+        // Remove existing face mesh if one exists
+        const existingFaceMesh = headBone.getObjectByName("faceMesh");
+        if (existingFaceMesh) {
+          headBone.remove(existingFaceMesh);
+        }
+
+        faceMesh.name = "faceMesh"; // Give a name to the face mesh for easier tracking
+        faceMesh.position.set(0.19, 0, 0);
+        faceMesh.rotation.set(0, -0.1, -1.6);
 
         headBone.add(faceMesh);
+        console.log("Face mesh added to head bone:", faceMesh.material);
+
+        ////// Face Texture ///////
+        const textureLoader = new THREE.TextureLoader();
+        const texture = textureLoader.load(`${face}`);
+
+        texture.flipY = !texture.flipY;
+
+        texture.colorSpace = "srgb";
+
+        const avatarFaceMaterial = faceMesh.material;
+
+        avatarFaceMaterial.map = texture;
+        avatarFaceMaterial.needsUpdate = true;
+
+        // console.log(avatarFaceMaterial);
+        // if (avatarFaceMaterial) {
+        //   avatarFaceMaterial.map = texture;
+        //   avatarFaceMaterial.needsUpdate = true;
+        // }
       }
     });
-  }, [scene]);
+  }, [face]);
 
+  ///// Animations ///////
   useEffect(() => {
     console.log("Available animations: ", actions);
     // console.log("Animations:", animations);
@@ -53,6 +84,7 @@ const AvatarQuin = ({ position, outfit }) => {
     // selectedNodes is now an array
   }, [actions, scene]);
 
+  ////// Position ///////
   useEffect(() => {
     console.log("Avatar position changed:", position);
   }, [position]);
@@ -63,17 +95,10 @@ const AvatarQuin = ({ position, outfit }) => {
     groupRef.current.add(axesHelper);
   }, []);
 
-  console.log(outfit);
-
-  console.log("materials: ", materials);
-
+  ////// Outfit Textures ///////
   useEffect(() => {
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load(`${outfit.texture}`);
-    // const faceTexture = textureLoader.load(`/T_Dx_EyeCard_Angry.png`);
-
-    // faceMesh.position.copy(headPosition);
-    // faceMesh.rotation.copy(headRotation);
 
     // Flip the texture along the Y-axis
     texture.flipY = false;

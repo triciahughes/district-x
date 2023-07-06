@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import ArrowIcon from "../../assets/LeftArrowIcon.png";
 
-const LeftArrowIcon = ({ top, handleLeftOutfitClick }) => {
+const LeftArrowIcon = ({
+  top,
+  handleActiveFunction,
+  activeFunction,
+  handleLeftOutfitClick,
+}) => {
   const [hovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => setHovered(true);
@@ -21,7 +26,8 @@ const LeftArrowIcon = ({ top, handleLeftOutfitClick }) => {
     <img
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={handleLeftOutfitClick}
+      // onClick={handleLeftOutfitClick}
+      onClick={() => handleActiveFunction(activeFunction)}
       src={ArrowIcon}
       alt="Left Arrow Icon"
       style={iconStyle}
