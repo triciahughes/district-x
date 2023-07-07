@@ -64,6 +64,9 @@ const CanvasModel = ({ username, userId }) => {
       case "nextHair":
         handleRightHairClick();
         break;
+      case "prevHair":
+        handleLefttHairClick();
+        break;
     }
   };
 
@@ -81,6 +84,14 @@ const CanvasModel = ({ username, userId }) => {
   const handleRightHairClick = () => {
     const currentHairIndex = hairArray.findIndex((item) => item === hair);
     const nextHairIndex = (currentHairIndex + 1) % hairArray.length;
+
+    setHair(hairArray[nextHairIndex]);
+    console.log("hair", hair);
+  };
+  const handleLefttHairClick = () => {
+    const currentHairIndex = hairArray.findIndex((item) => item === hair);
+    const nextHairIndex =
+      (currentHairIndex - 1 + hairArray.length) % hairArray.length;
 
     setHair(hairArray[nextHairIndex]);
     console.log("hair", hair);
@@ -291,7 +302,11 @@ const CanvasModel = ({ username, userId }) => {
         // activeFunction={activeFunction}
       />
 
-      <LeftArrowIcon top="25%" />
+      <LeftArrowIcon
+        top="25%"
+        handleActiveFunction={handleActiveFunction}
+        activeFunction={"prevHair"}
+      />
       <LeftArrowIcon
         top="50%"
         handleActiveFunction={handleActiveFunction}
