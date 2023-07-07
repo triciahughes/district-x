@@ -1,10 +1,12 @@
 # District X
 
-![Ed Splash](client/EdSplash.png)
-
 ## Description
 
 A self-expression social platform that combines customizable 3D avatars with anonymous discussions utilizing Unreal Engine 5.
+
+## Video Preview
+
+[![Watch the video](client/assets/PortfolioFeaturedImage_DistrictX.jpg)](https://youtu.be/P4qbp1i7nEw)
 
 ## Installation 📥
 
@@ -28,19 +30,21 @@ $ python app.py
 
 ## Important to note 📝
 
-The avatar character customization happens in URE editor. If you're soley on the web application, you will be met with a blank white page. To get pass this naviagte to...
+The avatar character customization happens in the URE editor. If you're solely on the web application, you will be met with a blank white page. To get past this navigate to...
 
 ```
 http://localhost:4000/home
 ```
 
-Thumnails are automatically generated when the character customization process is complete so if you bypass this part, there won't be any thumbnails for any of the users. You won't be able to view your own or other avatars via their profile pages.
+Thumbnails are automatically generated when the character customization process is complete so if you bypass this part, there won't be any thumbnails for any of the users. You won't be able to view your own or other avatars via their profile pages.
 
 ## Roadmap 📍
 
 Future additions include:
 
-- Coins for each user to indicate social status given by the community bases on posts / comments made
-- Limit thr amount of upvotes/downvotes a user can give on a single post/comment.
+I- Currently working on moving this application from UE5 to Threejs!
+
+- Coins for each user to indicate social status given by the community based on posts/comments made
+- Limit the number of upvotes/downvotes a user can give on a single post/comment.
 - Expand Districts.
 - Allow users to create Districts.
