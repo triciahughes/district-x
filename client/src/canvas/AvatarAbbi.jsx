@@ -3,14 +3,69 @@ import { TextureLoader } from "three";
 import React, { useRef, useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import SM_Dx_Hair_Female_01 from "../assets/hair/SM_Dx_Hair_Female_01.glb";
 // import { useLoader } from "react-three-fiber";
 
-const AvatarAbbi = ({ position, outfit, face }) => {
+const AvatarAbbi = ({ position, outfit, face, hair }) => {
   const groupRef = useRef();
   const { nodes, materials, animations, scene } = useGLTF(
     `SM_Dx_Avatar_Female.glb`
   );
   const { actions } = useAnimations(animations, groupRef);
+
+  useEffect(() => {
+    const hairGLTFLoader = new GLTFLoader();
+
+    hairGLTFLoader.load(hair, (gltf) => {
+      const hairGLTF = gltf;
+      const hairMesh = hairGLTF.scene.children[0].clone();
+
+      if (hairGLTF) {
+        const headBone = scene.getObjectByName("head");
+
+        const axesHelper = new THREE.AxesHelper(5);
+        headBone.add(axesHelper);
+        // Remove existing hair mesh if one exists
+        const existingHairMesh = headBone.getObjectByName("hairMesh");
+        if (existingHairMesh) {
+          headBone.remove(existingHairMesh);
+        }
+
+        // console.log("hairMesh: ", hairMesh);
+        // hairMesh.position.set(0, 0, 0.11);
+        // hairMesh.rotation.set(0, -0.1, -1.5708);
+
+        hairMesh.position.set(0.24, -0.0001, -0.04);
+        hairMesh.rotation.set(0.01, -0.4, -1.5708);
+        // hairMesh.scale.set(1.05, 1.05, 1.05);
+        //-1.0821
+
+        if (hair.includes("Female")) {
+          hairMesh.position.set(0, 0, 0.11);
+          hairMesh.rotation.set(0, -0.1, -1.5708);
+        }
+        hairMesh.name = `hairMesh`; // Give a name to the hair mesh for easier tracking
+
+        // } else {
+        //   hairMesh.position.set(3, 0, 0);
+        //   hairMesh.rotation.set(0, 0, 0);
+        // }
+
+        headBone.add(hairMesh);
+        console.log("Hair mesh added to head bone:", hairMesh.material);
+
+        const textureLoader = new THREE.TextureLoader();
+        const texture = textureLoader.load(`${hair}`);
+
+        texture.colorSpace = "srgb";
+
+        const avatarHairMaterial = hairMesh.material;
+
+        avatarHairMaterial.map = texture;
+        avatarHairMaterial.needsUpdate = true;
+      }
+    });
+  }, [hair]);
 
   /////Face Mesh ///////
   useEffect(() => {

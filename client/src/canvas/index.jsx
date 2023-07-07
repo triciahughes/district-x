@@ -7,7 +7,16 @@ import {
   FinalizeCharacterBtn,
   ColorPicker,
   ColorPickerBtn,
-} from "../components";
+} from "../components/index";
+
+import {
+  hairStyle1,
+  hairStyle2,
+  hairStyle3,
+  hairStyle4,
+  hairStyle5,
+  hairStyle6,
+} from "../assets";
 
 import AvatarAbbi from "./AvatarAbbi";
 import AvatarQuin from "./AvatarQuin";
@@ -27,6 +36,7 @@ const CanvasModel = ({ username, userId }) => {
     texture: "/T_Dx_Female_Outfit_01.png",
   });
   const [face, setFace] = useState("/T_Dx_EyeCard_Default.png");
+  const [hair, setHair] = useState(hairStyle1);
   const [avatar, setAvatar] = useState(true);
 
   //// canvas size ////
@@ -51,10 +61,30 @@ const CanvasModel = ({ username, userId }) => {
       case "prevEyes":
         handleLeftFaceClick();
         break;
+      case "nextHair":
+        handleRightHairClick();
+        break;
     }
   };
 
-  // console.log("activeFunction", activeFunction);
+  ////// Hair Changing Logic ////////
+
+  const hairArray = [
+    hairStyle1,
+    hairStyle2,
+    hairStyle3,
+    hairStyle4,
+    hairStyle5,
+    hairStyle6,
+  ];
+
+  const handleRightHairClick = () => {
+    const currentHairIndex = hairArray.findIndex((item) => item === hair);
+    const nextHairIndex = (currentHairIndex + 1) % hairArray.length;
+
+    setHair(hairArray[nextHairIndex]);
+    console.log("hair", hair);
+  };
 
   /////// Face Changing Logic ////////
   const facesArray = [
@@ -199,7 +229,12 @@ const CanvasModel = ({ username, userId }) => {
           <Center>
             {/* Avatar component with specified position */}
             {outfit.model ? (
-              <AvatarAbbi position={position} outfit={outfit} face={face} />
+              <AvatarAbbi
+                position={position}
+                outfit={outfit}
+                face={face}
+                hair={hair}
+              />
             ) : (
               <AvatarQuin position={position} outfit={outfit} face={face} />
             )}
@@ -232,7 +267,11 @@ const CanvasModel = ({ username, userId }) => {
       </div>
       <ColorPickerBtn ColorPicker={ColorPicker} />
       {/* Customize Arrow Icons */}
-      <RightArrowIcon top="25%" />
+      <RightArrowIcon
+        top="25%"
+        handleActiveFunction={handleActiveFunction}
+        activeFunction={"nextHair"}
+      />
       <RightArrowIcon
         top="50%"
         // handleRightFaceClick={handleRightFaceClick}
