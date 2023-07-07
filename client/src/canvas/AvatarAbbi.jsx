@@ -31,25 +31,14 @@ const AvatarAbbi = ({ position, outfit, face, hair }) => {
           headBone.remove(existingHairMesh);
         }
 
-        // console.log("hairMesh: ", hairMesh);
-        // hairMesh.position.set(0, 0, 0.11);
-        // hairMesh.rotation.set(0, -0.1, -1.5708);
-
-        hairMesh.position.set(0.24, -0.0001, -0.04);
-        hairMesh.rotation.set(0.01, -0.4, -1.5708);
-        // hairMesh.scale.set(1.05, 1.05, 1.05);
-        //-1.0821
+        hairMesh.position.set(0.19, -0.0009, -0.00001);
+        hairMesh.rotation.set(0.01, -0.25, -1.5708);
 
         if (hair.includes("Female")) {
           hairMesh.position.set(0, 0, 0.11);
           hairMesh.rotation.set(0, -0.1, -1.5708);
         }
         hairMesh.name = `hairMesh`; // Give a name to the hair mesh for easier tracking
-
-        // } else {
-        //   hairMesh.position.set(3, 0, 0);
-        //   hairMesh.rotation.set(0, 0, 0);
-        // }
 
         headBone.add(hairMesh);
         console.log("Hair mesh added to head bone:", hairMesh.material);

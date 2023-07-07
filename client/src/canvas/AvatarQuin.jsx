@@ -5,7 +5,7 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 // import { useLoader } from "react-three-fiber";
 
-const AvatarQuin = ({ position, outfit, face }) => {
+const AvatarQuin = ({ position, outfit, face, hair }) => {
   const groupRef = useRef();
   const { nodes, materials, animations, scene } = useGLTF(
     `SM_Dx_Avatar_Male.glb`
@@ -13,7 +13,48 @@ const AvatarQuin = ({ position, outfit, face }) => {
 
   const { actions } = useAnimations(animations, groupRef);
 
-  console.log(face);
+  useEffect(() => {
+    const hairGLTFLoader = new GLTFLoader();
+
+    hairGLTFLoader.load(hair, (gltf) => {
+      const hairGLTF = gltf;
+      const hairMesh = hairGLTF.scene.children[0].clone();
+
+      if (hairGLTF) {
+        const headBone = scene.getObjectByName("head");
+
+        const axesHelper = new THREE.AxesHelper(5);
+        headBone.add(axesHelper);
+        // Remove existing hair mesh if one exists
+        const existingHairMesh = headBone.getObjectByName("hairMesh");
+        if (existingHairMesh) {
+          headBone.remove(existingHairMesh);
+        }
+
+        hairMesh.position.set(0.2, 0, 0);
+        hairMesh.rotation.set(0, 0, -1.5708);
+
+        if (hair.includes("Female")) {
+          hairMesh.position.set(0.03, 0, 0.09);
+          hairMesh.rotation.set(0, 0.05, -1.5708);
+        }
+        hairMesh.name = `hairMesh`; // Give a name to the hair mesh for easier tracking
+
+        headBone.add(hairMesh);
+        console.log("Hair mesh added to head bone:", hairMesh.material);
+
+        const textureLoader = new THREE.TextureLoader();
+        const texture = textureLoader.load(`${hair}`);
+
+        texture.colorSpace = "srgb";
+
+        const avatarHairMaterial = hairMesh.material;
+
+        avatarHairMaterial.map = texture;
+        avatarHairMaterial.needsUpdate = true;
+      }
+    });
+  }, [hair]);
 
   //By using separate instances of GLTFLoader and faceGLTF for each component instance, we ensure that the loading and rendering of the face mesh is isolated and independent for each avatar. This approach prevents interference and allows each instance to have its own unique face rendering during the initial render.///
   /////Face Mesh ///////
@@ -52,12 +93,6 @@ const AvatarQuin = ({ position, outfit, face }) => {
 
         avatarFaceMaterial.map = texture;
         avatarFaceMaterial.needsUpdate = true;
-
-        // console.log(avatarFaceMaterial);
-        // if (avatarFaceMaterial) {
-        //   avatarFaceMaterial.map = texture;
-        //   avatarFaceMaterial.needsUpdate = true;
-        // }
       }
     });
   }, [face]);

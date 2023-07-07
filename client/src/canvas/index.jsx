@@ -236,7 +236,12 @@ const CanvasModel = ({ username, userId }) => {
                 hair={hair}
               />
             ) : (
-              <AvatarQuin position={position} outfit={outfit} face={face} />
+              <AvatarQuin
+                position={position}
+                outfit={outfit}
+                face={face}
+                hair={hair}
+              />
             )}
             {/* // <Avatar position={position} outfit={outfit} /> */}
             {/* // <Avatar position={position} outfit={outfit} /> */}
