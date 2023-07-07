@@ -4,9 +4,9 @@
 
 A self-expression social platform that combines customizable 3D avatars with anonymous discussions utilizing Unreal Engine 5.
 
-## Video Preview
+## Video Preview (Click the image)
 
-[![Watch the video](client/assets/PortfolioFeaturedImage_DistrictX.jpg)](https://youtu.be/P4qbp1i7nEw)
+[![Thumbnail](client/assets/PortfolioFeaturedImage_DistrictX.jpg)](https://youtu.be/P4qbp1i7nEw)
 
 ## Installation 📥
 
