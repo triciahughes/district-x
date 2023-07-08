@@ -59,7 +59,7 @@ const AvatarQuin = ({ position, outfit, face, hair, newHairColor }) => {
         );
       }
     });
-  }, [hair]);
+  }, [scene, hair, newHairColor]);
 
   //By using separate instances of GLTFLoader and faceGLTF for each component instance, we ensure that the loading and rendering of the face mesh is isolated and independent for each avatar. This approach prevents interference and allows each instance to have its own unique face rendering during the initial render.///
   /////Face Mesh ///////

@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import hairLogo from "../../assets/hairLogo.png";
 import HueSlider from "./HueSlider";
+import bodyLogo from "../../assets/bodyLogo.png";
 
-const HairColor = () => {
+const BodyColor = ({ colorPicker }) => {
   const [hovered, setHovered] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
 
   const handleMouseEnter = () => setHovered(true);
   const handleMouseLeave = () =>
     showPicker ? setHovered(true) : setHovered(false);
-
   const btnStyle = {
     position: "fixed",
-    left: 50,
+    left: 150,
     top: 100,
     backgroundColor: `${
       hovered ? "rgba(91, 189, 235, 1)" : "rgba(225, 225, 225, .25)"
@@ -28,7 +27,6 @@ const HairColor = () => {
   };
 
   const squareSize = 70;
-
   return (
     <>
       {showPicker ? <HueSlider /> : null}
@@ -38,10 +36,10 @@ const HairColor = () => {
         onMouseLeave={handleMouseLeave}
         onClick={() => setShowPicker(!showPicker)}
       >
-        <img src={hairLogo} alt="hair logo" style={{ width: "100%" }}></img>
+        <img src={bodyLogo} alt="body logo" style={{ width: "100%" }}></img>
       </button>
     </>
   );
 };
 
-export default HairColor;
+export default BodyColor;

@@ -1,6 +1,6 @@
-import { Canvas, act, useThree } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment, Center } from "@react-three/drei";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   RightArrowIcon,
   LeftArrowIcon,
@@ -8,6 +8,7 @@ import {
   ColorPicker,
   ColorPickerBtn,
   HairColor,
+  BodyColor,
 } from "../components/index";
 import {
   hairStyle1,
@@ -22,7 +23,6 @@ import AvatarAbbi from "./AvatarAbbi";
 import AvatarQuin from "./AvatarQuin";
 import Backdrop from "./Backdrop";
 import CameraRig from "./CameraRig";
-import { Color } from "three";
 import { useSnapshot } from "valtio";
 import state from "../store";
 
@@ -44,11 +44,7 @@ const CanvasModel = ({ username, userId }) => {
   const width = window.innerWidth;
   const height = window.innerHeight;
 
-  // const [activeFunction, setActiveFunction] = useState("");
   const handleActiveFunction = (activeFunction) => {
-    // if (activeFunction === "nextOutfit") {
-    //   handleRightOutfitClick();
-    // }
     switch (activeFunction) {
       case "nextOutfit":
         handleRightOutfitClick();
@@ -87,7 +83,6 @@ const CanvasModel = ({ username, userId }) => {
     const nextHairIndex = (currentHairIndex + 1) % hairArray.length;
 
     setHair(hairArray[nextHairIndex]);
-    console.log("hair", hair);
   };
   const handleLefttHairClick = () => {
     const currentHairIndex = hairArray.findIndex((item) => item === hair);
@@ -95,7 +90,6 @@ const CanvasModel = ({ username, userId }) => {
       (currentHairIndex - 1 + hairArray.length) % hairArray.length;
 
     setHair(hairArray[nextHairIndex]);
-    console.log("hair", hair);
   };
 
   /////// Face Changing Logic ////////
@@ -114,7 +108,6 @@ const CanvasModel = ({ username, userId }) => {
     const nextFaceIndex = (currentFaceIndex + 1) % facesArray.length;
 
     setFace(facesArray[nextFaceIndex]);
-    console.log("face", face);
   };
   const handleLeftFaceClick = () => {
     const currentFaceIndex = facesArray.findIndex((item) => item === face);
@@ -122,7 +115,6 @@ const CanvasModel = ({ username, userId }) => {
       (currentFaceIndex - 1 + facesArray.length) % facesArray.length;
 
     setFace(facesArray[nextFaceIndex]);
-    console.log("face", face);
   };
 
   /////// Outfit Changing Logic ///////
@@ -151,7 +143,6 @@ const CanvasModel = ({ username, userId }) => {
     setOrbit([-0.3, 0.75, 0]);
     setPosition([0, 0, 0]);
     setCameraPosition([0, 0, 13]);
-    console.log(orbit, position, avatar);
   };
 
   // Function to handle the click event for changing the outfit to the left
@@ -171,7 +162,6 @@ const CanvasModel = ({ username, userId }) => {
     setOrbit([-0.3, 0.75, 0]);
     setPosition([0, 0, 0]);
     setCameraPosition([0, 0, 13]);
-    console.log(orbit, position, avatar);
   };
 
   const convertColor = (hexColor) => {
@@ -186,6 +176,8 @@ const CanvasModel = ({ username, userId }) => {
   };
 
   const newHairColor = convertColor(snap.hairColor);
+
+  const newBodyColor = convertColor(snap.bodyColor);
 
   const getComplementaryColor = (hexColor) => {
     // Convert hexColor to RGB
@@ -262,6 +254,7 @@ const CanvasModel = ({ username, userId }) => {
                 face={face}
                 hair={hair}
                 newHairColor={newHairColor}
+                newBodyColor={newBodyColor}
               />
             ) : (
               <AvatarQuin
@@ -359,6 +352,7 @@ const CanvasModel = ({ username, userId }) => {
         }}
       >
         <HairColor ColorPicker={ColorPicker} />
+        <BodyColor ColorPicker={ColorPicker} />
         <FinalizeCharacterBtn />
       </div>
     </div>
