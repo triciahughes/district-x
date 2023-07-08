@@ -19,7 +19,7 @@ const HueSlider = () => {
     <div style={colorPickerStyle}>
       <SliderPicker
         color={snap.hairColor}
-        onChangeComplete={(hairColor) => (state.hairColor = hairColor.hex)}
+        onChange={(hairColor) => (state.hairColor = hairColor.hex)}
       />
     </div>
   );

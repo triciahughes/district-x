@@ -28,6 +28,7 @@ import state from "../store";
 
 const CanvasModel = ({ username, userId }) => {
   const snap = useSnapshot(state);
+  const [lights, setLights] = useState(null);
   const [orbit, setOrbit] = useState([-0.3, 0.75, 0]);
   const [position, setPosition] = useState([0, 0, 0]);
   const [cameraPosition, setCameraPosition] = useState([0, 0, 13]);
@@ -226,7 +227,9 @@ const CanvasModel = ({ username, userId }) => {
           background: `linear-gradient(${snap.color}, ${newColor})`,
         }}
       >
-        <Backdrop /> {/* Backdrop component */}
+        {
+          lights ? lights : setLights(<Backdrop />) // replace Backdrop with your actual light creation logic
+        }
       </Canvas>
 
       {/* Second Canvas for Avatar and OrbitControls */}
