@@ -5,7 +5,14 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 // import { useLoader } from "react-three-fiber";
 
-const AvatarQuin = ({ position, outfit, face, hair, newHairColor }) => {
+const AvatarQuin = ({
+  position,
+  outfit,
+  face,
+  hair,
+  newHairColor,
+  newBodyColor,
+}) => {
   const groupRef = useRef();
   const { nodes, materials, animations, scene } = useGLTF(
     `SM_Dx_Avatar_Male.glb`
@@ -152,6 +159,21 @@ const AvatarQuin = ({ position, outfit, face, hair, newHairColor }) => {
       avatarClothingMaterial.needsUpdate = true;
     }
   }, [materials, outfit]);
+
+  useEffect(() => {
+    // const textureLoader = new THREE.TextureLoader();
+    // const texture = textureLoader.load(`${newBodyColor}`);
+
+    const avatarBodyMaterial = materials["M_Skin_01"];
+
+    avatarBodyMaterial.color = new THREE.Color(
+      newBodyColor[0],
+      newBodyColor[1],
+      newBodyColor[2]
+    );
+
+    // console.log("Materials", avatarBodyMaterial);
+  }, [newBodyColor]);
 
   return (
     <>
