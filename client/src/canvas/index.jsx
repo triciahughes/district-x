@@ -7,8 +7,8 @@ import {
   FinalizeCharacterBtn,
   ColorPicker,
   ColorPickerBtn,
+  HairColor,
 } from "../components/index";
-
 import {
   hairStyle1,
   hairStyle2,
@@ -173,6 +173,19 @@ const CanvasModel = ({ username, userId }) => {
     console.log(orbit, position, avatar);
   };
 
+  const convertColor = (hexColor) => {
+    // Convert hexColor to RGB
+    const rgbColor =
+      hexColor.charAt(0) === "#" ? hexColor.substring(1, 7) : hexColor;
+    const r = parseInt(rgbColor.substring(0, 2), 16) / 255;
+    const g = parseInt(rgbColor.substring(2, 4), 16) / 255;
+    const b = parseInt(rgbColor.substring(4, 6), 16) / 255;
+
+    return [r, g, b];
+  };
+
+  const newHairColor = convertColor(snap.hairColor);
+
   const getComplementaryColor = (hexColor) => {
     // Convert hexColor to RGB
     const rgbColor =
@@ -245,6 +258,7 @@ const CanvasModel = ({ username, userId }) => {
                 outfit={outfit}
                 face={face}
                 hair={hair}
+                newHairColor={newHairColor}
               />
             ) : (
               <AvatarQuin
@@ -320,7 +334,29 @@ const CanvasModel = ({ username, userId }) => {
       />
 
       {/* Button to Finalize Character */}
-      <FinalizeCharacterBtn />
+      <div
+        style={{
+          position: "fixed",
+          left: 525,
+          bottom: 15,
+          padding: "15px",
+          backgroundColor: "rgba(225, 225, 225, .25)",
+          boxShadow: "0 2px 30px rgba(31, 38, 135, .07)",
+          backdropFilter: "blur(4px)",
+          border: "1px solid rgba(225, 225, 225, .18)",
+          color: "rgba(45, 169, 227)",
+          fontSize: "1.75rem",
+          border: "none",
+          borderRadius: "7px",
+          width: "30%",
+          height: "20%",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <HairColor ColorPicker={ColorPicker} />
+        <FinalizeCharacterBtn />
+      </div>
     </div>
   );
 };

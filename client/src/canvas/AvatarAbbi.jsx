@@ -6,7 +6,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import SM_Dx_Hair_Female_01 from "../assets/hair/SM_Dx_Hair_Female_01.glb";
 // import { useLoader } from "react-three-fiber";
 
-const AvatarAbbi = ({ position, outfit, face, hair }) => {
+const AvatarAbbi = ({ position, outfit, face, hair, newHairColor }) => {
   const groupRef = useRef();
   const { nodes, materials, animations, scene } = useGLTF(
     `SM_Dx_Avatar_Female.glb`
@@ -46,15 +46,25 @@ const AvatarAbbi = ({ position, outfit, face, hair }) => {
         const textureLoader = new THREE.TextureLoader();
         const texture = textureLoader.load(`${hair}`);
 
-        texture.colorSpace = "srgb";
+        // texture.colorSpace = "srgb";
 
-        const avatarHairMaterial = hairMesh.material;
+        console.log("hair material:", hairMesh.material);
+        console.log(newHairColor);
 
-        avatarHairMaterial.map = texture;
-        avatarHairMaterial.needsUpdate = true;
+        // const avatarHairMaterial = hairMesh.material;
+
+        // console.log(avatarHairMaterial.color);
+        hairMesh.material.color = new THREE.Color(
+          newHairColor[0],
+          newHairColor[1],
+          newHairColor[2]
+        );
+
+        // avatarHairMaterial.map = texture;
+        // avatarHairMaterial.needsUpdate = true;
       }
     });
-  }, [hair]);
+  }, [scene, hair, newHairColor]);
 
   /////Face Mesh ///////
   useEffect(() => {

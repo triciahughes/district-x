@@ -14,8 +14,9 @@ const FinalizeCharacterBtn = () => {
 
   const buttonStyle = {
     position: "fixed",
-    left: 600,
-    bottom: 0,
+    // left: 600,
+    left: 125,
+    bottom: -15,
     padding: "15px",
     backgroundColor: `${
       hovered ? "rgba(91, 189, 235, 1)" : "rgba(99, 191, 235, 0.75)"
@@ -25,7 +26,7 @@ const FinalizeCharacterBtn = () => {
     fontSize: "1rem",
     border: "none",
     borderRadius: "7px",
-    width: "20%",
+    width: "50%",
     display: "flex",
     justifyContent: "center",
   };

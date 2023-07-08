@@ -1,50 +1,48 @@
 import React, { useState } from "react";
-import Swatch from "../../assets/swatch.png";
+import { SketchPicker, HuePicker } from "react-color";
+import hairLogo from "../../assets/hairLogo.png";
+import HueSlider from "./HueSlider";
 
-const ColorPickerBtn = ({ ColorPicker }) => {
+const HairColor = ({ ColorPicker }) => {
   const [hovered, setHovered] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
 
   const handleMouseEnter = () => setHovered(true);
-  const handleMouseLeave = () => setHovered(false);
+  const handleMouseLeave = () =>
+    showPicker ? setHovered(true) : setHovered(false);
 
   const btnStyle = {
     position: "fixed",
     left: 50,
-    top: 150,
+    top: 100,
     backgroundColor: `${
       hovered ? "rgba(91, 189, 235, 1)" : "rgba(225, 225, 225, .25)"
     }`,
     transform: `translateY(-50%) ${hovered ? "scale(1.1)" : "scale(1)"}`,
     border: "none",
     borderRadius: "7px",
-    width: "7%",
+    // width: "2%",
+    // height: "2%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-  };
-
-  const colorPickerStyle = {
-    position: "fixed",
-    left: 40,
-    top: 200,
   };
 
   const squareSize = 70;
 
   return (
     <>
+      {showPicker ? <HueSlider /> : null}
       <button
         style={{ ...btnStyle, width: squareSize, height: squareSize }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={() => setShowPicker(!showPicker)}
       >
-        <img src={Swatch} alt="swatch logo" style={{ width: "100%" }}></img>
+        <img src={hairLogo} alt="hair logo" style={{ width: "100%" }}></img>
       </button>
-      {showPicker ? <ColorPicker colorPickerStyle={colorPickerStyle} /> : null}
     </>
   );
 };
 
-export default ColorPickerBtn;
+export default HairColor;

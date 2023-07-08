@@ -4,7 +4,7 @@ import { useSnapshot } from "valtio";
 
 import state from "../../store";
 
-const ColorPicker = () => {
+const ColorPicker = ({ colorPickerStyle }) => {
   const snap = useSnapshot(state);
 
   const btnStyle = {
@@ -14,7 +14,7 @@ const ColorPicker = () => {
   };
 
   return (
-    <div style={btnStyle}>
+    <div style={colorPickerStyle}>
       <TwitterPicker
         color={snap.color}
         onChangeComplete={(color) => (state.color = color.hex)}

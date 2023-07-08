@@ -5,6 +5,7 @@ import LeftArrowIcon from "./elements/LeftArrowIcon";
 import RightArrowIcon from "./elements/RightArrowIcon";
 import ColorPicker from "./elements/ColorPicker";
 import ColorPickerBtn from "./elements/ColorPickerBtn";
+import HairColor from "./elements/HairColor";
 
 export {
   SignInForm,
@@ -14,4 +15,5 @@ export {
   RightArrowIcon,
   ColorPicker,
   ColorPickerBtn,
+  HairColor,
 };
