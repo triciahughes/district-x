@@ -5,7 +5,7 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 // import { useLoader } from "react-three-fiber";
 
-const AvatarQuin = ({ position, outfit, face, hair }) => {
+const AvatarQuin = ({ position, outfit, face, hair, newHairColor }) => {
   const groupRef = useRef();
   const { nodes, materials, animations, scene } = useGLTF(
     `SM_Dx_Avatar_Male.glb`
@@ -46,12 +46,17 @@ const AvatarQuin = ({ position, outfit, face, hair }) => {
         const textureLoader = new THREE.TextureLoader();
         const texture = textureLoader.load(`${hair}`);
 
-        texture.colorSpace = "srgb";
+        console.log("hair material:", hairMesh.material);
+        console.log(newHairColor);
 
-        const avatarHairMaterial = hairMesh.material;
+        // const avatarHairMaterial = hairMesh.material;
 
-        avatarHairMaterial.map = texture;
-        avatarHairMaterial.needsUpdate = true;
+        // console.log(avatarHairMaterial.color);
+        hairMesh.material.color = new THREE.Color(
+          newHairColor[0],
+          newHairColor[1],
+          newHairColor[2]
+        );
       }
     });
   }, [hair]);

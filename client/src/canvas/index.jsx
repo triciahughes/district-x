@@ -269,6 +269,7 @@ const CanvasModel = ({ username, userId }) => {
                 outfit={outfit}
                 face={face}
                 hair={hair}
+                newHairColor={newHairColor}
               />
             )}
             {/* // <Avatar position={position} outfit={outfit} /> */}
