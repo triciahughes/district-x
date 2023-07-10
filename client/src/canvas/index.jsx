@@ -9,6 +9,8 @@ import {
   ColorPickerBtn,
   HairColor,
   BodyColor,
+  EyeColor,
+  OutfitColor,
 } from "../components/index";
 import {
   hairStyle1,
@@ -179,6 +181,8 @@ const CanvasModel = ({ username, userId }) => {
 
   const newBodyColor = convertColor(snap.bodyColor);
 
+  // const newOutfitColor = convertColor(snap.outfitColor);
+
   const getComplementaryColor = (hexColor) => {
     // Convert hexColor to RGB
     const rgbColor =
@@ -264,6 +268,7 @@ const CanvasModel = ({ username, userId }) => {
                 hair={hair}
                 newHairColor={newHairColor}
                 newBodyColor={newBodyColor}
+                // newOutfitColor={newOutfitColor}
               />
             )}
             {/* // <Avatar position={position} outfit={outfit} /> */}
@@ -354,6 +359,8 @@ const CanvasModel = ({ username, userId }) => {
       >
         <HairColor ColorPicker={ColorPicker} />
         <BodyColor ColorPicker={ColorPicker} />
+        <EyeColor ColorPicker={ColorPicker} />
+        <OutfitColor ColorPicker={ColorPicker} />
         <FinalizeCharacterBtn />
       </div>
     </div>

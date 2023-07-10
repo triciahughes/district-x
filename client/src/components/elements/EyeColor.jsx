@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import hairLogo from "../../assets/hairLogo.png";
+import eyeLogo from "../../assets/eyeLogo.png";
 import HueSlider from "./HueSlider";
 import { useSnapshot } from "valtio";
 
 import state from "../../store";
 
-const HairColor = () => {
+const EyeColor = () => {
   const snap = useSnapshot(state);
   const [hovered, setHovered] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
@@ -16,7 +16,7 @@ const HairColor = () => {
 
   const btnStyle = {
     position: "fixed",
-    left: 50,
+    left: 250,
     top: 100,
     backgroundColor: `${
       hovered ? "rgba(91, 189, 235, 1)" : "rgba(225, 225, 225, .25)"
@@ -42,10 +42,10 @@ const HairColor = () => {
         onMouseLeave={handleMouseLeave}
         onClick={() => setShowPicker(!showPicker)}
       >
-        <img src={hairLogo} alt="hair logo" style={{ width: "100%" }}></img>
+        <img src={eyeLogo} alt="hair logo" style={{ width: "100%" }}></img>
       </button>
     </>
   );
 };
 
-export default HairColor;
+export default EyeColor;

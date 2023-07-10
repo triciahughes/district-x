@@ -7,6 +7,8 @@ import ColorPicker from "./elements/ColorPicker";
 import ColorPickerBtn from "./elements/ColorPickerBtn";
 import HairColor from "./elements/HairColor";
 import BodyColor from "./elements/BodyColor";
+import EyeColor from "./elements/EyeColor";
+import OutfitColor from "./elements/OutfitColor";
 
 export {
   SignInForm,
@@ -18,4 +20,6 @@ export {
   ColorPickerBtn,
   HairColor,
   BodyColor,
+  EyeColor,
+  OutfitColor,
 };

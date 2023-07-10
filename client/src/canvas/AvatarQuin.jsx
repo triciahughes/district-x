@@ -12,6 +12,7 @@ const AvatarQuin = ({
   hair,
   newHairColor,
   newBodyColor,
+  newOutfitColor,
 }) => {
   const groupRef = useRef();
   const { nodes, materials, animations, scene } = useGLTF(
@@ -20,6 +21,7 @@ const AvatarQuin = ({
 
   const { actions } = useAnimations(animations, groupRef);
 
+  ////////// HAIR ///////////
   useEffect(() => {
     const hairGLTFLoader = new GLTFLoader();
 
@@ -69,7 +71,7 @@ const AvatarQuin = ({
   }, [scene, hair, newHairColor]);
 
   //By using separate instances of GLTFLoader and faceGLTF for each component instance, we ensure that the loading and rendering of the face mesh is isolated and independent for each avatar. This approach prevents interference and allows each instance to have its own unique face rendering during the initial render.///
-  /////Face Mesh ///////
+  ////////////Face Mesh ///////////
   useEffect(() => {
     const faceGLTFLoader = new GLTFLoader();
 
@@ -109,7 +111,7 @@ const AvatarQuin = ({
     });
   }, [face]);
 
-  ///// Animations ///////
+  ///////// Animations //////////
   useEffect(() => {
     console.log("Available animations: ", actions);
     // console.log("Animations:", animations);
@@ -131,7 +133,7 @@ const AvatarQuin = ({
     // selectedNodes is now an array
   }, [actions, scene]);
 
-  ////// Position ///////
+  ///////// Position //////////
   useEffect(() => {
     console.log("Avatar position changed:", position);
   }, [position]);
@@ -142,7 +144,7 @@ const AvatarQuin = ({
     groupRef.current.add(axesHelper);
   }, []);
 
-  ////// Outfit Textures ///////
+  ////////// Outfit Textures ///////////
   useEffect(() => {
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load(`${outfit.texture}`);
@@ -155,9 +157,17 @@ const AvatarQuin = ({
     const avatarClothingMaterial =
       materials["M_Clothing_01"] || materials["MI_Clothing_Abbi_02"];
     if (avatarClothingMaterial) {
+      // avatarClothingMaterial.color = new THREE.Color(
+      //   newOutfitColor[0],
+      //   newOutfitColor[1],
+      //   newOutfitColor[2]
+      // );
       avatarClothingMaterial.map = texture;
       avatarClothingMaterial.needsUpdate = true;
     }
+
+    console.log("materials: ", materials);
+    console.log("avatarClothingMaterial: ", avatarClothingMaterial);
   }, [materials, outfit]);
 
   useEffect(() => {
