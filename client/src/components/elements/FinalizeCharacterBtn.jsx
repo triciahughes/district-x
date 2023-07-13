@@ -15,7 +15,7 @@ const FinalizeCharacterBtn = () => {
   const buttonStyle = {
     position: "fixed",
     // left: 600,
-    left: 125,
+    left: 90,
     bottom: -15,
     padding: "15px",
     backgroundColor: `${

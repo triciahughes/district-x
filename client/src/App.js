@@ -87,7 +87,7 @@ function App() {
     //     });
     //   }
     // });
-    console.log("hello from fetchUserPosts", profileUserId);
+    // console.log("hello from fetchUserPosts", profileUserId);
   }
 
   //// specific for logged in user ////
@@ -99,7 +99,7 @@ function App() {
         });
       }
     });
-    console.log("hello from fetchUserComments", profileUserId);
+    // console.log("hello from fetchUserComments", profileUserId);
   }
 
   //// For ALL users not just logged in user ////
@@ -108,9 +108,9 @@ function App() {
     fetch(`/profileposts/${id}`).then((res) => {
       if (res.ok) {
         res.json().then((profilePostData) => {
-          console.log(profilePostData);
+          // console.log(profilePostData);
           setProfilePost(profilePostData);
-          console.log("hello from profile post");
+          // console.log("hello from profile post");
         });
       }
     });
@@ -161,7 +161,7 @@ function App() {
 
   function handleSortPostsClick() {
     setPostSortBool((current) => !current);
-    console.log(postSortBool);
+    // console.log(postSortBool);
   }
   const filterButton = postSortBool ? (
     <Button onClick={handleSortPostsClick} style={{ color: "#ff9100" }}>

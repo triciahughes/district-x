@@ -5,27 +5,23 @@ import { useSnapshot } from "valtio";
 import state from "../../store";
 import { act } from "@react-three/fiber";
 
-const HueSlider = () => {
+const HueSlider = ({ activeCustomFunction }) => {
   const snap = useSnapshot(state);
 
-  const handleColorChange = (activeColor) => {
-    switch (activeColor) {
-      case "hair":
-        // state.hairColor = color.hex;
+  const currentColor = snap[activeCustomFunction].replace(/"/g, "");
+
+  console.log(currentColor);
+
+  const handleColorChange = (activeCustomFunction, color) => {
+    switch (activeCustomFunction) {
+      case "hairColor":
+        state.hairColor = color.hex;
         break;
       case "bodyColor":
-        bodyColorFunction();
-        break;
-      case "eyes":
-        // state.eyeColor = color.hex;
-        break;
-      case "outfit":
-        // state.outfitColor = color.hex;
+        state.bodyColor = color.hex;
         break;
     }
   };
-
-  const bodyColorFunction = (color) => (snap.bodyColor = color.hex);
 
   const colorPickerStyle = {
     position: "fixed",
@@ -35,7 +31,10 @@ const HueSlider = () => {
 
   return (
     <div style={colorPickerStyle}>
-      <SliderPicker color={snap.bodyColor} onChange={handleColorChange} />
+      <SliderPicker
+        color={currentColor}
+        onChange={(color) => handleColorChange(activeCustomFunction, color)}
+      />
     </div>
   );
 };

@@ -9,8 +9,6 @@ import {
   ColorPickerBtn,
   HairColor,
   BodyColor,
-  EyeColor,
-  OutfitColor,
 } from "../components/index";
 import {
   hairStyle1,
@@ -41,6 +39,12 @@ const CanvasModel = ({ username, userId }) => {
   const [face, setFace] = useState("/T_Dx_EyeCard_Default.png");
   const [hair, setHair] = useState(hairStyle1);
   const [avatar, setAvatar] = useState(true);
+  const [activeCustomFunction, setActiveCustomFunction] = useState(null);
+  const [activeCustomButton, setActiveCustomButton] = useState(null);
+  const [hovered, setHovered] = useState(false);
+
+  const handleMouseEnter = () => setHovered(true);
+  const handleMouseLeave = () => setHovered(false);
 
   //// canvas size ////
   const width = window.innerWidth;
@@ -65,6 +69,17 @@ const CanvasModel = ({ username, userId }) => {
         break;
       case "prevHair":
         handleLefttHairClick();
+        break;
+    }
+  };
+
+  const handleActiveCustomFunction = (activeFunction) => {
+    switch (activeFunction) {
+      case "hairColor":
+        setActiveCustomFunction("hairColor");
+        break;
+      case "bodyColor":
+        setActiveCustomFunction("bodyColor");
         break;
     }
   };
@@ -180,8 +195,6 @@ const CanvasModel = ({ username, userId }) => {
   const newHairColor = convertColor(snap.hairColor);
 
   const newBodyColor = convertColor(snap.bodyColor);
-
-  // const newOutfitColor = convertColor(snap.outfitColor);
 
   const getComplementaryColor = (hexColor) => {
     // Convert hexColor to RGB
@@ -340,7 +353,7 @@ const CanvasModel = ({ username, userId }) => {
       <div
         style={{
           position: "fixed",
-          left: 525,
+          left: 600,
           bottom: 15,
           padding: "15px",
           backgroundColor: "rgba(225, 225, 225, .25)",
@@ -351,16 +364,32 @@ const CanvasModel = ({ username, userId }) => {
           fontSize: "1.75rem",
           border: "none",
           borderRadius: "7px",
-          width: "30%",
+          width: "20%",
           height: "20%",
           display: "flex",
           justifyContent: "center",
         }}
       >
-        <HairColor ColorPicker={ColorPicker} />
-        <BodyColor ColorPicker={ColorPicker} />
-        <EyeColor ColorPicker={ColorPicker} />
-        <OutfitColor ColorPicker={ColorPicker} />
+        <HairColor
+          ColorPicker={ColorPicker}
+          handleActiveCustomFunction={handleActiveCustomFunction}
+          activeCustomFunction={"hairColor"}
+          setActiveCustomButton={setActiveCustomButton}
+          hovered={hovered}
+          // setHovered={setHovered}
+          handleMouseEnter={handleMouseEnter}
+          handleMouseLeave={handleMouseLeave}
+        />
+        <BodyColor
+          ColorPicker={ColorPicker}
+          handleActiveCustomFunction={handleActiveCustomFunction}
+          activeCustomFunction={"bodyColor"}
+          setActiveCustomButton={setActiveCustomButton}
+          hovered={hovered}
+          // setHovered={setHovered}
+          handleMouseEnter={handleMouseEnter}
+          handleMouseLeave={handleMouseLeave}
+        />
         <FinalizeCharacterBtn />
       </div>
     </div>

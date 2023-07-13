@@ -32,8 +32,8 @@ const AvatarQuin = ({
       if (hairGLTF) {
         const headBone = scene.getObjectByName("head");
 
-        const axesHelper = new THREE.AxesHelper(5);
-        headBone.add(axesHelper);
+        // const axesHelper = new THREE.AxesHelper(5);
+        // headBone.add(axesHelper);
         // Remove existing hair mesh if one exists
         const existingHairMesh = headBone.getObjectByName("hairMesh");
         if (existingHairMesh) {
@@ -139,10 +139,10 @@ const AvatarQuin = ({
   }, [position]);
 
   // Create an AxesHelper to visualize the pivot point
-  useEffect(() => {
-    const axesHelper = new THREE.AxesHelper(5);
-    groupRef.current.add(axesHelper);
-  }, []);
+  // useEffect(() => {
+  //   const axesHelper = new THREE.AxesHelper(5);
+  //   groupRef.current.add(axesHelper);
+  // }, []);
 
   ////////// Outfit Textures ///////////
   useEffect(() => {

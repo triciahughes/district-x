@@ -4,19 +4,40 @@ import HueSlider from "./HueSlider";
 import { useSnapshot } from "valtio";
 
 import state from "../../store";
+import { act } from "@react-three/fiber";
 
-const HairColor = () => {
+const HairColor = ({
+  handleActiveCustomFunction,
+  activeCustomFunction,
+  setActiveCustomButtom,
+  hovered,
+  setHovered,
+  handleMouseEnter,
+  handleMouseLeave,
+}) => {
   const snap = useSnapshot(state);
-  const [hovered, setHovered] = useState(false);
+  // const [hovered, setHovered] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
 
-  const handleMouseEnter = () => setHovered(true);
-  const handleMouseLeave = () =>
-    showPicker ? setHovered(true) : setHovered(false);
+  // const handleMouseEnter = () => setHovered(true);
+  // const handleMouseLeave = () =>
+  //   showPicker ? setHovered(true) : setHovered(false);
+
+  // const handleCustomState = () => {
+  //   if (activeCustomFunction === "hairColor") {
+  //     setShowPicker(true);
+  //   } else {
+  //     setShowPicker(false);
+  //   }
+  // };
+
+  if (activeCustomFunction === "hairColor") {
+    console.log("hairColor is active");
+  }
 
   const btnStyle = {
     position: "fixed",
-    left: 50,
+    left: 100,
     top: 100,
     backgroundColor: `${
       hovered ? "rgba(91, 189, 235, 1)" : "rgba(225, 225, 225, .25)"
@@ -35,12 +56,19 @@ const HairColor = () => {
 
   return (
     <>
-      {showPicker ? <HueSlider /> : null}
+      {showPicker ? (
+        <HueSlider activeCustomFunction={activeCustomFunction} />
+      ) : null}
       <button
         style={{ ...btnStyle, width: squareSize, height: squareSize }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onClick={() => setShowPicker(!showPicker)}
+        onClick={() => (
+          setShowPicker(!showPicker),
+          handleActiveCustomFunction(activeCustomFunction),
+          setActiveCustomButtom(() => "hairColor")
+          // handleCustomState()
+        )}
       >
         <img src={hairLogo} alt="hair logo" style={{ width: "100%" }}></img>
       </button>

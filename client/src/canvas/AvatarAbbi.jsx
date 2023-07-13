@@ -30,8 +30,8 @@ const AvatarAbbi = ({
       if (hairGLTF) {
         const headBone = scene.getObjectByName("head");
 
-        const axesHelper = new THREE.AxesHelper(5);
-        headBone.add(axesHelper);
+        // const axesHelper = new THREE.AxesHelper(5);
+        // headBone.add(axesHelper);
         // Remove existing hair mesh if one exists
         const existingHairMesh = headBone.getObjectByName("hairMesh");
         if (existingHairMesh) {
@@ -48,19 +48,19 @@ const AvatarAbbi = ({
         hairMesh.name = `hairMesh`; // Give a name to the hair mesh for easier tracking
 
         headBone.add(hairMesh);
-        console.log("Hair mesh added to head bone:", hairMesh.material);
+        // console.log("Hair mesh added to head bone:", hairMesh.material);
 
         const textureLoader = new THREE.TextureLoader();
         const texture = textureLoader.load(`${hair}`);
 
         // texture.colorSpace = "srgb";
 
-        console.log("hair material:", hairMesh.material);
-        console.log(newHairColor);
+        // console.log("hair material:", hairMesh.material);
+        // console.log(newHairColor);
 
         // const avatarHairMaterial = hairMesh.material;
 
-        // console.log(avatarHairMaterial.color);
+        console.log(hairMesh.material.color);
         hairMesh.material.color = new THREE.Color(
           newHairColor[0],
           newHairColor[1],
@@ -95,7 +95,7 @@ const AvatarAbbi = ({
         faceMesh.rotation.set(0, -0.1, -1.6);
 
         headBone.add(faceMesh);
-        console.log("Face mesh added to head bone:", faceMesh.material);
+        // console.log("Face mesh added to head bone:", faceMesh.material);
 
         ////// Face Texture ///////
         const textureLoader = new THREE.TextureLoader();
@@ -109,27 +109,17 @@ const AvatarAbbi = ({
 
         avatarFaceMaterial.map = texture;
         avatarFaceMaterial.needsUpdate = true;
-
-        // console.log(avatarFaceMaterial);
-        // if (avatarFaceMaterial) {
-        //   avatarFaceMaterial.map = texture;
-        //   avatarFaceMaterial.needsUpdate = true;
-        // }
       }
     });
   }, [face]);
 
   useEffect(() => {
-    console.log("Available animations: ", actions);
-    // console.log("Animations:", animations);
-
     if (actions.Anim_Idle_Abbi_0) {
       actions.Anim_Idle_Abbi_0.play();
     } else {
       console.warn("There is no animation named 'idle'");
     }
 
-    console.log("Available animations: ", actions);
     // array of the names of the nodes needed
     var nodesToSelect = ["head", "neck_01", "hand_l", "hand_r"];
 
@@ -145,14 +135,10 @@ const AvatarAbbi = ({
   // }, [position]);
 
   // Create an AxesHelper to visualize the pivot point
-  useEffect(() => {
-    const axesHelper = new THREE.AxesHelper(5);
-    groupRef.current.add(axesHelper);
-  }, []);
-
-  console.log(outfit);
-
-  console.log(materials);
+  // useEffect(() => {
+  //   const axesHelper = new THREE.AxesHelper(5);
+  //   groupRef.current.add(axesHelper);
+  // }, []);
 
   useEffect(() => {
     const textureLoader = new THREE.TextureLoader();
@@ -172,9 +158,6 @@ const AvatarAbbi = ({
   }, [materials, outfit]);
 
   useEffect(() => {
-    // const textureLoader = new THREE.TextureLoader();
-    // const texture = textureLoader.load(`${newBodyColor}`);
-
     const avatarBodyMaterial = materials["MI_Skin_01"];
 
     avatarBodyMaterial.color = new THREE.Color(
@@ -182,8 +165,6 @@ const AvatarAbbi = ({
       newBodyColor[1],
       newBodyColor[2]
     );
-
-    console.log("Materials", avatarBodyMaterial);
   }, [newBodyColor]);
 
   return (
