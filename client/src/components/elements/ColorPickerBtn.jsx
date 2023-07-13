@@ -24,6 +24,12 @@ const ColorPickerBtn = ({ ColorPicker }) => {
     alignItems: "center",
   };
 
+  const colorPickerStyle = {
+    position: "fixed",
+    left: 40,
+    top: 200,
+  };
+
   const squareSize = 70;
 
   return (
@@ -36,7 +42,7 @@ const ColorPickerBtn = ({ ColorPicker }) => {
       >
         <img src={Swatch} alt="swatch logo" style={{ width: "100%" }}></img>
       </button>
-      {showPicker ? <ColorPicker /> : null}
+      {showPicker ? <ColorPicker colorPickerStyle={colorPickerStyle} /> : null}
     </>
   );
 };
