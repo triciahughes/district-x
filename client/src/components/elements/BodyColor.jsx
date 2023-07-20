@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HueSlider from "./HueSlider";
 import bodyLogo from "../../assets/bodyLogo.png";
 
@@ -6,14 +6,59 @@ const BodyColor = ({
   colorPicker,
   handleActiveCustomFunction,
   activeCustomFunction,
-  setActiveCustomButtom,
-  hovered,
-  setHovered,
-  handleMouseEnter,
-  handleMouseLeave,
+  setActiveCustomButton,
+  activeCustomButton,
+  // hovered,
+  // setHovered,
+  // handleMouseEnter,
+  // handleMouseLeave,
 }) => {
-  // const [hovered, setHovered] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
+  const [styleState, setStyleState] = useState({});
+  const [hovered, setHovered] = useState(false);
+
+  const handleMouseEnter = () => setHovered(true);
+  const handleMouseLeave = () => setHovered(false);
+
+  useEffect(() => {
+    if (activeCustomFunction === "bodyColor") {
+      setHovered(true);
+      setStyleState({
+        position: "fixed",
+        left: 180,
+        top: 100,
+        // backgroundColor: `${
+        //   hovered ? "rgba(91, 189, 235, 1)" : "rgba(225, 225, 225, .25)"
+        // }`,
+        // transform: `translateY(-50%) ${hovered ? "scale(1.1)" : "scale(1)"}`,
+        border: "none",
+        borderRadius: "7px",
+        // width: "2%",
+        // height: "2%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      });
+    } else {
+      setHovered(false);
+      setStyleState({
+        position: "fixed",
+        left: 180,
+        top: 100,
+        // backgroundColor: `${
+        //   hovered ? "rgba(91, 189, 235, 1)" : "rgba(225, 225, 225, .25)"
+        // }`,
+        // transform: `translateY(-50%) ${hovered ? "scale(1.1)" : "scale(1)"}`,
+        border: "none",
+        borderRadius: "7px",
+        // width: "2%",
+        // height: "2%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      });
+    }
+  }, [activeCustomFunction, hovered]);
 
   // const handleMouseEnter = () => setHovered(true);
   // const handleMouseLeave = () =>
@@ -27,26 +72,26 @@ const BodyColor = ({
   //   }
   // };
 
-  if (activeCustomFunction === "bodyColor") {
-    console.log("bodyColor is active");
-  }
+  // if (activeCustomFunction === "bodyColor") {
+  //   console.log("bodyColor is active");
+  // }
 
-  const btnStyle = {
-    position: "fixed",
-    left: 180,
-    top: 100,
-    backgroundColor: `${
-      hovered ? "rgba(91, 189, 235, 1)" : "rgba(225, 225, 225, .25)"
-    }`,
-    transform: `translateY(-50%) ${hovered ? "scale(1.1)" : "scale(1)"}`,
-    border: "none",
-    borderRadius: "7px",
-    // width: "2%",
-    // height: "2%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  };
+  // const btnStyle = {
+  //   position: "fixed",
+  //   left: 180,
+  //   top: 100,
+  //   backgroundColor: `${
+  //     hovered ? "rgba(91, 189, 235, 1)" : "rgba(225, 225, 225, .25)"
+  //   }`,
+  //   transform: `translateY(-50%) ${hovered ? "scale(1.1)" : "scale(1)"}`,
+  //   border: "none",
+  //   borderRadius: "7px",
+  //   // width: "2%",
+  //   // height: "2%",
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  // };
 
   const squareSize = 70;
   return (
@@ -55,13 +100,26 @@ const BodyColor = ({
         <HueSlider activeCustomFunction={activeCustomFunction} />
       ) : null}
       <button
-        style={{ ...btnStyle, width: squareSize, height: squareSize }}
+        style={{
+          ...styleState,
+          width: squareSize,
+          height: squareSize,
+          background: hovered
+            ? "rgba(91, 189, 235, 1)"
+            : "rgba(225, 225, 225, .25)",
+          transform: `translateY(-50%) ${hovered ? "scale(1.1)" : "scale(1)"}`,
+        }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={() => (
           setShowPicker(!showPicker),
-          handleActiveCustomFunction(activeCustomFunction),
-          setActiveCustomButtom(() => "bodyColor")
+          setHovered(!hovered),
+          // handleActiveCustomFunction(activeCustomFunction),
+          setActiveCustomButton(
+            activeCustomFunction === true || activeCustomFunction === null
+              ? false
+              : null
+          )
           // handleCustomState()
         )}
       >

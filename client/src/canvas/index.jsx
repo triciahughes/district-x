@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment, Center } from "@react-three/drei";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   RightArrowIcon,
   LeftArrowIcon,
@@ -39,14 +39,9 @@ const CanvasModel = ({ username, userId }) => {
   const [face, setFace] = useState("/T_Dx_EyeCard_Default.png");
   const [hair, setHair] = useState(hairStyle1);
   const [avatar, setAvatar] = useState(true);
-  const [activeCustomFunction, setActiveCustomFunction] = useState(null);
+  const [activeCustomFunction, setActiveCustomFunction] = useState("");
   const [activeCustomButton, setActiveCustomButton] = useState(null);
-  const [hovered, setHovered] = useState(false);
 
-  const handleMouseEnter = () => setHovered(true);
-  const handleMouseLeave = () => setHovered(false);
-
-  //// canvas size ////
   const width = window.innerWidth;
   const height = window.innerHeight;
 
@@ -73,17 +68,25 @@ const CanvasModel = ({ username, userId }) => {
     }
   };
 
-  const handleActiveCustomFunction = (activeFunction) => {
-    switch (activeFunction) {
-      case "hairColor":
+  useEffect(() => {
+    // activeCustomButton
+    //   ? setActiveCustomFunction("hairColor")
+    //   : setActiveCustomFunction("bodyColor");
+
+    switch (activeCustomButton) {
+      case true:
         setActiveCustomFunction("hairColor");
         break;
-      case "bodyColor":
+      case false:
         setActiveCustomFunction("bodyColor");
         break;
+      case null:
+        setActiveCustomFunction("");
     }
-  };
+  }, [activeCustomButton]);
 
+  console.log(activeCustomFunction);
+  console.log(activeCustomButton);
   ////// Hair Changing Logic ////////
 
   const hairArray = [
@@ -372,23 +375,24 @@ const CanvasModel = ({ username, userId }) => {
       >
         <HairColor
           ColorPicker={ColorPicker}
-          handleActiveCustomFunction={handleActiveCustomFunction}
-          activeCustomFunction={"hairColor"}
+          // handleActiveCustomFunction={handleActiveCustomFunction}
+          activeCustomFunction={activeCustomFunction}
           setActiveCustomButton={setActiveCustomButton}
-          hovered={hovered}
+          // hovered={hovered}
           // setHovered={setHovered}
-          handleMouseEnter={handleMouseEnter}
-          handleMouseLeave={handleMouseLeave}
+          // handleMouseEnter={handleMouseEnter}
+          // handleMouseLeave={handleMouseLeave}
         />
         <BodyColor
           ColorPicker={ColorPicker}
-          handleActiveCustomFunction={handleActiveCustomFunction}
-          activeCustomFunction={"bodyColor"}
+          // handleActiveCustomFunction={handleActiveCustomFunction}
+          activeCustomFunction={activeCustomFunction}
           setActiveCustomButton={setActiveCustomButton}
-          hovered={hovered}
+          activeCustomButton={activeCustomButton}
+          // hovered={hovered}
           // setHovered={setHovered}
-          handleMouseEnter={handleMouseEnter}
-          handleMouseLeave={handleMouseLeave}
+          // handleMouseEnter={handleMouseEnter}
+          // handleMouseLeave={handleMouseLeave}
         />
         <FinalizeCharacterBtn />
       </div>

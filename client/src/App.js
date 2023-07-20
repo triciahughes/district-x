@@ -49,6 +49,7 @@ function App() {
           setUserId(userData.id);
           fetchUserPosts(userData.id);
           fetchUserComments(userData.id);
+          redirect("/home");
         });
       } else {
         setUser([]);

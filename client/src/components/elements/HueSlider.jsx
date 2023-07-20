@@ -8,7 +8,9 @@ import { act } from "@react-three/fiber";
 const HueSlider = ({ activeCustomFunction }) => {
   const snap = useSnapshot(state);
 
-  const currentColor = snap[activeCustomFunction].replace(/"/g, "");
+  const currentColor = snap[activeCustomFunction]
+    ? snap[activeCustomFunction].replace(/"/g, "")
+    : "";
 
   console.log(currentColor);
 

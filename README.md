@@ -28,10 +28,16 @@ $ python app.py
 
 ## Important to note 📝
 
-The avatar character customization happens in URE editor. If you're soley on the web application, you will be met with a blank white page. To get pass this naviagte to...
+The avatar character customization _USED_ to run in the URE editor. I'm currently working on getting this whole application to solely be web-based. Not everything is connected at the moment, so feel free to just navigate to /home, or if you want to check out the current state of the avatar customization page navigate to /customizer. On the /customizer route if you click on the 'Finalize Avatar' button, you'll be navigated to the home page!
 
 ```
 http://localhost:4000/home
+```
+
+or...
+
+```
+http://localhost:4000/customizer
 ```
 
 Thumnails are automatically generated when the character customization process is complete so if you bypass this part, there won't be any thumbnails for any of the users. You won't be able to view your own or other avatars via their profile pages.
