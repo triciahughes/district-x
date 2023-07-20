@@ -6,7 +6,7 @@ import RightArrowIcon from "./elements/RightArrowIcon";
 import ColorPicker from "./elements/ColorPicker";
 import ColorPickerBtn from "./elements/ColorPickerBtn";
 import HairColor from "./elements/HairColor";
-import BodyColor from "./elements/BodyColor";
+import SkinColor from "./elements/SkinColor";
 // import HueSlider from "./elements/HueSlider";
 
 export {
@@ -18,6 +18,6 @@ export {
   ColorPicker,
   ColorPickerBtn,
   HairColor,
-  BodyColor,
+  SkinColor,
   // HueSlider,
 };

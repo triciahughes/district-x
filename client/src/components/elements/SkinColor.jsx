@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import HueSlider from "./HueSlider";
 import bodyLogo from "../../assets/bodyLogo.png";
 
-const BodyColor = ({
+const SkinColor = ({
   colorPicker,
   handleActiveCustomFunction,
   activeCustomFunction,
@@ -21,7 +21,7 @@ const BodyColor = ({
   const handleMouseLeave = () => setHovered(false);
 
   useEffect(() => {
-    if (activeCustomFunction === "bodyColor") {
+    if (activeCustomFunction === "skinColor") {
       setHovered(true);
       setStyleState({
         position: "fixed",
@@ -65,15 +65,15 @@ const BodyColor = ({
   //   showPicker ? setHovered(true) : setHovered(false);
 
   // const handleCustomState = () => {
-  //   if (activeCustomFunction === "bodyColor") {
+  //   if (activeCustomFunction === "skinColor") {
   //     setShowPicker(true);
   //   } else {
   //     setShowPicker(false);
   //   }
   // };
 
-  // if (activeCustomFunction === "bodyColor") {
-  //   console.log("bodyColor is active");
+  // if (activeCustomFunction === "skinColor") {
+  //   console.log("skinColor is active");
   // }
 
   // const btnStyle = {
@@ -129,4 +129,4 @@ const BodyColor = ({
   );
 };
 
-export default BodyColor;
+export default SkinColor;

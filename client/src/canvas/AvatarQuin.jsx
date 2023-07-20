@@ -11,7 +11,7 @@ const AvatarQuin = ({
   face,
   hair,
   newHairColor,
-  newBodyColor,
+  newskinColor,
   newOutfitColor,
 }) => {
   const groupRef = useRef();
@@ -172,18 +172,18 @@ const AvatarQuin = ({
 
   useEffect(() => {
     // const textureLoader = new THREE.TextureLoader();
-    // const texture = textureLoader.load(`${newBodyColor}`);
+    // const texture = textureLoader.load(`${newskinColor}`);
 
     const avatarBodyMaterial = materials["M_Skin_01"];
 
     avatarBodyMaterial.color = new THREE.Color(
-      newBodyColor[0],
-      newBodyColor[1],
-      newBodyColor[2]
+      newskinColor[0],
+      newskinColor[1],
+      newskinColor[2]
     );
 
     // console.log("Materials", avatarBodyMaterial);
-  }, [newBodyColor]);
+  }, [newskinColor]);
 
   return (
     <>

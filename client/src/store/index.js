@@ -4,9 +4,12 @@ const state = proxy({
   edit: true,
   inSession: false,
   color: "#7BDCB5",
+  clothingData: 0,
+  eyeStyle: 5,
   hairColor: "#F78DA7",
-  bodyColor: "#C1C1C1",
-  eyeColor: "#000000",
+  hairStyle: 1,
+  skinColor: "#C1C1C1",
+
   // outfitColor: "#FF0000",
 });
 

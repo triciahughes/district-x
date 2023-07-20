@@ -12,7 +12,7 @@ const AvatarAbbi = ({
   face,
   hair,
   newHairColor,
-  newBodyColor,
+  newskinColor,
 }) => {
   const groupRef = useRef();
   const { nodes, materials, animations, scene } = useGLTF(
@@ -161,11 +161,11 @@ const AvatarAbbi = ({
     const avatarBodyMaterial = materials["MI_Skin_01"];
 
     avatarBodyMaterial.color = new THREE.Color(
-      newBodyColor[0],
-      newBodyColor[1],
-      newBodyColor[2]
+      newskinColor[0],
+      newskinColor[1],
+      newskinColor[2]
     );
-  }, [newBodyColor]);
+  }, [newskinColor]);
 
   return (
     <>

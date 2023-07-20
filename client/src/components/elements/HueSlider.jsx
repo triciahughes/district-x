@@ -19,8 +19,8 @@ const HueSlider = ({ activeCustomFunction }) => {
       case "hairColor":
         state.hairColor = color.hex;
         break;
-      case "bodyColor":
-        state.bodyColor = color.hex;
+      case "skinColor":
+        state.skinColor = color.hex;
         break;
     }
   };

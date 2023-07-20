@@ -8,7 +8,7 @@ import {
   ColorPicker,
   ColorPickerBtn,
   HairColor,
-  BodyColor,
+  SkinColor,
 } from "../components/index";
 import {
   hairStyle1,
@@ -71,14 +71,14 @@ const CanvasModel = ({ username, userId }) => {
   useEffect(() => {
     // activeCustomButton
     //   ? setActiveCustomFunction("hairColor")
-    //   : setActiveCustomFunction("bodyColor");
+    //   : setActiveCustomFunction("skinColor");
 
     switch (activeCustomButton) {
       case true:
         setActiveCustomFunction("hairColor");
         break;
       case false:
-        setActiveCustomFunction("bodyColor");
+        setActiveCustomFunction("skinColor");
         break;
       case null:
         setActiveCustomFunction("");
@@ -197,7 +197,7 @@ const CanvasModel = ({ username, userId }) => {
 
   const newHairColor = convertColor(snap.hairColor);
 
-  const newBodyColor = convertColor(snap.bodyColor);
+  const newskinColor = convertColor(snap.skinColor);
 
   const getComplementaryColor = (hexColor) => {
     // Convert hexColor to RGB
@@ -274,7 +274,7 @@ const CanvasModel = ({ username, userId }) => {
                 face={face}
                 hair={hair}
                 newHairColor={newHairColor}
-                newBodyColor={newBodyColor}
+                newskinColor={newskinColor}
               />
             ) : (
               <AvatarQuin
@@ -283,7 +283,7 @@ const CanvasModel = ({ username, userId }) => {
                 face={face}
                 hair={hair}
                 newHairColor={newHairColor}
-                newBodyColor={newBodyColor}
+                newskinColor={newskinColor}
                 // newOutfitColor={newOutfitColor}
               />
             )}
@@ -383,7 +383,7 @@ const CanvasModel = ({ username, userId }) => {
           // handleMouseEnter={handleMouseEnter}
           // handleMouseLeave={handleMouseLeave}
         />
-        <BodyColor
+        <SkinColor
           ColorPicker={ColorPicker}
           // handleActiveCustomFunction={handleActiveCustomFunction}
           activeCustomFunction={activeCustomFunction}
