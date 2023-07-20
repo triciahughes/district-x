@@ -223,7 +223,7 @@ const CanvasModel = ({ username, userId }) => {
     return hexComplement;
   };
 
-  const newColor = getComplementaryColor(snap.color);
+  const newColor = getComplementaryColor(snap.backDrop);
 
   return (
     <div>
@@ -236,7 +236,7 @@ const CanvasModel = ({ username, userId }) => {
           position: "fixed",
           width: width,
           height: height,
-          background: `linear-gradient(${snap.color}, ${newColor})`,
+          background: `linear-gradient(${snap.backDrop}, ${newColor})`,
         }}
       >
         {

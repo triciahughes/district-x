@@ -3,7 +3,7 @@ import { proxy } from "valtio";
 const state = proxy({
   edit: true,
   inSession: false,
-  color: "#7BDCB5",
+  backDrop: "#7BDCB5",
   clothingData: 0,
   eyeStyle: 5,
   hairColor: "#F78DA7",

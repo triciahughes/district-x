@@ -16,8 +16,8 @@ const ColorPicker = ({ colorPickerStyle }) => {
   return (
     <div style={colorPickerStyle}>
       <TwitterPicker
-        color={snap.color}
-        onChangeComplete={(color) => (state.color = color.hex)}
+        color={snap.backDrop}
+        onChangeComplete={(color) => (state.backDrop = color.hex)}
       />
     </div>
   );
