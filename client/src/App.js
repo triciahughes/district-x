@@ -214,7 +214,14 @@ function App() {
         />
         <Route
           path="/customizer"
-          element={<Customizer username={user.username} userId={user.id} />}
+          element={
+            <Customizer
+              username={user.username}
+              userId={user.id}
+              user={user}
+              fetchUser={fetchUser}
+            />
+          }
         />
         {/* <Route path="/createavatar"> */}
         {/* <CreateAvatar

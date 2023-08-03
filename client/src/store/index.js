@@ -9,8 +9,6 @@ const state = proxy({
   hairColor: "#F78DA7",
   hairStyle: 1,
   skinColor: "#C1C1C1",
-
-  // outfitColor: "#FF0000",
 });
 
 export default state;

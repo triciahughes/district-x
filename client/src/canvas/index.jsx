@@ -25,8 +25,9 @@ import Backdrop from "./Backdrop";
 import CameraRig from "./CameraRig";
 import { useSnapshot } from "valtio";
 import state from "../store";
+import CreateAvatar from "../create/CreateAvatar";
 
-const CanvasModel = ({ username, userId }) => {
+const CanvasModel = ({ username, userId, user, fetchUser }) => {
   const snap = useSnapshot(state);
   const [lights, setLights] = useState(null);
   const [orbit, setOrbit] = useState([-0.3, 0.75, 0]);
@@ -35,6 +36,7 @@ const CanvasModel = ({ username, userId }) => {
   const [outfit, setOutfit] = useState({
     model: true,
     texture: "/T_Dx_Female_Outfit_01.png",
+    clothingData: 1,
   });
   const [face, setFace] = useState("/T_Dx_EyeCard_Default.png");
   const [hair, setHair] = useState(hairStyle1);
@@ -139,12 +141,12 @@ const CanvasModel = ({ username, userId }) => {
 
   /////// Outfit Changing Logic ///////
   const outfitsArray = [
-    { model: true, texture: "/T_Dx_Female_Outfit_01.png" },
-    { model: true, texture: "/T_Dx_Female_Outfit_02.png" },
-    { model: true, texture: "/T_Dx_Female_Outfit_03.png" },
-    { model: false, texture: "/T_Dx_Male_Outfit_01.png" },
-    { model: false, texture: "/T_Dx_Male_Outfit_02.png" },
-    { model: false, texture: "/T_Dx_Male_Outfit_03.png" },
+    { model: true, texture: "/T_Dx_Female_Outfit_01.png", clothingData: 1 },
+    { model: true, texture: "/T_Dx_Female_Outfit_02.png", clothingData: 2 },
+    { model: true, texture: "/T_Dx_Female_Outfit_03.png", clothingData: 3 },
+    { model: false, texture: "/T_Dx_Male_Outfit_01.png", clothingData: 4 },
+    { model: false, texture: "/T_Dx_Male_Outfit_02.png", clothingData: 5 },
+    { model: false, texture: "/T_Dx_Male_Outfit_03.png", clothingData: 6 },
   ];
 
   // Function to handle the click event for changing the outfit to the right
@@ -395,6 +397,12 @@ const CanvasModel = ({ username, userId }) => {
           // handleMouseLeave={handleMouseLeave}
         />
         <FinalizeCharacterBtn />
+        <CreateAvatar
+          fetchUser={fetchUser}
+          user={user}
+          userId={userId}
+          clothingData={outfit}
+        />
       </div>
     </div>
   );

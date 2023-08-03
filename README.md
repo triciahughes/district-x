@@ -1,10 +1,12 @@
 # District X
 
-![Ed Splash](client/EdSplash.png)
-
 ## Description
 
-A self-expression social platform that combines customizable 3D avatars with anonymous discussions utilizing Unreal Engine 5.
+A self-expression social platform that combines customizable 3D avatars with anonymous discussions now utilizing Three.js. See legacy branch if you's like to see the project when it was running in Unreal Engine 5!
+
+## Video Preview (Click the image)
+
+[![Thumbnail](client/assets/PortfolioFeaturedImage_DistrictX.jpg)](https://youtu.be/P4qbp1i7nEw)
 
 ## Installation 📥
 
